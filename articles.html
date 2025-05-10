@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#FFD700"/>
+  <link rel="manifest" href="manifest.json"/>
+  <title>Articles – CryptoKid</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo old-english">CryptoKid</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="guides.html">Guides</a></li>
+      <li><a href="markets.html">Markets</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="articles-page">
+    <h1>Featured Articles</h1>
+    <div class="articles-list">
+
+      <div class="article-preview">
+        <h2><a href="article-pi-network.html">Is Pi Network the Real Deal or Digital Mirage?</a></h2>
+        <p>We cut through the speculation to break down what Pi actually is, how it works, and if it’s got staying power.</p>
+      </div>
+
+      <div class="article-preview">
+        <h2><a href="article-hidden-gems.html">Top 3 Hidden Gems You’re Sleeping On</a></h2>
+        <p>These small-cap coins might be quiet now, but their fundamentals could roar in the next bull run. Here's why.</p>
+      </div>
+
+      <div class="article-preview">
+        <h2><a href="article-crypto-vs-stocks.html">Crypto vs Stocks: What’s the Better Play in 2025?</a></h2>
+        <p>Is the traditional market dead weight? Or does crypto just move faster? We break down the risk, reward, and reality.</p>
+      </div>
+
+      <div class="article-preview">
+        <h2><a href="article-whales-signals.html">How to Track Whale Moves and Volume Signals</a></h2>
+        <p>If you don’t know how to read the order book, you’re the liquidity. Learn how to sniff out big money activity before it moves the charts.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 CryptoKid. Built for those who read between the blocks.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('navMenu');
+      menu.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

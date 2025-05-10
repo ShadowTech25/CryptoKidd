@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoInsights</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #222;
+      color: #000;
+    }
+    header {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      font-family: 'UnifrakturCook', cursive;
+      border-bottom: 1px solid #ccc;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .menu-icon {
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    nav {
+      background-color: #fff;
+      display: none;
+      flex-direction: column;
+      padding: 1rem;
+      border-bottom: 1px solid #ccc;
+      animation: slideDown 0.4s ease-in-out forwards;
+    }
+    nav a {
+      text-decoration: none;
+      color: #000;
+      padding: 0.75rem 0;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #007bff;
+    }
+    @keyframes slideDown {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .section {
+      background: #fff;
+      margin: 2rem;
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    .section h2 {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .section p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .section img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .btn-group button {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border: 2px solid #000;
+      background: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-group button:hover {
+      background-color: #000;
+      color: #fff;
+    }
+    .highlight {
+      background-color: #e0f0ff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+    }
+    .highlight h3 {
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      nav {
+        border-top: 1px solid #ccc;
+      }
+      nav a {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>CryptoInsights</div>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+  </header>
+  <nav id="navMenu">
+    <a href="#home">Home</a>
+    <a href="#strategies">Strategies</a>
+    <a href="#blog">Blog</a>
+    <a href="#education">Education</a>
+    <a href="#mission">Mission</a>
+  </nav>  <div class="section" id="home">
+    <h2>Unlock the World of <strong>Crypto Insights</strong></h2>
+    <p>Welcome to CryptoInsights, your premier source for expert analysis and up-to-date information on the cryptocurrency market. Dive into our blog for the latest trends, trading strategies, and educational resources designed to empower both novice and experienced traders.</p>
+    <div class="btn-group">
+      <button>Trends</button>
+      <button>Trade</button>
+    </div>
+    <img src="images/crypto-traders.jpg" alt="Crypto Trading Room">
+  </div>  <div class="section" id="strategies">
+    <h2>Mastering Crypto: <em>Effective Trading Strategies</em></h2>
+    <p>Unlock your trading potential with our expert-led strategies. From day trading to long-term investments, we provide the knowledge and tools you need to navigate the volatile crypto market successfully. Learn to manage risk and maximize your returns.</p>
+    <ul>
+      <li>Day Trading: Capitalize on short-term price movements.</li>
+      <li>Swing Trading: Identify and profit from market swings.</li>
+      <li>Long-Term Investing: Build a portfolio for future growth.</li>
+    </ul>
+    <img src="images/chart-graphic.jpg" alt="Trading Chart">
+  </div>  <div class="section highlight" id="blog">
+    <h3>Market Trends</h3>
+    <strong>The Impact of Regulation on Cryptocurrencies</strong>
+    <p>Government regulations are increasingly shaping the future of the cryptocurrency market.</p>
+  </div>  <div class="section highlight">
+    <h3>Trading Strategies</h3>
+    <strong>Top 5 Crypto Trading Strategies for 2024</strong>
+    <p>Discover effective strategies to navigate the dynamic cryptocurrency market in 2024.</p>
+  </div>  <div class="section highlight">
+    <h3>Cryptocurrency Education</h3>
+    <strong>Understanding Altcoins: A Beginner’s Guide</strong>
+    <p>Altcoins offer diverse functionalities and investment opportunities.</p>
+  </div>  <div class="section" id="education">
+    <h2>Learn Crypto</h2>
+    <strong>Understand Digital Assets</strong>
+    <p>Delve into our comprehensive cryptocurrency education resources and build a solid foundation in digital currency knowledge.</p>
+    <button>More</button>
+    <img src="images/crypto-guide.jpg" alt="Basics of Crypto">
+  </div>  <div class="section" id="mission">
+    <h2>Discover CryptoInsights' Mission</h2>
+    <p>We aim to empower individuals with essential knowledge about cryptocurrency. Our team, led by experienced professionals, provides insightful analysis and education to help you navigate the crypto landscape.</p>
+    <img src="images/team-discussion.jpg" alt="CryptoInsights Team">
+  </div>  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navMenu');
+      if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+      } else {
+        nav.style.display = 'flex';
+        nav.style.flexDirection = 'column';
+      }
+    }
+  </script></body>
+</html>

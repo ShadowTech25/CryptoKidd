@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#FFD700"/>
+  <link rel="manifest" href="manifest.json"/>
+  <title>Markets – CryptoKid</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo old-english">CryptoKid</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="guides.html">Guides</a></li>
+      <li><a href="markets.html">Markets</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="articles-page">
+    <h1>Market Overview</h1>
+    <section class="articles-list">
+      <p>
+        This is where data turns into insight. Watch the trends, catch the breakouts, and avoid the traps. Real signals. Real analysis.
+      </p>
+
+      <div class="article-preview">
+        <h2>Top Movers Today</h2>
+        <p>Who’s pumping, who’s dumping, and which volume spikes might mean something real. Updated hourly (soon).</p>
+      </div>
+
+      <div class="article-preview">
+        <h2>Bitcoin Watch</h2>
+        <p>BTC leads the market. If you don’t know what it’s doing, you’re trading blind. Here's our daily pulse check.</p>
+      </div>
+
+      <div class="article-preview">
+        <h2>Altcoin Radar</h2>
+        <p>We track volatility, trend shifts, and social buzz to surface the next wave of mid-cap runners worth watching.</p>
+      </div>
+
+      <div class="article-preview">
+        <h2>On-Chain Sentiment</h2>
+        <p>Whale moves, exchange flows, and wallet metrics that matter — not just ticker price noise.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 CryptoKid. Built for those who read between the blocks.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

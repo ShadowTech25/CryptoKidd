@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#FFD700"/>
+  <link rel="manifest" href="manifest.json"/>
+  <title>Guides – CryptoKid</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo old-english">CryptoKid</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="guides.html">Guides</a></li>
+      <li><a href="markets.html">Markets</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="articles-page">
+    <h1>Crypto Guides & Playbooks</h1>
+    <section class="articles-list">
+      <p>
+        Whether you’re new to crypto or just want tighter execution — these guides are built to make you sharper, faster, and harder to shake.
+      </p>
+
+      <div class="article-preview">
+        <h2><a href="#">The Beginner’s Guide to Crypto (2025 Edition)</a></h2>
+        <p>No tech jargon. No overload. Just the core concepts you need to get your feet wet — and not drown.</p>
+      </div>
+
+      <div class="article-preview">
+        <h2><a href="#">How to Read a Crypto Chart Without Guessing</a></h2>
+        <p>Learn candlesticks, trends, resistance zones, and volume — without needing a PhD in indicators.</p>
+      </div>
+
+      <div class="article-preview">
+        <h2><a href="#">Wallets, Keys, and How Not to Get Wrecked</a></h2>
+        <p>Hot vs cold. Custodial vs self. Understand the tools that actually keep your coins safe in a rug-prone world.</p>
+      </div>
+
+      <div class="article-preview">
+        <h2><a href="#">How to Spot a Pump & Dump Before It Hits</a></h2>
+        <p>Recognize the signs, check the wallets, and stay ahead of the scammers trying to bait FOMO buyers.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 CryptoKid. Built for those who read between the blocks.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

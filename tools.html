@@ -9,30 +9,6 @@
   <title>CryptoKid Tools</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
-
-  <style>
-    .market-ticker {
-      background: #111;
-      color: #FFD700;
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 10px;
-      font-size: 0.9rem;
-      border-bottom: 1px solid #FFD700;
-      position: relative;
-    }
-    .market-ticker span {
-      display: inline-block;
-      min-width: 100%;
-      padding-right: 40px;
-      animation: scroll-ticker 20s linear infinite;
-    }
-    @keyframes scroll-ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-  </style>
-
 </head>
 <body>
   <div class="market-ticker">
@@ -172,5 +148,46 @@
         `Predicted Trend: ${prediction}`;
     }
   </script>
+
+<script src="js/chart.min.js"></script>
+<script>
+  async function loadForecastChart() {
+    const token = document.getElementById("tokenChartInput").value.trim().toLowerCase() || "bitcoin";
+    const res = await fetch(`https://api.coingecko.com/api/v3/coins/${token}/market_chart?vs_currency=usd&days=30`);
+    const data = await res.json();
+    const labels = data.prices.map(([t]) => new Date(t).toLocaleDateString());
+    const prices = data.prices.map(([_, v]) => v);
+
+    const ctx = document.getElementById("forecastChart").getContext("2d");
+    if (window.forecastChartInstance) window.forecastChartInstance.destroy();
+
+    window.forecastChartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: `${token.toUpperCase()} Price (USD)`,
+          data: prices,
+          borderColor: "#FFD700",
+          backgroundColor: "rgba(255, 215, 0, 0.1)",
+          borderWidth: 2,
+          pointRadius: 0,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: { ticks: { color: "#ccc" } },
+          y: { ticks: { color: "#ccc" } }
+        },
+        plugins: {
+          legend: { labels: { color: "#FFD700" } }
+        }
+      }
+    });
+  }
+</script>
+
 </body>
 </html>

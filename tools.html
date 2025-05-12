@@ -1,25 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#FFD700"/>
+  <link rel="manifest" href="manifest.json"/>
   <title>CryptoKid Tools</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header class="header">
-    <h1 class="logo">CryptoKid</h1>
-    <nav class="navbar">
-      <a href="index.html">Home</a>
-      <a href="articles.html">Articles</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="tools.html" class="active">Tools</a>
-    </nav>
+  <div class="market-ticker">
+    <span>BTC: $62,115 | ETH: $3,010 | PI: $0.72 | SOL: $155.12 | DOGE: $0.137</span>
+  </div>
+
+  <nav class="navbar">
+    <div class="logo old-english">CryptoKid</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="guides.html">Guides</a></li>
+      <li><a href="markets.html">Markets</a></li>
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <h1 class="hero-title">Crypto Tools & Calculators</h1>
+    <p class="hero-subtext">Forecasts, simulators, alerts and more — all in one place.</p>
   </header>
 
   <main class="main-content">
-    <h2>Crypto Tools & Calculators</h2>
-
     <section class="tool-section">
       <h3>Growth Forecast Calculator</h3>
       <input id="startPrice" type="number" placeholder="Current Price (e.g. 0.50)">
@@ -85,7 +102,15 @@
     </section>
   </main>
 
+  <footer class="footer">
+    <p>© 2025 CryptoKid. Built for those who read between the blocks.</p>
+  </footer>
+
   <script>
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('show');
+    }
+
     function calcGrowth() {
       const p = parseFloat(document.getElementById("startPrice").value);
       const r = parseFloat(document.getElementById("growthRate").value) / 100;

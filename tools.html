@@ -1,143 +1,88 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>CryptoKid Tools</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      background: #000;
-      color: #FFD700;
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
-    header {
-      background: #111;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav a {
-      color: #FFD700;
-      text-decoration: none;
-      margin: 0 10px;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    main {
-      padding: 2rem;
-    }
-    details {
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    summary {
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-    input, button {
-      padding: 10px;
-      margin: 5px 0;
-      width: 100%;
-      background: #222;
-      color: #FFD700;
-      border: 1px solid #444;
-    }
-    button {
-      background: #FFD700;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>CryptoKid</h1>
-    <nav>
+  <header class="header">
+    <h1 class="logo">CryptoKid</h1>
+    <nav class="navbar">
       <a href="index.html">Home</a>
       <a href="articles.html">Articles</a>
       <a href="dashboard.html">Dashboard</a>
-      <a href="tools.html">Tools</a>
+      <a href="tools.html" class="active">Tools</a>
     </nav>
   </header>
 
-  <main>
-    <h2>Crypto Tools Hub</h2>
+  <main class="main-content">
+    <h2>Crypto Tools & Calculators</h2>
 
-    <details>
-      <summary>1. Growth Forecast Calculator</summary>
-      <input id="startPrice" type="number" step="0.01" placeholder="Current Price (e.g. 0.50)" />
-      <input id="growthRate" type="number" step="0.01" placeholder="Daily Growth % (e.g. 2)" />
-      <input id="days" type="number" placeholder="Days into Future" />
+    <section class="tool-section">
+      <h3>Growth Forecast Calculator</h3>
+      <input id="startPrice" type="number" placeholder="Current Price (e.g. 0.50)">
+      <input id="growthRate" type="number" placeholder="Daily Growth % (e.g. 2)">
+      <input id="days" type="number" placeholder="Days into Future">
       <button onclick="calcGrowth()">Calculate</button>
       <div id="growthResult"></div>
-    </details>
+    </section>
 
-    <details>
-      <summary>2. Market Cap Estimator</summary>
-      <input id="circulating" type="number" placeholder="Circulating Supply (e.g. 1000000000)" />
-      <input id="targetCap" type="number" placeholder="Target Market Cap (e.g. 500000000)" />
+    <section class="tool-section">
+      <h3>Market Cap Estimator</h3>
+      <input id="circulating" type="number" placeholder="Circulating Supply">
+      <input id="targetCap" type="number" placeholder="Target Market Cap">
       <button onclick="calcCap()">Estimate</button>
       <div id="capResult"></div>
-    </details>
+    </section>
 
-    <details>
-      <summary>3. Unlock Impact Simulator</summary>
-      <input id="currentPrice" type="number" placeholder="Current Price" />
-      <input id="unlockAmount" type="number" placeholder="Tokens Unlocking" />
-      <input id="sellPressure" type="number" step="0.01" placeholder="Sell Pressure % (e.g. 30)" />
+    <section class="tool-section">
+      <h3>Unlock Impact Simulator</h3>
+      <input id="currentPrice" type="number" placeholder="Current Price">
+      <input id="unlockAmount" type="number" placeholder="Tokens Unlocking">
+      <input id="sellPressure" type="number" placeholder="Sell Pressure %">
       <button onclick="calcUnlock()">Simulate</button>
       <div id="unlockResult"></div>
-    </details>
+    </section>
 
-    <details>
-      <summary>4. Sentiment + Trend Predictor</summary>
-      <input id="sentimentScore" type="number" step="0.1" placeholder="Sentiment Score % (e.g. 65)" />
-      <input id="rsi" type="number" step="1" placeholder="RSI (0-100)" />
+    <section class="tool-section">
+      <h3>Sentiment + Trend Predictor</h3>
+      <input id="sentimentScore" type="number" placeholder="Sentiment Score %">
+      <input id="rsi" type="number" placeholder="RSI (0-100)">
       <button onclick="predictSentiment()">Predict</button>
       <div id="sentimentResult"></div>
-    </details>
+    </section>
 
-    <details>
-      <summary>5. Forecast Chart (placeholder)</summary>
-      <p>Chart logic placeholder — will use Chart.js and CoinGecko</p>
-      <p><em>[Chart area will appear here]</em></p>
-    </details>
+    <section class="tool-section">
+      <h3>Forecast Chart Placeholder</h3>
+      <p>[Chart.js area here]</p>
+    </section>
 
-    <details>
-      <summary>6. Whale Tracker</summary>
-      <p>Live whale activity monitor [offline version placeholder]</p>
-    </details>
+    <section class="tool-section">
+      <h3>Whale Tracker (Placeholder)</h3>
+      <p>Will monitor high-volume wallet moves.</p>
+    </section>
 
-    <details>
-      <summary>7. Whale Alert Setup</summary>
-      <p>UI for defining whale alert rules [placeholder]</p>
-    </details>
+    <section class="tool-section">
+      <h3>Whale Alert Setup (Placeholder)</h3>
+      <p>Configure your alert rules here.</p>
+    </section>
 
-    <details>
-      <summary>8. Whale History Log</summary>
-      <p>Past triggered alerts summary [placeholder]</p>
-    </details>
+    <section class="tool-section">
+      <h3>Whale Alert History (Placeholder)</h3>
+      <p>See triggered whale movement logs.</p>
+    </section>
 
-    <details>
-      <summary>9. Portfolio Tracker</summary>
-      <p>Track tokens and performance [placeholder]</p>
-    </details>
+    <section class="tool-section">
+      <h3>Portfolio Tracker (Placeholder)</h3>
+      <p>Add coins and track your positions.</p>
+    </section>
 
-    <details>
-      <summary>10. Price Alert Manager</summary>
-      <p>Create alert rules for token price movements [placeholder]</p>
-    </details>
-
+    <section class="tool-section">
+      <h3>Price Alert Manager (Placeholder)</h3>
+      <p>Set custom price alert notifications.</p>
+    </section>
   </main>
 
   <script>
@@ -146,22 +91,24 @@
       const r = parseFloat(document.getElementById("growthRate").value) / 100;
       const d = parseInt(document.getElementById("days").value);
       const result = p * Math.pow(1 + r, d);
-      document.getElementById("growthResult").textContent = `Projected Price: $${result.toFixed(4)} after ${d} days`;
+      document.getElementById("growthResult").textContent = 
+        `Projected Price: $${result.toFixed(4)} after ${d} days`;
     }
 
     function calcCap() {
       const supply = parseFloat(document.getElementById("circulating").value);
       const cap = parseFloat(document.getElementById("targetCap").value);
       const price = cap / supply;
-      document.getElementById("capResult").textContent = `Target Price: $${price.toFixed(6)} based on cap`;
+      document.getElementById("capResult").textContent = 
+        `Target Price: $${price.toFixed(6)}`;
     }
 
     function calcUnlock() {
       const price = parseFloat(document.getElementById("currentPrice").value);
-      const unlock = parseFloat(document.getElementById("unlockAmount").value);
       const sellRate = parseFloat(document.getElementById("sellPressure").value) / 100;
       const impact = price * (1 - (sellRate * 0.5));
-      document.getElementById("unlockResult").textContent = `Simulated Price after Sell-Off: $${impact.toFixed(4)}`;
+      document.getElementById("unlockResult").textContent = 
+        `Simulated Price After Sell-Off: $${impact.toFixed(4)}`;
     }
 
     function predictSentiment() {
@@ -170,7 +117,8 @@
       let prediction = "Neutral";
       if (s > 70 && rsi < 70) prediction = "Bullish";
       else if (s < 40 || rsi > 75) prediction = "Bearish";
-      document.getElementById("sentimentResult").textContent = `Predicted Trend: ${prediction}`;
+      document.getElementById("sentimentResult").textContent = 
+        `Predicted Trend: ${prediction}`;
     }
   </script>
 </body>

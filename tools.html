@@ -124,7 +124,19 @@
     <details><summary>Portfolio Tracker (Placeholder)</summary><div>
       <p>Add coins and track your positions.</p></div></details>
 
-    <details><summary>Price Alert Manager (Placeholder)</summary><div>
+    
+<details><summary>Portfolio Tracker</summary>
+  <div style="padding: 20px 0;">
+    <input id="portfolioToken" placeholder="Token ID (e.g. bitcoin)" style="width: 100%; padding: 8px; margin-bottom: 8px;" />
+    <input id="portfolioAmount" type="number" placeholder="Amount Held" style="width: 100%; padding: 8px; margin-bottom: 8px;" />
+    <input id="purchasePrice" type="number" placeholder="Purchase Price (USD)" style="width: 100%; padding: 8px; margin-bottom: 8px;" />
+    <button onclick="calculatePortfolio()">Calculate</button>
+    <div id="portfolioResult" style="margin-top: 10px;"></div>
+  </div>
+</details>
+
+
+<details><summary>Price Alert Manager (Placeholder)</summary><div>
       <p>Set custom price alert notifications.</p></div></details>
   </main>
 
@@ -212,5 +224,40 @@
       });
     }
   </script>
+
+<script>
+  async function calculatePortfolio() {
+    const token = document.getElementById("portfolioToken").value.trim().toLowerCase();
+    const amount = parseFloat(document.getElementById("portfolioAmount").value);
+    const buyPrice = parseFloat(document.getElementById("purchasePrice").value);
+
+    if (!token || isNaN(amount) || isNaN(buyPrice)) {
+      document.getElementById("portfolioResult").innerHTML = "<p style='color:red;'>Please fill out all fields.</p>";
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${token}&vs_currencies=usd`);
+      const data = await res.json();
+      const currentPrice = data[token]?.usd;
+
+      if (!currentPrice) throw new Error("Token not found");
+
+      const currentValue = currentPrice * amount;
+      const initialValue = buyPrice * amount;
+      const pnl = currentValue - initialValue;
+      const pnlPct = ((pnl / initialValue) * 100).toFixed(2);
+
+      document.getElementById("portfolioResult").innerHTML = `
+        <p><strong>Current Price:</strong> $${currentPrice.toFixed(4)}</p>
+        <p><strong>Total Value:</strong> $${currentValue.toFixed(2)}</p>
+        <p><strong>Profit/Loss:</strong> $${pnl.toFixed(2)} (${pnlPct}%)</p>
+      `;
+    } catch (e) {
+      document.getElementById("portfolioResult").innerHTML = "<p style='color:red;'>Error fetching price. Check token ID.</p>";
+    }
+  }
+</script>
+
 </body>
 </html>

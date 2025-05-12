@@ -9,28 +9,6 @@
   <title>CryptoKid Tools</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
-
-  <style>
-    .market-ticker {
-      background: #111;
-      color: #FFD700;
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 10px;
-      font-size: 0.9rem;
-      border-bottom: 1px solid #FFD700;
-    }
-    .market-ticker span {
-      display: inline-block;
-      padding-right: 40px;
-      animation: scroll-ticker 20s linear infinite;
-    }
-    @keyframes scroll-ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-  </style>
-
 </head>
 <body>
   <div class="market-ticker">
@@ -59,69 +37,71 @@
   </header>
 
   <main class="main-content">
-    <section class="tool-section">
-      <h3>Growth Forecast Calculator</h3>
+    <style>
+      details {
+        background: #111;
+        color: #FFD700;
+        border: 1px solid #FFD70055;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        padding: 10px;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+      details[open] summary::after {
+        content: " ▲";
+      }
+      details summary::after {
+        content: " ▼";
+      }
+    </style>
+    <details><summary>Growth Forecast Calculator</summary><div>
       <input id="startPrice" type="number" placeholder="Current Price (e.g. 0.50)">
       <input id="growthRate" type="number" placeholder="Daily Growth % (e.g. 2)">
       <input id="days" type="number" placeholder="Days into Future">
       <button onclick="calcGrowth()">Calculate</button>
-      <div id="growthResult"></div>
-    </section>
+      <div id="growthResult"></div></div></details>
 
-    <section class="tool-section">
-      <h3>Market Cap Estimator</h3>
+    <details><summary>Market Cap Estimator</summary><div>
       <input id="circulating" type="number" placeholder="Circulating Supply">
       <input id="targetCap" type="number" placeholder="Target Market Cap">
       <button onclick="calcCap()">Estimate</button>
-      <div id="capResult"></div>
-    </section>
+      <div id="capResult"></div></div></details>
 
-    <section class="tool-section">
-      <h3>Unlock Impact Simulator</h3>
+    <details><summary>Unlock Impact Simulator</summary><div>
       <input id="currentPrice" type="number" placeholder="Current Price">
       <input id="unlockAmount" type="number" placeholder="Tokens Unlocking">
       <input id="sellPressure" type="number" placeholder="Sell Pressure %">
       <button onclick="calcUnlock()">Simulate</button>
-      <div id="unlockResult"></div>
-    </section>
+      <div id="unlockResult"></div></div></details>
 
-    <section class="tool-section">
-      <h3>Sentiment + Trend Predictor</h3>
+    <details><summary>Sentiment + Trend Predictor</summary><div>
       <input id="sentimentScore" type="number" placeholder="Sentiment Score %">
       <input id="rsi" type="number" placeholder="RSI (0-100)">
       <button onclick="predictSentiment()">Predict</button>
-      <div id="sentimentResult"></div>
-    </section>
+      <div id="sentimentResult"></div></div></details>
 
-    <section class="tool-section">
-      <h3>Forecast Chart Placeholder</h3>
-      <p>[Chart.js area here]</p>
-    </section>
+    <details><summary>Forecast Chart Placeholder</summary><div>
+      <p>[Chart.js area here]</p></div></details>
 
-    <section class="tool-section">
-      <h3>Whale Tracker (Placeholder)</h3>
-      <p>Will monitor high-volume wallet moves.</p>
-    </section>
+    <details><summary>Whale Tracker (Placeholder)</summary><div>
+      <p>Will monitor high-volume wallet moves.</p></div></details>
 
-    <section class="tool-section">
-      <h3>Whale Alert Setup (Placeholder)</h3>
-      <p>Configure your alert rules here.</p>
-    </section>
+    <details><summary>Whale Alert Setup (Placeholder)</summary><div>
+      <p>Configure your alert rules here.</p></div></details>
 
-    <section class="tool-section">
-      <h3>Whale Alert History (Placeholder)</h3>
-      <p>See triggered whale movement logs.</p>
-    </section>
+    <details><summary>Whale Alert History (Placeholder)</summary><div>
+      <p>See triggered whale movement logs.</p></div></details>
 
-    <section class="tool-section">
-      <h3>Portfolio Tracker (Placeholder)</h3>
-      <p>Add coins and track your positions.</p>
-    </section>
+    <details><summary>Portfolio Tracker (Placeholder)</summary><div>
+      <p>Add coins and track your positions.</p></div></details>
 
-    <section class="tool-section">
-      <h3>Price Alert Manager (Placeholder)</h3>
-      <p>Set custom price alert notifications.</p>
-    </section>
+    <details><summary>Price Alert Manager (Placeholder)</summary><div>
+      <p>Set custom price alert notifications.</p></div></details>
   </main>
 
   <footer class="footer">

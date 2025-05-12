@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +8,48 @@
   <title>CryptoKid Tools</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    .market-ticker {
+      background: #111;
+      color: #FFD700;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 10px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #FFD700;
+      position: relative;
+    }
+    .market-ticker span {
+      display: inline-block;
+      min-width: 100%;
+      padding-right: 40px;
+      animation: scroll-ticker 20s linear infinite;
+    }
+    @keyframes scroll-ticker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    details {
+      background: #111;
+      color: #FFD700;
+      border: 1px solid #FFD70055;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      padding: 10px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    details[open] summary::after {
+      content: " ▲";
+    }
+    details summary::after {
+      content: " ▼";
+    }
+  </style>
 </head>
 <body>
   <div class="market-ticker">
@@ -37,28 +78,6 @@
   </header>
 
   <main class="main-content">
-    <style>
-      details {
-        background: #111;
-        color: #FFD700;
-        border: 1px solid #FFD70055;
-        border-radius: 5px;
-        margin-bottom: 15px;
-        padding: 10px;
-      }
-      summary {
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-      }
-      details[open] summary::after {
-        content: " ▲";
-      }
-      details summary::after {
-        content: " ▼";
-      }
-    </style>
     <details><summary>Growth Forecast Calculator</summary><div>
       <input id="startPrice" type="number" placeholder="Current Price (e.g. 0.50)">
       <input id="growthRate" type="number" placeholder="Daily Growth % (e.g. 2)">
@@ -85,8 +104,13 @@
       <button onclick="predictSentiment()">Predict</button>
       <div id="sentimentResult"></div></div></details>
 
-    <details><summary>Forecast Chart Placeholder</summary><div>
-      <p>[Chart.js area here]</p></div></details>
+    <details><summary>Forecast Chart</summary>
+      <div style="padding: 20px 0;">
+        <input id="tokenChartInput" placeholder="Enter Token ID (e.g. bitcoin)" style="width: 100%; padding: 8px; margin-bottom: 10px;" />
+        <button onclick="loadForecastChart()">Load Chart</button>
+        <canvas id="forecastChart" height="100" style="margin-top: 20px;"></canvas>
+      </div>
+    </details>
 
     <details><summary>Whale Tracker (Placeholder)</summary><div>
       <p>Will monitor high-volume wallet moves.</p></div></details>
@@ -149,45 +173,44 @@
     }
   </script>
 
-<script src="js/chart.min.js"></script>
-<script>
-  async function loadForecastChart() {
-    const token = document.getElementById("tokenChartInput").value.trim().toLowerCase() || "bitcoin";
-    const res = await fetch(`https://api.coingecko.com/api/v3/coins/${token}/market_chart?vs_currency=usd&days=30`);
-    const data = await res.json();
-    const labels = data.prices.map(([t]) => new Date(t).toLocaleDateString());
-    const prices = data.prices.map(([_, v]) => v);
+  <script src="js/chart.min.js"></script>
+  <script>
+    async function loadForecastChart() {
+      const token = document.getElementById("tokenChartInput").value.trim().toLowerCase() || "bitcoin";
+      const res = await fetch(`https://api.coingecko.com/api/v3/coins/${token}/market_chart?vs_currency=usd&days=30`);
+      const data = await res.json();
+      const labels = data.prices.map(([t]) => new Date(t).toLocaleDateString());
+      const prices = data.prices.map(([_, v]) => v);
 
-    const ctx = document.getElementById("forecastChart").getContext("2d");
-    if (window.forecastChartInstance) window.forecastChartInstance.destroy();
+      const ctx = document.getElementById("forecastChart").getContext("2d");
+      if (window.forecastChartInstance) window.forecastChartInstance.destroy();
 
-    window.forecastChartInstance = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: `${token.toUpperCase()} Price (USD)`,
-          data: prices,
-          borderColor: "#FFD700",
-          backgroundColor: "rgba(255, 215, 0, 0.1)",
-          borderWidth: 2,
-          pointRadius: 0,
-          fill: true
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          x: { ticks: { color: "#ccc" } },
-          y: { ticks: { color: "#ccc" } }
+      window.forecastChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: `${token.toUpperCase()} Price (USD)`,
+            data: prices,
+            borderColor: "#FFD700",
+            backgroundColor: "rgba(255, 215, 0, 0.1)",
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: true
+          }]
         },
-        plugins: {
-          legend: { labels: { color: "#FFD700" } }
+        options: {
+          responsive: true,
+          scales: {
+            x: { ticks: { color: "#ccc" } },
+            y: { ticks: { color: "#ccc" } }
+          },
+          plugins: {
+            legend: { labels: { color: "#FFD700" } }
+          }
         }
-      }
-    });
-  }
-</script>
-
+      });
+    }
+  </script>
 </body>
 </html>

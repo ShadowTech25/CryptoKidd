@@ -45,7 +45,24 @@
   <div class="market-ticker">
     <span>BTC: $62,115 | ETH: $3,010 | PI: $0.72 | SOL: $155.12 | DOGE: $0.137</span>
   </div>
-  <div class="navbar"><div class="logo old-english">CryptoKid</div></div>
+  <nav class="navbar">
+  <div class="logo old-english">CryptoKid</div>
+  <input type="checkbox" id="nav-toggle" style="display:none;">
+  <label for="nav-toggle" style="cursor:pointer; font-size:1.5rem; color:#FFD700; display:block; margin-top:10px;">☰</label>
+  <ul id="nav-menu" style="list-style:none; padding:0; display:none; margin-top:15px;">
+    <li><a href="#home" style="color:#FFD700; text-decoration:none;">Home</a></li>
+    <li><a href="#tools" style="color:#FFD700; text-decoration:none;">Tools</a></li>
+    <li><a href="#articles" style="color:#FFD700; text-decoration:none;">Articles</a></li>
+    <li><a href="#alerts" style="color:#FFD700; text-decoration:none;">Alerts</a></li>
+    <li><a href="#account" style="color:#FFD700; text-decoration:none;">Account</a></li>
+    <li><a href="#about" style="color:#FFD700; text-decoration:none;">About</a></li>
+  </ul>
+</nav>
+<script>
+  document.getElementById("nav-toggle").addEventListener("change", function() {
+    document.getElementById("nav-menu").style.display = this.checked ? "block" : "none";
+  });
+</script>
   <header class="hero">
     <h1 class="hero-title">Crypto Tools & Calculators</h1>
     <p class="hero-subtext">Forecasts, simulators, alerts and more — all in one place.</p>
@@ -203,7 +220,43 @@
   <div id="unlockSimResult"></div>
 </div></details>
 
-  </main>
+  <!-- TOOL 18: Gas Tracker --><details><summary>Gas Tracker</summary><div>
+  <p><strong>What it does:</strong> Estimate the average gas fees for Ethereum-based transactions using mock data.</p>
+  <button onclick="trackGas()">Check Gas</button>
+  <div id="gasResult"></div>
+</div></details><!-- TOOL 19: Tax Estimator --><details><summary>Tax Estimator</summary><div>
+  <p><strong>What it does:</strong> Estimate crypto taxes based on profit and selected country tax rate.</p>
+  <input id="taxProfit" type="number" placeholder="Total Profit ($)">
+  <select id="taxCountry">
+    <option value="0.15">USA (15%)</option>
+    <option value="0.20">Canada (20%)</option>
+    <option value="0.25">UK (25%)</option>
+    <option value="0.30">Germany (30%)</option>
+  </select>
+  <button onclick="estimateTax()">Estimate</button>
+  <div id="taxResult"></div>
+</div></details><!-- TOOL 20: Whale Lookup Tool --><details><summary>Whale Lookup Tool</summary><div>
+  <p><strong>What it does:</strong> Lookup a wallet address and return mock holdings for large whale wallets.</p>
+  <input id="lookupWallet" placeholder="Wallet Address">
+  <button onclick="lookupWhale()">Lookup</button>
+  <div id="lookupResult"></div>
+</div></details><!-- TOOL 21: Token Hype Score --><details><summary>Token Hype Score</summary><div>
+  <p><strong>What it does:</strong> Assigns a hype score to a token based on mock social metrics and trend signals.</p>
+  <input id="hypeToken" placeholder="Token ID">
+  <button onclick="calculateHype()">Get Hype Score</button>
+  <div id="hypeResult"></div>
+</div></details><!-- TOOL 22: Token Sentiment Feed --><details><summary>Token Sentiment Feed</summary><div>
+  <p><strong>What it does:</strong> Simulates a live sentiment feed for tokens based on mock API data.</p>
+  <button onclick="loadSentimentFeed()">Load Feed</button>
+  <ul id="sentimentFeedList"></ul>
+</div></details><!-- TOOL 23: Advanced Profit Calculator --><details><summary>Advanced Profit Calculator</summary><div>
+  <p><strong>What it does:</strong> Calculates exact profit, ROI %, and break-even price for a given buy/sell scenario.</p>
+  <input id="profitBuyPrice" type="number" placeholder="Buy Price">
+  <input id="profitSellPrice" type="number" placeholder="Sell Price">
+  <input id="profitAmount" type="number" placeholder="Amount Traded">
+  <button onclick="calculateProfit()">Calculate</button>
+  <div id="profitCalcResult"></div>
+</div></details></main>
   <footer class="footer">
     <p>© 2025 CryptoKid. Built for those who read between the blocks.</p>
   </footer>
@@ -341,6 +394,62 @@ function analyzeUnlock() {
       <li>Mid Term Impact: ~$${midImpact.toFixed(4)}</li>
       <li>Long Term Impact: ~$${longImpact.toFixed(4)}</li>
     </ul>`;
+}
+function trackGas() {
+  const slow = (Math.random() * 10 + 5).toFixed(2);
+  const average = (Math.random() * 20 + 10).toFixed(2);
+  const fast = (Math.random() * 30 + 20).toFixed(2);
+  document.getElementById("gasResult").innerHTML = `
+    <ul>
+      <li>Slow: ${slow} Gwei</li>
+      <li>Average: ${average} Gwei</li>
+      <li>Fast: ${fast} Gwei</li>
+    </ul>`;
+}
+function estimateTax() {
+  const profit = parseFloat(document.getElementById("taxProfit").value);
+  const rate = parseFloat(document.getElementById("taxCountry").value);
+  const tax = profit * rate;
+  document.getElementById("taxResult").innerHTML = `Estimated Tax: $${tax.toFixed(2)}`;
+}
+function lookupWhale() {
+  const addr = document.getElementById("lookupWallet").value;
+  const mockHoldings = [
+    { token: "ETH", balance: (Math.random() * 2000).toFixed(2) },
+    { token: "USDT", balance: (Math.random() * 500000).toFixed(0) },
+    { token: "SHIBA", balance: (Math.random() * 1000000000).toFixed(0) }
+  ];
+  const html = mockHoldings.map(t => `<li>${t.token}: ${t.balance}</li>`).join("");
+  document.getElementById("lookupResult").innerHTML = `<p>Wallet: ${addr}</p><ul>${html}</ul>`;
+}
+function calculateHype() {
+  const token = document.getElementById("hypeToken").value.toUpperCase();
+  const score = Math.floor(Math.random() * 101);
+  let label = "Moderate";
+  if (score >= 80) label = "Extreme";
+  else if (score >= 60) label = "High";
+  else if (score < 40) label = "Low";
+  document.getElementById("hypeResult").innerHTML = `<p>${token} Hype Score: <strong>${score}</strong> (${label})</p>`;
+}
+function loadSentimentFeed() {
+  const feed = [
+    { token: "PI", status: "Bullish" },
+    { token: "ROAM", status: "Neutral" },
+    { token: "XRP", status: "Bearish" },
+    { token: "SOL", status: "Bullish" }
+  ];
+  document.getElementById("sentimentFeedList").innerHTML = feed.map(item => `<li><strong>${item.token}</strong>: ${item.status}</li>`).join("");
+}
+function calculateProfit() {
+  const buy = parseFloat(document.getElementById("profitBuyPrice").value);
+  const sell = parseFloat(document.getElementById("profitSellPrice").value);
+  const amount = parseFloat(document.getElementById("profitAmount").value);
+  const profit = (sell - buy) * amount;
+  const roi = ((sell - buy) / buy) * 100;
+  document.getElementById("profitCalcResult").innerHTML = `
+    <p>Profit: $${profit.toFixed(2)}</p>
+    <p>ROI: ${roi.toFixed(2)}%</p>
+    <p>Break-even Price: $${buy.toFixed(2)}</p>`;
 }
 </script>
   </script>

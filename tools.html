@@ -260,7 +260,62 @@ window.addEventListener('resize', handleResize); window.addEventListener('load',
   <input id="profitAmount" type="number" placeholder="Amount Traded">
   <button onclick="calculateProfit()">Calculate</button>
   <div id="profitCalcResult"></div>
-</div></details></main>
+</div></details>
+    <!-- TOOL 24: Token Scorecard --><details><summary>Token Scorecard</summary><div>
+  <p><strong>What it does:</strong> Shows a mock data card with token summary.</p>
+  <input id="scorecardToken" placeholder="Token ID">
+  <button onclick="generateScorecard()">Generate Scorecard</button>
+  <div id="scorecardResult"></div>
+</div></details><!-- TOOL 25: Airdrop Radar + Eligibility Checker --><details><summary>Airdrop Radar + Eligibility Checker</summary><div>
+  <p><strong>What it does:</strong> Simulates upcoming airdrops + wallet eligibility.</p>
+  <input id="airdropWallet" placeholder="Wallet Address">
+  <button onclick="checkAirdropEligibility()">Check Eligibility</button>
+  <div id="airdropResult"></div>
+  <br>
+  <button onclick="loadAirdropRadar()">View Upcoming Airdrops</button>
+  <ul id="airdropRadarList"></ul>
+</div></details><!-- TOOL 26: Smart Money Tracker / Wallet Tagger --><details><summary>Smart Money Tracker / Wallet Tagger</summary><div>
+  <p><strong>What it does:</strong> Tags wallet as smart money and loads trades.</p>
+  <input id="smartWallet" placeholder="Wallet Address">
+  <button onclick="tagSmartWallet()">Tag Wallet</button>
+  <div id="smartTagResult"></div>
+  <br>
+  <button onclick="loadSmartTrades()">Load Smart Trades</button>
+  <table>
+    <thead><tr><th>Wallet</th><th>Token</th><th>Amount</th><th>Action</th></tr></thead>
+    <tbody id="smartTradeTable"></tbody>
+  </table>
+</div></details><!-- TOOL 27: Token Narrative Tracker --><details><summary>Token Narrative Tracker</summary><div>
+  <p><strong>What it does:</strong> Assigns a trending narrative to the token.</p>
+  <input id="narrativeToken" placeholder="Token ID">
+  <button onclick="trackNarrative()">Track Narrative</button>
+  <div id="narrativeResult"></div>
+</div></details><!-- TOOL 28: Presale Sniper + ROI Estimator --><details><summary>Presale Sniper + ROI Estimator</summary><div>
+  <p><strong>What it does:</strong> Calculates potential ROI from presale.</p>
+  <input id="presaleToken" placeholder="Token Name">
+  <input id="presaleBuyPrice" type="number" placeholder="Presale Price">
+  <input id="presaleListPrice" type="number" placeholder="Expected Listing Price">
+  <button onclick="calculatePresaleROI()">Estimate ROI</button>
+  <div id="presaleResult"></div>
+</div></details><!-- TOOL 29: Whale Wallet Explorer --><details><summary>Whale Wallet Explorer</summary><div>
+  <p><strong>What it does:</strong> Loads mock token balances for a whale.</p>
+  <input id="whaleExploreWallet" placeholder="Wallet Address">
+  <button onclick="exploreWhaleWallet()">Explore Wallet</button>
+  <div id="whaleExplorerResult"></div>
+</div></details><!-- TOOL 30: Multi-Token Rebalancer with Risk Tiers --><details><summary>Multi-Token Rebalancer with Risk Tiers</summary><div>
+  <p><strong>What it does:</strong> Allocates capital by risk (High, Medium, Low).</p>
+  <input id="rebalanceTotal" type="number" placeholder="Total Value">
+  <input id="highRiskToken" placeholder="High Risk Token">
+  <input id="mediumRiskToken" placeholder="Medium Risk Token">
+  <input id="lowRiskToken" placeholder="Low Risk Token">
+  <button onclick="rebalanceWithTiers()">Rebalance</button>
+  <div id="rebalanceTiersResult"></div>
+</div></details><!-- TOOL 31: Token Unlock Heatmap --><details><summary>Token Unlock Heatmap</summary><div>
+  <p><strong>What it does:</strong> Visualizes unlocks by token and month (mock).</p>
+  <button onclick="loadUnlockHeatmap()">Show Heatmap</button>
+  <div id="unlockHeatmapResult"></div>
+</div></details>
+  </main>
   <footer class="footer">
     <p>© 2025 CryptoKid. Built for those who read between the blocks.</p>
   </footer>
@@ -455,7 +510,100 @@ function calculateProfit() {
     <p>ROI: ${roi.toFixed(2)}%</p>
     <p>Break-even Price: $${buy.toFixed(2)}</p>`;
 }
+function generateScorecard() {
+  const token = document.getElementById("scorecardToken").value.toUpperCase();
+  const cap = (Math.random() * 1000).toFixed(1);
+  const volume = (Math.random() * 100).toFixed(1);
+  document.getElementById("scorecardResult").innerHTML =
+    `<div><strong>${token} Scorecard</strong><br>Market Cap: $${cap}M<br>Volume: $${volume}M</div>`;
+}
+Checker
+function checkAirdropEligibility() {
+  const wallet = document.getElementById("airdropWallet").value;
+  const eligible = Math.random() > 0.5;
+  document.getElementById("airdropResult").innerText = eligible
+    ? `${wallet} is eligible!`
+    : `${wallet} is not eligible.`;
+}
+function loadAirdropRadar() {
+  const radar = [
+    { token: "PIX", date: "2025-06-01" },
+    { token: "BETA", date: "2025-06-12" },
+    { token: "FOXX", date: "2025-07-04" }
+  ];
+  document.getElementById("airdropRadarList").innerHTML = radar.map(r =>
+    `<li>${r.token} - ${r.date}</li>`).join("");
+}
+Tagger
+function tagSmartWallet() {
+  const wallet = document.getElementById("smartWallet").value;
+  document.getElementById("smartTagResult").innerText = `Wallet ${wallet} tagged as smart money.`;
+}
+function loadSmartTrades() {
+  const trades = [
+    { wallet: "0xSmartA", token: "ARB", amount: "120K", action: "Buy" },
+    { wallet: "0xSmartB", token: "ETH", amount: "500", action: "Sell" }
+  ];
+  document.getElementById("smartTradeTable").innerHTML = trades.map(t =>
+    `<tr><td>${t.wallet}</td><td>${t.token}</td><td>${t.amount}</td><td>${t.action}</td></tr>`).join("");
+}
+function trackNarrative() {
+  const token = document.getElementById("narrativeToken").value.toUpperCase();
+  const tags = ["AI", "DePIN", "Gaming", "RWA", "Memecoin", "Staking", "Infrastructure"];
+  const label = tags[Math.floor(Math.random() * tags.length)];
+  document.getElementById("narrativeResult").innerHTML =
+    `${token} is currently trending in the <strong>${label}</strong> narrative.`;
+}
+Estimator
+function calculatePresaleROI() {
+  const buy = parseFloat(document.getElementById("presaleBuyPrice").value);
+  const list = parseFloat(document.getElementById("presaleListPrice").value);
+  if (isNaN(buy) || isNaN(list) || buy <= 0) {
+    document.getElementById("presaleResult").innerText = "Invalid input.";
+    return;
+  }
+  const roi = ((list - buy) / buy) * 100;
+  document.getElementById("presaleResult").innerHTML =
+    `Expected ROI: <strong>${roi.toFixed(2)}%</strong>`;
+}
+function exploreWhaleWallet() {
+  const wallet = document.getElementById("whaleExploreWallet").value;
+  const balances = [
+    { token: "USDC", balance: (Math.random() * 1000000).toFixed(0) },
+    { token: "BTC", balance: (Math.random() * 500).toFixed(2) },
+    { token: "ETH", balance: (Math.random() * 1500).toFixed(2) }
+  ];
+  document.getElementById("whaleExplorerResult").innerHTML =
+    `<p>${wallet}</p><ul>${balances.map(b => `<li>${b.token}: ${b.balance}</li>`).join("")}</ul>`;
+}
+function rebalanceWithTiers() {
+  const total = parseFloat(document.getElementById("rebalanceTotal").value);
+  const high = document.getElementById("highRiskToken").value.toUpperCase();
+  const med = document.getElementById("mediumRiskToken").value.toUpperCase();
+  const low = document.getElementById("lowRiskToken").value.toUpperCase();
+  if (isNaN(total) || total <= 0 || !high || !med || !low) {
+    document.getElementById("rebalanceTiersResult").innerText = "Invalid input.";
+    return;
+  }
+  const result = `
+    ${high}: $${(total * 0.5).toFixed(2)}<br>
+    ${med}: $${(total * 0.3).toFixed(2)}<br>
+    ${low}: $${(total * 0.2).toFixed(2)}`;
+  document.getElementById("rebalanceTiersResult").innerHTML = result;
+}
+function loadUnlockHeatmap() {
+  const heatmap = {
+    June: ["PIX ($10M)", "ROAM ($8M)"],
+    July: ["HYPE ($12M)", "XRAY ($5M)"],
+    August: ["SOLVE ($9M)"]
+  };
+  let html = "<ul>";
+  for (const [month, tokens] of Object.entries(heatmap)) {
+    html += `<li>${month}: ${tokens.join(", ")}</li>`;
+  }
+  html += "</ul>";
+  document.getElementById("unlockHeatmapResult").innerHTML = html;
+}
 </script>
-  </script>
 </body>
 </html>

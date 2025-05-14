@@ -51,7 +51,7 @@
     <input type="checkbox" id="menu-toggle" style="display:none;">
     <label for="menu-toggle" id="menu-icon" style="font-size:2rem; color:#FFD700; cursor:pointer;">☰</label>
   </div>
-  <div id="nav-links" style="display:none; flex-direction:column; gap:10px; margin-top:15px; list-style:none;">
+  <div id="nav-links" style="display:none; flex-direction:column; gap:10px; margin-top:15px;">
     <a href="index.html" style="color:#FFD700; text-decoration:none; font-weight:bold;">Home</a>
     <a href="articles.html" style="color:#FFD700; text-decoration:none; font-weight:bold;">Articles</a>
     <a href="guides.html" style="color:#FFD700; text-decoration:none; font-weight:bold;">Guides</a>
@@ -59,24 +59,32 @@
     <a href="tools.html" style="color:#FFD700; text-decoration:none; font-weight:bold;">Tools</a>
     <a href="about.html" style="color:#FFD700; text-decoration:none; font-weight:bold;">About</a>
     <a href="contact.html" style="color:#FFD700; text-decoration:none; font-weight:bold;">Contact</a>
-    <details style="margin-top:10px; color:#FFD700;">
-      <summary style="cursor:pointer; font-weight:bold;">Account</summary>
-      <a href="signup.html" style="color:#FFD700; display:block; margin-left:10px; text-decoration:none;">Sign Up</a>
-      <a href="login.html" style="color:#FFD700; display:block; margin-left:10px; text-decoration:none;">Login</a>
-      <a href="dashboard.html" style="color:#FFD700; display:block; margin-left:10px; text-decoration:none;">Dashboard</a>
-    </details>
   </div>
 </nav>
 <script>
-  const menuToggle = document.getElementById("menu-toggle");
-  const navLinks = document.getElementById("nav-links");
-  const menuIcon = document.getElementById("menu-icon");function handleResize() { if (window.innerWidth < 768) { menuIcon.style.display = 'block'; if (!menuToggle.checked) navLinks.style.display = 'none'; } else { menuIcon.style.display = 'none'; navLinks.style.display = 'flex'; } }
+  const toggle = document.getElementById("menu-toggle");
+  const nav = document.getElementById("nav-links");
+  const icon = document.getElementById("menu-icon");
 
-menuToggle.addEventListener('change', () => { navLinks.style.display = menuToggle.checked ? 'block' : 'none'; navLinks.style.flexDirection = 'column'; navLinks.style.gap = '10px'; navLinks.style.marginTop = '10px'; });
+  icon.addEventListener("click", () => {
+    toggle.checked = !toggle.checked;
+    nav.style.display = toggle.checked ? "flex" : "none";
+  });
 
-window.addEventListener('resize', handleResize); window.addEventListener('load', handleResize);
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+      nav.style.display = "flex";
+      nav.style.flexDirection = "row";
+      nav.style.gap = "20px";
+    } else {
+      nav.style.display = toggle.checked ? "flex" : "none";
+      nav.style.flexDirection = "column";
+      nav.style.gap = "10px";
+    }
+  });
+
+  window.dispatchEvent(new Event("resize"));
 </script>
-
   <header class="hero">
     <h1 class="hero-title">Crypto Tools & Calculators</h1>
     <p class="hero-subtext">Forecasts, simulators, alerts and more — all in one place.</p>

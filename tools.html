@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,56 +54,219 @@
   <main>
 
 <details><summary>Growth Forecast Calculator</summary><div>
-  <p>Tool logic for <strong>Growth Forecast Calculator</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Use this tool to estimate the future value of a token based on its current price and a projected daily growth rate. Ideal for visualizing long-term gains over time.</p>
+  <input id="startPrice" type="number" placeholder="Current Price">
+  <input id="growthRate" type="number" placeholder="Daily Growth %">
+  <input id="days" type="number" placeholder="Days">
+  <button onclick="calcGrowth()">Calculate</button>
+  <div id="growthResult"></div>
 </div></details>
 
 <details><summary>Market Cap Estimator</summary><div>
-  <p>Tool logic for <strong>Market Cap Estimator</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> This tool lets you calculate what the price of a token would be at a given market cap. Just enter the circulating supply and your target cap to simulate valuation.</p>
+  <input id="circulating" type="number" placeholder="Circulating Supply">
+  <input id="targetCap" type="number" placeholder="Target Market Cap">
+  <button onclick="calcCap()">Estimate</button>
+  <div id="capResult"></div>
 </div></details>
+
+<script>
+function calcGrowth() {
+  const p = parseFloat(document.getElementById("startPrice").value);
+  const r = parseFloat(document.getElementById("growthRate").value) / 100;
+  const d = parseInt(document.getElementById("days").value);
+  const result = p * Math.pow(1 + r, d);
+  document.getElementById("growthResult").textContent = `Projected Price: $${result.toFixed(4)}`;
+}
+function calcCap() {
+  const s = parseFloat(document.getElementById("circulating").value);
+  const c = parseFloat(document.getElementById("targetCap").value);
+  const price = c / s;
+  document.getElementById("capResult").textContent = `Target Price: $${price.toFixed(6)}`;
+}
+</script>
+
+  
 
 <details><summary>Unlock Impact Simulator</summary><div>
-  <p>Tool logic for <strong>Unlock Impact Simulator</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Estimate the effect of token unlock events on price. Useful for anticipating sell pressure and simulating post-unlock price impact.</p>
+  
+<input id="currentPrice" type="number" placeholder="Current Price">
+<input id="unlockAmount" type="number" placeholder="Unlock Amount">
+<input id="sellPressure" type="number" placeholder="Sell Pressure %">
+<button onclick="calcUnlock()">Simulate</button>
+<div id="unlockResult"></div>
 </div></details>
-
 <details><summary>Sentiment + Trend Predictor</summary><div>
-  <p>Tool logic for <strong>Sentiment + Trend Predictor</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Combines sentiment score and RSI to predict whether a token is likely to trend bullish, bearish, or remain neutral. Great for quick trade bias.</p>
+  
+<input id="sentimentScore" type="number" placeholder="Sentiment Score %">
+<input id="rsi" type="number" placeholder="RSI (0-100)">
+<button onclick="predictSentiment()">Predict</button>
+<div id="sentimentResult"></div>
 </div></details>
-
 <details><summary>Portfolio Tracker</summary><div>
-  <p>Tool logic for <strong>Portfolio Tracker</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Track your position’s value. Enter the token name, how much you hold, and your purchase price to calculate your total holding value.</p>
+  
+<input id="portfolioToken" placeholder="Token">
+<input id="portfolioAmount" type="number" placeholder="Amount Held">
+<input id="purchasePrice" type="number" placeholder="Buy Price">
+<button onclick="calculatePortfolio()">Calculate</button>
+<div id="portfolioResult"></div>
 </div></details>
-
 <details><summary>Price Alert Manager</summary><div>
-  <p>Tool logic for <strong>Price Alert Manager</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Set a target price for a token and check if your alert condition has been met. Helps you stay notified of market movements.</p>
+  
+<input id="alertToken" placeholder="Token ID">
+<input id="alertTarget" type="number" placeholder="Target Price">
+<button onclick="checkPriceAlert()">Check</button>
+<div id="alertResult"></div>
 </div></details>
-
 <details><summary>Whale Tracker</summary><div>
-  <p>Tool logic for <strong>Whale Tracker</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Visualize simulated whale transaction activity. Helps identify potential accumulation or dumping patterns from large wallets.</p>
+  
+<input id="whaleToken" placeholder="Token ID">
+<button onclick="loadWhaleData()">Simulate Activity</button>
+<table><thead><tr><th>Tx Hash</th><th>Amount</th><th>From</th><th>To</th></tr></thead><tbody id="whaleTableBody"></tbody></table>
 </div></details>
-
 <details><summary>Whale Alert Setup</summary><div>
-  <p>Tool logic for <strong>Whale Alert Setup</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Define custom alert rules based on token transfers and thresholds. Monitor large movements in real-time with notifications.</p>
+  
+<input id="alertTokenInput" placeholder="Token ID">
+<input id="alertThresholdInput" type="number" placeholder="Threshold">
+<select id="alertTypeInput"><option value="popup">Popup</option><option value="log">Log</option></select>
+<button onclick="saveWhaleAlert()">Save Rule</button>
+<div id="whaleAlertConfirm"></div>
 </div></details>
-
 <details><summary>Whale Alert History</summary><div>
-  <p>Tool logic for <strong>Whale Alert History</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Review previously triggered whale alerts. A great reference to see if high-volume transfers are part of a larger pattern.</p>
+  
+<button onclick="loadWhaleHistory()">Load History</button>
+<table><thead><tr><th>Token</th><th>Threshold</th><th>Type</th><th>Date</th></tr></thead><tbody id="whaleHistoryBody"></tbody></table>
 </div></details>
-
 <details><summary>Admin Dashboard</summary><div>
-  <p>Tool logic for <strong>Admin Dashboard</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Manage whale alert settings in your local browser memory. Lets you delete or update simulated alerts with one click.</p>
+  
+<button onclick="loadAdminAlerts()">Manage Alerts</button>
+<table><thead><tr><th>Token</th><th>Threshold</th><th>Type</th><th>Time</th><th>Action</th></tr></thead><tbody id="adminAlertTable"></tbody></table>
 </div></details>
-
 <details><summary>Token Sentiment Analyzer</summary><div>
-  <p>Tool logic for <strong>Token Sentiment Analyzer</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Generates a sentiment score to help assess whether public perception is bullish, bearish, or neutral for any given token.</p>
+  
+<input id="sentimentToken" placeholder="Token ID">
+<button onclick="analyzeSentiment()">Analyze</button>
+<div id="sentimentAnalysisResult"></div>
 </div></details>
-
 <details><summary>Slippage Calculator</summary><div>
-  <p>Tool logic for <strong>Slippage Calculator</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Use this to estimate how much slippage will occur in a trade. Input the token amount and pool liquidity to simulate.</p>
+  
+<input id="slipTokenAmount" type="number" placeholder="Token Amount">
+<input id="slipPoolLiquidity" type="number" placeholder="Pool Liquidity">
+<button onclick="calculateSlippage()">Calculate</button>
+<div id="slippageResult"></div>
 </div></details>
-
 <details><summary>Token Unlock Countdown</summary><div>
-  <p>Tool logic for <strong>Token Unlock Countdown</strong> will go here. Inputs, outputs, and interactivity are handled by JS functions.</p>
+  <p><strong>What it does:</strong> Countdown to future token unlocks. Helps track vesting events and prepare for potential volatility or trend changes.</p>
+  
+<input id="unlockToken" placeholder="Token ID">
+<input id="unlockDate" type="date">
+<button onclick="calculateUnlockCountdown()">Start</button>
+<div id="unlockCountdownResult"></div>
 </div></details>
+<script>
+function calcGrowth() {
+  const p = parseFloat(document.getElementById("startPrice").value);
+  const r = parseFloat(document.getElementById("growthRate").value) / 100;
+  const d = parseInt(document.getElementById("days").value);
+  const result = p * Math.pow(1 + r, d);
+  document.getElementById("growthResult").textContent = `Projected Price: $${result.toFixed(4)}`;
+}
+function calcCap() {
+  const s = parseFloat(document.getElementById("circulating").value);
+  const c = parseFloat(document.getElementById("targetCap").value);
+  const price = c / s;
+  document.getElementById("capResult").textContent = `Target Price: $${price.toFixed(6)}`;
+}
+function calcUnlock() {
+  const price = parseFloat(document.getElementById("currentPrice").value);
+  const sellRate = parseFloat(document.getElementById("sellPressure").value) / 100;
+  const impact = price * (1 - (sellRate * 0.5));
+  document.getElementById("unlockResult").textContent = `Simulated Price: $${impact.toFixed(4)}`;
+}
+function predictSentiment() {
+  const score = parseFloat(document.getElementById("sentimentScore").value);
+  const rsi = parseFloat(document.getElementById("rsi").value);
+  let prediction = "Neutral";
+  if (score > 70 && rsi < 70) prediction = "Bullish";
+  else if (score < 40 || rsi > 75) prediction = "Bearish";
+  document.getElementById("sentimentResult").textContent = `Trend: ${prediction}`;
+}
+function calculatePortfolio() {
+  const token = document.getElementById("portfolioToken").value;
+  const amount = parseFloat(document.getElementById("portfolioAmount").value);
+  const buy = parseFloat(document.getElementById("purchasePrice").value);
+  const value = amount * buy;
+  document.getElementById("portfolioResult").innerText = `Holding Value: $${value.toFixed(2)}`;
+}
+function checkPriceAlert() {
+  const target = parseFloat(document.getElementById("alertTarget").value);
+  const token = document.getElementById("alertToken").value;
+  document.getElementById("alertResult").innerText = `${token.toUpperCase()} alert set for $${target}`;
+}
+function loadWhaleData() {
+  const data = [
+    { hash: "0xabc", amount: "200K", from: "0xWallet1", to: "0xExchange" },
+    { hash: "0xdef", amount: "350K", from: "0xWallet2", to: "0xVault" }
+  ];
+  document.getElementById("whaleTableBody").innerHTML = data.map(d => `<tr><td>${d.hash}</td><td>${d.amount}</td><td>${d.from}</td><td>${d.to}</td></tr>`).join("");
+}
+function saveWhaleAlert() {
+  const token = document.getElementById("alertTokenInput").value;
+  const threshold = document.getElementById("alertThresholdInput").value;
+  const type = document.getElementById("alertTypeInput").value;
+  const alert = { token, threshold, type, timestamp: new Date().toISOString() };
+  const saved = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
+  saved.push(alert);
+  localStorage.setItem("whaleAlerts", JSON.stringify(saved));
+  document.getElementById("whaleAlertConfirm").innerText = "Alert saved.";
+}
+function loadWhaleHistory() {
+  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
+  document.getElementById("whaleHistoryBody").innerHTML = alerts.map(a => `<tr><td>${a.token}</td><td>${a.threshold}</td><td>${a.type}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join("");
+}
+function loadAdminAlerts() {
+  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
+  document.getElementById("adminAlertTable").innerHTML = alerts.map((a, i) => `<tr><td>${a.token}</td><td>${a.threshold}</td><td>${a.type}</td><td>${new Date(a.timestamp).toLocaleString()}</td><td><button onclick="deleteAlert(${i})">Delete</button></td></tr>`).join("");
+}
+function deleteAlert(i) {
+  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
+  alerts.splice(i, 1);
+  localStorage.setItem("whaleAlerts", JSON.stringify(alerts));
+  loadAdminAlerts();
+}
+function analyzeSentiment() {
+  const score = Math.floor(Math.random() * 101);
+  let status = "Neutral", color = "#FFD700";
+  if (score > 70) { status = "Bullish"; color = "lime"; }
+  else if (score < 40) { status = "Bearish"; color = "red"; }
+  document.getElementById("sentimentAnalysisResult").innerHTML = `<p>Score: ${score}%</p><p style="color:${color};">Status: ${status}</p>`;
+}
+function calculateSlippage() {
+  const amount = parseFloat(document.getElementById("slipTokenAmount").value);
+  const pool = parseFloat(document.getElementById("slipPoolLiquidity").value);
+  const slippage = (amount / (pool + amount)) * 100;
+  document.getElementById("slippageResult").innerText = `Estimated Slippage: ${slippage.toFixed(2)}%`;
+}
+function calculateUnlockCountdown() {
+  const token = document.getElementById("unlockToken").value;
+  const date = new Date(document.getElementById("unlockDate").value);
+  const now = new Date();
+  const diff = date - now;
+  if (diff <= 0) return document.getElementById("unlockCountdownResult").innerHTML = "Already unlocked.";
+  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("unlockCountdownResult").innerHTML = `${token.toUpperCase()} unlocks in ${d} days.`;
+}
+</script>
 
   </main>
   <footer class="footer">

@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKid Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body { background:#000; color:#FFD700; font-family:Arial, sans-serif; margin:0; padding:0; }
+    .navbar { background:#000; padding:10px 20px; position:relative; }
+    .navbar .nav-content { display:flex; justify-content:space-between; align-items:center; }
+    .navbar .logo { font-family:'UnifrakturCook', cursive; font-size:2rem; color:#FFD700; }
+    #menu-toggle { display:none; }
+    #menu-icon { font-size:2rem; color:#FFD700; cursor:pointer; display:none; }
+    #nav-links { display:none; flex-direction:column; gap:10px; margin-top:15px; }
+    @media(min-width:768px) {
+      #menu-icon { display:none !important; }
+      #nav-links { display:flex !important; flex-direction:row !important; gap:20px !important; margin-top:0 !important; }
+    }
+    a { color:#FFD700; text-decoration:none; font-weight:bold; }
+    .container { max-width:900px; margin:0 auto; padding:20px; }
+    .header { font-family:'UnifrakturCook', cursive; font-size:2.5rem; text-align:center; margin:20px 0; }
+    .card { background:#111; border:1px solid #FFD700; border-radius:8px; padding:20px; margin-bottom:20px; }
+    .button { background:#FFD700; color:#000; padding:10px 15px; font-weight:bold; border:none; border-radius:5px; cursor:pointer; width:100%; margin:5px 0; }
+    .section-title { font-size:1.2rem; margin-bottom:10px; }
+    .premium-badge { background:linear-gradient(to right, gold, #FFD700, goldenrod); color:#000; padding:3px 8px; border-radius:5px; font-size:0.8rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-content">
+    <div class="logo">CryptoKid</div>
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" id="menu-icon">☰</label>
+  </div>
+  <div id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="articles.html">Articles</a>
+    <a href="guides.html">Guides</a>
+    <a href="markets.html">Markets</a>
+    <a href="tools.html">Tools</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const nav = document.getElementById("nav-links");
+  const icon = document.getElementById("menu-icon");
+  icon.addEventListener("click", () => {
+    toggle.checked = !toggle.checked;
+    nav.style.display = toggle.checked ? "flex" : "none";
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+      nav.style.display = "flex";
+      nav.style.flexDirection = "row";
+    } else {
+      nav.style.display = toggle.checked ? "flex" : "none";
+      nav.style.flexDirection = "column";
+    }
+  });
+  window.dispatchEvent(new Event("resize"));
+</script>
+
+<!-- DASHBOARD -->
+<div class="container">
+  <div class="header">CryptoKid Dashboard</div>
+
+  <div class="card">
+    <div class="section-title">Welcome, [Username]</div>
+    <p>Email: user@example.com</p>
+    <p>Account Tier: <span id="userTier" style="font-weight:bold;">Free</span></p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Upgrade to Premium</div>
+    <button class="button" onclick="payWithStripe()">Pay with Stripe</button>
+    <button class="button" onclick="payWithPayPal()">Pay with PayPal</button>
+    <button class="button" onclick="payWithBTC()">Pay with Bitcoin</button>
+    <button class="button" onclick="payWithPi()">Pay with Pi Coin</button>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Account Summary</div>
+    <p>Tools used: 7</p>
+    <p>Alerts set: 3</p>
+    <p>Last login: 2025-05-14</p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Recently Used Tools</div>
+    <ul>
+      <li>Growth Forecast Calculator</li>
+      <li>Portfolio Tracker</li>
+      <li>Unlock Impact Simulator</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Articles You Viewed</div>
+    <ul>
+      <li><a href="article1.html">The Future of Tokenomics</a></li>
+      <li><a href="article2.html">Crypto Security Basics</a></li>
+    </ul>
+  </div>
+
+  <div id="paymentConfirmation" class="card" style="display:none; color:#00ff99; border-color:lime;">
+    <strong>Payment confirmed!</strong> Your Premium access will be activated shortly.
+  </div>
+</div>
+
+<!-- PAYMENT LOGIC -->
+<script>
+  function showConfirmation() {
+    document.getElementById("paymentConfirmation").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function payWithStripe() {
+    alert("Redirecting to Stripe...");
+    showConfirmation();
+  }
+
+  function payWithPayPal() {
+    alert("Redirecting to PayPal...");
+    showConfirmation();
+  }
+
+  function payWithBTC() {
+    alert("Send BTC to: 1A2b3C4d5E6f7G8h9I0j");
+    showConfirmation();
+  }
+
+  function payWithPi() {
+    alert("Send Pi to: PiWallet1234567890");
+    showConfirmation();
+  }
+</script>
+
+</body>
+</html>

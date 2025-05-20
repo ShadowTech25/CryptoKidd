@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -81,9 +80,7 @@
 <body>
   <div class="market-ticker">
     <span>BTC: $62,115 | ETH: $3,010 | PI: $0.72 | SOL: $155.12 | DOGE: $0.137</span>
-  </div>
-
-  <nav class="navbar">
+  </div>  <nav class="navbar">
     <div class="logo old-english">CryptoKid</div>
     <div class="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -97,14 +94,10 @@
   <li><a href="about.html">About</a></li>
   <li><a href="contact.html">Contact</a></li>
 </ul>
-  </nav>
-
-  <header class="hero">
+  </nav>  <header class="hero">
     <h1 class="hero-title">Decoding Crypto, One Block at a Time</h1>
     <p class="hero-subtext">Explore underground trends, early alpha, and sharp insights before they hit the mainstream.</p>
-  </header>
-
-  <section class="feature-section">
+  </header>  <section class="feature-section">
     <h2>What’s Moving Right Now</h2>
     <div class="card">
       <h3>$PI is up 22% – Why?</h3>
@@ -114,9 +107,7 @@
       <h3>ETH Gas Drops Below 8 Gwei</h3>
       <p>That’s unusually cheap. Perfect window for L2 deployments or smart contract interaction. Builders, this is your green light.</p>
     </div>
-  </section>
-
-  <section class="feature-section">
+  </section>  <section class="feature-section">
     <h2>CryptoKid’s Radar</h2>
     <div class="card">
       <h3>Watchlist Highlights</h3>
@@ -126,48 +117,32 @@
         <li><strong>Protocol:</strong> ELX – AI-optimized DeFi routing</li>
       </ul>
     </div>
-  </section>
-
-  <section class="feature-section">
+  </section>  <section class="feature-section">
     <h2>Alpha Corner</h2>
     <div class="card">
       <p><strong>Tip:</strong> Don't chase pumps. Chase volume with no price movement — that’s where whales accumulate.</p>
     </div>
-  </section>
-
-  <section class="video-embed">
+  </section>  <section class="video-embed">
     <h2 style="text-align:center;">Watch: The Crypto Breakdown</h2>
     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="CryptoKid Video"></iframe>
-  </section>
-
-  <section class="start-here">
+  </section>  <section class="start-here">
     <h2>New Here?</h2>
     <p>Start with these essentials:</p>
     <a href="guides.html">Crypto Starter Guide</a>
     <a href="article-pi-network.html">Is Pi Network Real?</a>
     <a href="contact.html">Contact the Kid</a>
-  </section>
-
-  <div class="rotating-quote" id="quoteBox">
+  </section>  <div class="rotating-quote" id="quoteBox">
     “The only crypto site that doesn’t waste your time. Straight to the point, no fluff.” — Anonymous Trader
-  </div>
-
-  <section class="slang-preview">
+  </div>  <section class="slang-preview">
     <p>Don’t know what “rekt” means? You will. <a href="guides.html">Learn the Lingo</a></p>
-  </section>
-
-  <section class="as-seen-on">
+  </section>  <section class="as-seen-on">
     <h2>As Seen On</h2>
     <img src="https://dummyimage.com/100x40/444/fff&text=Coindesk" alt="Coindesk" />
     <img src="https://dummyimage.com/100x40/444/fff&text=Decrypt" alt="Decrypt" />
     <img src="https://dummyimage.com/100x40/444/fff&text=Cointelegraph" alt="Cointelegraph" />
-  </section>
-
-  <footer class="footer">
+  </section>  <footer class="footer">
     <p>© 2025 CryptoKid. Built for those who read between the blocks.</p>
-  </footer>
-
-  <script>
+  </footer>  <script>
     function toggleMenu() {
       document.getElementById('navMenu').classList.toggle('show');
     }
@@ -182,6 +157,19 @@
       quoteIndex = (quoteIndex + 1) % quotes.length;
       document.getElementById("quoteBox").innerText = quotes[quoteIndex];
     }, 6000);
-  </script>
-</body>
+  </script><!-- Firebase App (Core SDK) --><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script><script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBWoTFNHPtDygL5hvNLSycthL5pWrRFnGE",
+    authDomain: "cryptokiddofficial.firebaseapp.com",
+    databaseURL: "https://cryptokiddofficial-default-rtdb.firebaseio.com",
+    projectId: "cryptokiddofficial",
+    storageBucket: "cryptokiddofficial.appspot.com",
+    messagingSenderId: "661589551503",
+    appId: "1:661589551503:web:6fe76fc440af292a43c3fa",
+    measurementId: "G-VX1NN7GRD3"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script></body>
 </html>

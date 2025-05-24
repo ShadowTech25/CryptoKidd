@@ -1,1310 +1,612 @@
-<!DOCTYPE html><html lang="en">
+
+<!DOCTYPE html>
+
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#FFD700"/>
-  <title>CryptoKid Tools</title>
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
-  <style>
-    body { background: #000; color: #FFD700; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .market-ticker {
-      background: #111; color: #FFD700; overflow: hidden; white-space: nowrap;
-      padding: 10px; font-size: 0.9rem; border-bottom: 1px solid #FFD700; position: relative;
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Utility &amp; Tools</title>
+<style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
     }
-    .market-ticker span {
-      display: inline-block; min-width: 100%; padding-right: 40px;
-      animation: scroll-ticker 20s linear infinite;
+    h1 {
+      text-align: center;
+      font-size: 2rem;
     }
-    @keyframes scroll-ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: auto;
     }
-    .navbar, .hero, .footer { text-align: center; padding: 20px; }
-    .old-english { font-family: 'UnifrakturCook', cursive; font-size: 2rem; color: #FFD700; }
-    main { padding: 20px; }
-    details {
-      background: #111; color: #FFD700; border: 1px solid #FFD70055;
-      border-radius: 5px; margin-bottom: 15px; padding: 10px;
+    .tool-card {
+      background-color: #111;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #FFD700;
+      box-shadow: 0 0 10px #FFD70033;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.2s;
     }
-    summary {
-      cursor: pointer; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;
+    .tool-card:hover {
+      transform: translateY(-5px);
     }
-    details[open] summary::after { content: " ▲"; }
-    details summary::after { content: " ▼"; }
-    input, select, button {
-      background: #000; color: #FFD700; border: 1px solid #FFD700;
-      padding: 8px; width: 100%; box-sizing: border-box; margin-bottom: 10px;
+    .tool-icon {
+      width: 100%;
+      padding: 20px;
+      background: linear-gradient(to right, #FFD700, #6A0DAD);
     }
-    button { cursor: pointer; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { padding: 5px; text-align: left; color: #FFF; }
-    th { color: #FFD700; }
+    .tool-icon img {
+      width: 40px;
+      height: 40px;
+    }
+    .tool-content {
+      padding: 20px;
+    }
+    .tool-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 10px 0;
+    }
+    .tool-category {
+      background: #333;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .tool-desc {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    .open-btn {
+      margin-top: 15px;
+      padding: 8px 16px;
+      background-color: #FFD700;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .favorite-btn {
+      margin-top: 10px;
+      background: none;
+      border: none;
+      color: #FFD700;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .favorite-btn.active {
+      color: #FF4500;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .filter-btn {
+      background-color: #FFD700;
+      color: #000;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    .filter-btn.active {
+      background-color: #6A0DAD;
+      color: #fff;
+    }
+  
+    .tool-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .tool-desc {
+      flex-grow: 1;
+    }
+    
+    .tool-card {
+      height: 100%;
+      min-height: 360px;
+    }
+    
+.nav-wrapper {
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  background-color: #111;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.nav-wrapper.show {
+  display: flex;
+}
+
+.nav-section {
+  border-top: 1px solid #FFD700;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  margin-top: 5px;
+}
+
+.nav-section h3 {
+  color: #FFD700;
+  margin: 0 0 10px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.nav-section a {
+  color: #FFD700;
+  text-decoration: none;
+  display: block;
+  margin: 6px 10px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.nav-section a:hover {
+  color: white;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tool-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 80px;
+  background: linear-gradient(to right, #FFD700, #6A0DAD);
+}
+
+.tool-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tool-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100px;
+  background: linear-gradient(to right, #FFD700, #6A0DAD);
+  overflow: hidden;
+}
+
+.tool-icon img {
+  width: 40px;
+  height: 40px;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+  align-self: center;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  height: 100%;
+  min-height: 360px;
+}
+
+.tool-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  min-height: 100px;
+  padding: 20px 0;
+  background: linear-gradient(to right, #FFD700, #6A0DAD);
+  overflow: hidden;
+}
+
+.tool-icon img {
+  width: 40px;
+  height: 40px;
+  max-width: 100%;
+  object-fit: contain;
+  margin: auto;
+  display: block;
+  align-self: center;
+}
+
+.nav-section h3 {
+  text-align: center !important;
+}
+</style>
+</head>
+<body><nav class="navbar">
+<div class="logo">CryptoKid</div>
+<div class="hamburger" onclick="toggleMenu()">
+<div></div>
+<div></div>
+<div></div>
+</div>
+</nav><div class="nav-wrapper" id="navMenu">
+<div class="nav-section">
+<h3>Main</h3>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</div>
+<div class="nav-section">
+<h3>Learn</h3>
+<a href="articles.html">Articles</a>
+<a href="guides.html">Guides</a>
+</div>
+<div class="nav-section">
+<h3>Tools</h3>
+<a href="markets.html">Markets</a>
+<a href="tools.html">Tools</a>
+<a href="dashboard.html">Dashboard</a>
+</div>
+</div><script>
+function toggleMenu() {
+  const navMenu = document.getElementById("navMenu");
+  navMenu.classList.toggle("show");
+}
+</script>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Utility &amp; Tools</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      background-color: #000;
+    }
+
+    .navbar {
+      background-color: #000;
+      border-bottom: 3px solid #FFD700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      font-family: 'UnifrakturCook', cursive;
+    }
+
+    .logo {
+      font-size: 2rem;
+      color: #FFD700;
+    }
+
+    .hamburger {
+      width: 30px;
+      height: 21px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hamburger div {
+      height: 3px;
+      background-color: #FFD700;
+      border-radius: 2px;
+      width: 100%;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      background-color: #000;
+      padding: 20px;
+    }
+
+    .nav-links.show {
+      display: flex;
+    }
+
+    .nav-links li {
+      list-style: none;
+      margin: 10px 0;
+    }
+
+    .nav-links li a {
+      color: #FFD700;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    .nav-links li a:hover {
+      color: white;
+    }
+
+    @media (min-width: 768px) {
+      .hamburger {
+        display: none;
+      }
+      .nav-links {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 0;
+        gap: 20px;
+      }
+      .nav-links li {
+        margin: 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="market-ticker">
-    <span>BTC: $62,115 | ETH: $3,010 | PI: $0.72 | SOL: $155.12 | DOGE: $0.137</span>
-  </div>
- <nav class="navbar" style="background:#000; padding:10px 20px; position:relative;">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <div class="logo old-english" style="font-size:2rem; color:#FFD700;">CryptoKid</div>
-    <input type="checkbox" id="menu-toggle" style="display:none;">
-    <label for="menu-toggle" id="menu-icon" style="font-size:2rem; color:#FFD700; cursor:pointer;">☰</label>
-  </div>
-  <div id="nav-links" style="display:none; flex-direction:column; align-items:flex-start; padding-top:10px;">
-    <a href="index.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Home</a>
-    <a href="articles.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Articles</a>
-    <a href="guides.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Guides</a>
-    <a href="markets.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Markets</a>
-    <a href="tools.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Tools</a>
-    <a href="about.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">About</a>
-    <a href="contact.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Contact</a>
-  </div>
-</nav>
-
-<!-- Responsive Navbar Script -->
+<div style="margin-bottom: 30px;"></div><div class="filters">
+<button class="filter-btn active" onclick="filterCategory('all')">All Tools</button>
+<button class="filter-btn" onclick="filterCategory('market')">Market Tools</button>
+<button class="filter-btn" onclick="filterCategory('defi')">DeFi Tools</button>
+<button class="filter-btn" onclick="filterCategory('portfolio')">Portfolio Tools</button>
+</div><div class="filters">
+<button class="filter-btn" onclick="filterCategory('wallet')">Wallet Tracking</button>
+<button class="filter-btn" onclick="filterCategory('analysis')">Token Analysis</button>
+<button class="filter-btn" onclick="filterCategory('presale')">Presale Tools</button>
+</div><div class="filters" style="margin: 20px auto; text-align: center; max-width: 600px;"><select onchange="filterByDropdown(this.value)" style="padding: 12px 16px; width: 100%; max-width: 600px; border-radius: 8px; border: 2px solid #FFD700; font-size: 1rem; background-color: #111; color: #FFD700; appearance: none; background-image: url('data:image/svg+xml;utf8,&lt;svg fill=&quot;%23FFD700&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; width=&quot;24&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;path d=&quot;M7 10l5 5 5-5z&quot;/&gt;&lt;/svg&gt;'); background-repeat: no-repeat; background-position-x: 98%; background-position-y: 50%;"><option value="all">Select Category</option><option value="markettools">Market Tools</option><option value="defitools">DeFi Tools</option><option value="portfoliotools">Portfolio Tools</option><option value="wallettracking">Wallet Tracking</option><option value="tokenanalysis">Token Analysis</option><option value="presaletools">Presale Tools</option></select></div>
 <script>
-  const toggle = document.getElementById("menu-toggle");
-  const nav = document.getElementById("nav-links");
-  const icon = document.getElementById("menu-icon");
-
-  icon.addEventListener("click", () => {
-    toggle.checked = !toggle.checked;
-    nav.style.display = toggle.checked ? "flex" : "none";
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) {
-      nav.style.display = "flex";
-      nav.style.flexDirection = "row";
-      nav.style.alignItems = "center";
-      nav.style.justifyContent = "center";
-      nav.style.gap = "20px";
-    } else {
-      nav.style.display = toggle.checked ? "flex" : "none";
-      nav.style.flexDirection = "column";
-      nav.style.alignItems = "flex-start";
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('show');
     }
+  
+function searchCategory(query) {
+  const toolCards = document.querySelectorAll('.tool-card');
+  query = query.toLowerCase();
+  toolCards.forEach(card => {
+    const category = card.querySelector('.tool-category').textContent.toLowerCase();
+    const title = card.querySelector('.tool-title').textContent.toLowerCase();
+    card.style.display = (category.includes(query) || title.includes(query)) ? 'block' : 'none';
   });
+}
 
-  window.dispatchEvent(new Event("resize"));
-</script>
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const nav = document.getElementById("nav-links");
-  const icon = document.getElementById("menu-icon");
-
-  icon.addEventListener("click", () => {
-    toggle.checked = !toggle.checked;
-    nav.style.display = toggle.checked ? "flex" : "none";
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) {
-      nav.style.display = "flex";
-      nav.style.flexDirection = "row";
-      nav.style.gap = "20px";
-    } else {
-      nav.style.display = toggle.checked ? "flex" : "none";
-      nav.style.flexDirection = "column";
-      nav.style.gap = "10px";
-    }
-  });
-
-  window.dispatchEvent(new Event("resize"));
-</script>
-  <header class="hero">
-    <h1 class="hero-title">Crypto Tools & Calculators</h1>
-    <p class="hero-subtext">Forecasts, simulators, alerts and more — all in one place.</p>
-  </header>
-  <main>
-    <!-- TOOL 1: Growth Forecast Calculator -->
-    <details><summary>Growth Forecast Calculator</summary><div>
-      <p><strong>What it does:</strong> Use this tool to estimate the future value of a token based on its current price and a projected daily growth rate.</p>
-      <input id="startPrice" type="number" placeholder="Current Price">
-      <input id="growthRate" type="number" placeholder="Daily Growth %">
-      <input id="days" type="number" placeholder="Days">
-      <button onclick="calcGrowth()">Calculate</button>
-      <div id="growthResult"></div>
-    </div></details><!-- TOOL 2: Market Cap Estimator -->
-<details><summary>Market Cap Estimator</summary><div>
-  <p><strong>What it does:</strong> Calculate what the price of a token would be at a given market cap.</p>
-  <input id="circulating" type="number" placeholder="Circulating Supply">
-  <input id="targetCap" type="number" placeholder="Target Market Cap">
-  <button onclick="calcCap()">Estimate</button>
-  <div id="capResult"></div>
-</div></details>
-
-<!-- TOOL 3: Unlock Impact Simulator -->
-<details><summary>Unlock Impact Simulator</summary><div>
-  <p><strong>What it does:</strong> Estimate the effect of token unlock events on price.</p>
-  <input id="currentPrice" type="number" placeholder="Current Price">
-  <input id="unlockAmount" type="number" placeholder="Unlock Amount">
-  <input id="sellPressure" type="number" placeholder="Sell Pressure %">
-  <button onclick="calcUnlock()">Simulate</button>
-  <div id="unlockResult"></div>
-</div></details>
-
-<!-- TOOL 4: Sentiment + Trend Predictor -->
-<details><summary>Sentiment + Trend Predictor</summary><div>
-  <p><strong>What it does:</strong> Predicts whether a token is likely to trend bullish, bearish, or remain neutral.</p>
-  <input id="sentimentScore" type="number" placeholder="Sentiment Score %">
-  <input id="rsi" type="number" placeholder="RSI (0-100)">
-  <button onclick="predictSentiment()">Predict</button>
-  <div id="sentimentResult"></div>
-</div></details>
-
-<!-- TOOL 5: Portfolio Tracker -->
-<details><summary>Portfolio Tracker</summary><div>
-  <p><strong>What it does:</strong> Track your holdings and total portfolio value.</p>
-  <input id="portfolioToken" placeholder="Token">
-  <input id="portfolioAmount" type="number" placeholder="Amount Held">
-  <input id="purchasePrice" type="number" placeholder="Buy Price">
-  <button onclick="calculatePortfolio()">Calculate</button>
-  <div id="portfolioResult"></div>
-</div></details>
-
-<!-- TOOL 6: Price Alert Manager -->
-<details><summary>Price Alert Manager</summary><div>
-  <p><strong>What it does:</strong> Set a target price and check alert trigger.</p>
-  <input id="alertToken" placeholder="Token ID">
-  <input id="alertTarget" type="number" placeholder="Target Price">
-  <button onclick="checkPriceAlert()">Check</button>
-  <div id="alertResult"></div>
-</div></details>
-
-<!-- TOOL 7: Whale Tracker -->
-<details><summary>Whale Tracker</summary><div>
-  <p><strong>What it does:</strong> Simulated whale transaction activity.</p>
-  <input id="whaleToken" placeholder="Token ID">
-  <button onclick="loadWhaleData()">Simulate Activity</button>
-  <table><thead><tr><th>Tx Hash</th><th>Amount</th><th>From</th><th>To</th></tr></thead><tbody id="whaleTableBody"></tbody></table>
-</div></details>
-
-<!-- TOOL 8: Whale Alert Setup -->
-<details><summary>Whale Alert Setup</summary><div>
-  <p><strong>What it does:</strong> Define custom alert rules based on token transfers.</p>
-  <input id="alertTokenInput" placeholder="Token ID">
-  <input id="alertThresholdInput" type="number" placeholder="Threshold">
-  <select id="alertTypeInput"><option value="popup">Popup</option><option value="log">Log</option></select>
-  <button onclick="saveWhaleAlert()">Save Rule</button>
-  <div id="whaleAlertConfirm"></div>
-</div></details>
-
-<!-- TOOL 9: Whale Alert History -->
-<details><summary>Whale Alert History</summary><div>
-  <p><strong>What it does:</strong> Review previously triggered whale alerts.</p>
-  <button onclick="loadWhaleHistory()">Load History</button>
-  <table><thead><tr><th>Token</th><th>Threshold</th><th>Type</th><th>Date</th></tr></thead><tbody id="whaleHistoryBody"></tbody></table>
-</div></details>
-
-<!-- TOOL 10: Admin Dashboard -->
-<details><summary>Admin Dashboard</summary><div>
-  <p><strong>What it does:</strong> Manage whale alert settings in your local browser memory.</p>
-  <button onclick="loadAdminAlerts()">Manage Alerts</button>
-  <table><thead><tr><th>Token</th><th>Threshold</th><th>Type</th><th>Time</th><th>Action</th></tr></thead><tbody id="adminAlertTable"></tbody></table>
-</div></details>
-
-<!-- TOOL 11: Token Sentiment Analyzer -->
-<details><summary>Token Sentiment Analyzer</summary><div>
-  <p><strong>What it does:</strong> Generates a sentiment score for a given token.</p>
-  <input id="sentimentToken" placeholder="Token ID">
-  <button onclick="analyzeSentiment()">Analyze</button>
-  <div id="sentimentAnalysisResult"></div>
-</div></details>
-
-<!-- TOOL 12: Slippage Calculator -->
-<details><summary>Slippage Calculator</summary><div>
-  <p><strong>What it does:</strong> Estimate how much slippage will occur in a trade.</p>
-  <input id="slipTokenAmount" type="number" placeholder="Token Amount">
-  <input id="slipPoolLiquidity" type="number" placeholder="Pool Liquidity">
-  <button onclick="calculateSlippage()">Calculate</button>
-  <div id="slippageResult"></div>
-</div></details>
-
-<!-- TOOL 13: Token Unlock Countdown -->
-<details><summary>Token Unlock Countdown</summary><div>
-  <p><strong>What it does:</strong> Countdown to future token unlocks.</p>
-  <input id="unlockToken" placeholder="Token ID">
-  <input id="unlockDate" type="date">
-  <button onclick="calculateUnlockCountdown()">Start</button>
-  <div id="unlockCountdownResult"></div>
-</div></details>
-
-<!-- TOOL 14: Historical Chart Viewer -->
-<details><summary>Historical Chart Viewer</summary><div>
-  <p><strong>What it does:</strong> Displays a token’s price chart over time using mock data.</p>
-  <input id="chartToken" placeholder="Token ID">
-  <button onclick="loadChart()">View Chart</button>
-  <div id="chartResult">[Chart would render here with live integration]</div>
-</div></details>
-
-<!-- TOOL 15: Token Comparison Tool -->
-<details><summary>Token Comparison Tool</summary><div>
-  <p><strong>What it does:</strong> Compare two tokens side-by-side based on market cap, price, volume, and other key stats.</p>
-  <input id="token1" placeholder="Token 1">
-  <input id="token2" placeholder="Token 2">
-  <button onclick="compareTokens()">Compare</button>
-  <div id="comparisonResult"></div>
-</div></details>
-
-<!-- TOOL 16: Portfolio Rebalancer -->
-<details><summary>Portfolio Rebalancer</summary><div>
-  <p><strong>What it does:</strong> Calculates how much of each token to buy/sell to hit your ideal allocation.</p>
-  <input id="totalValue" type="number" placeholder="Total Portfolio Value">
-  <input id="rebalanceToken1" placeholder="Token 1 Name">
-  <input id="rebalancePercent1" type="number" placeholder="Target % for Token 1">
-  <input id="rebalanceToken2" placeholder="Token 2 Name">
-  <input id="rebalancePercent2" type="number" placeholder="Target % for Token 2">
-  <button onclick="rebalancePortfolio()">Rebalance</button>
-  <div id="rebalanceResult"></div>
-</div></details>
-
-<!-- TOOL 17: Token Unlock Analyzer -->
-<details><summary>Token Unlock Analyzer</summary><div>
-  <p><strong>What it does:</strong> Simulates different unlock scenarios and outputs projected impact across multiple timeframes.</p>
-  <input id="unlockSimToken" placeholder="Token ID">
-  <input id="unlockSimAmount" type="number" placeholder="Total Unlock Amount">
-  <input id="unlockSimPrice" type="number" placeholder="Current Price">
-  <button onclick="analyzeUnlock()">Analyze Unlock Impact</button>
-  <div id="unlockSimResult"></div>
-</div></details>
-
-  <!-- TOOL 18: Gas Tracker --><details><summary>Gas Tracker</summary><div>
-  <p><strong>What it does:</strong> Estimate the average gas fees for Ethereum-based transactions using mock data.</p>
-  <button onclick="trackGas()">Check Gas</button>
-  <div id="gasResult"></div>
-</div></details><!-- TOOL 19: Tax Estimator --><details><summary>Tax Estimator</summary><div>
-  <p><strong>What it does:</strong> Estimate crypto taxes based on profit and selected country tax rate.</p>
-  <input id="taxProfit" type="number" placeholder="Total Profit ($)">
-  <select id="taxCountry">
-    <option value="0.15">USA (15%)</option>
-    <option value="0.20">Canada (20%)</option>
-    <option value="0.25">UK (25%)</option>
-    <option value="0.30">Germany (30%)</option>
-  </select>
-  <button onclick="estimateTax()">Estimate</button>
-  <div id="taxResult"></div>
-</div></details><!-- TOOL 20: Whale Lookup Tool --><details><summary>Whale Lookup Tool</summary><div>
-  <p><strong>What it does:</strong> Lookup a wallet address and return mock holdings for large whale wallets.</p>
-  <input id="lookupWallet" placeholder="Wallet Address">
-  <button onclick="lookupWhale()">Lookup</button>
-  <div id="lookupResult"></div>
-</div></details><!-- TOOL 21: Token Hype Score --><details><summary>Token Hype Score</summary><div>
-  <p><strong>What it does:</strong> Assigns a hype score to a token based on mock social metrics and trend signals.</p>
-  <input id="hypeToken" placeholder="Token ID">
-  <button onclick="calculateHype()">Get Hype Score</button>
-  <div id="hypeResult"></div>
-</div></details><!-- TOOL 22: Token Sentiment Feed --><details><summary>Token Sentiment Feed</summary><div>
-  <p><strong>What it does:</strong> Simulates a live sentiment feed for tokens based on mock API data.</p>
-  <button onclick="loadSentimentFeed()">Load Feed</button>
-  <ul id="sentimentFeedList"></ul>
-</div></details><!-- TOOL 23: Advanced Profit Calculator --><details><summary>Advanced Profit Calculator</summary><div>
-  <p><strong>What it does:</strong> Calculates exact profit, ROI %, and break-even price for a given buy/sell scenario.</p>
-  <input id="profitBuyPrice" type="number" placeholder="Buy Price">
-  <input id="profitSellPrice" type="number" placeholder="Sell Price">
-  <input id="profitAmount" type="number" placeholder="Amount Traded">
-  <button onclick="calculateProfit()">Calculate</button>
-  <div id="profitCalcResult"></div>
-</div></details>
-    <!-- TOOL 24: Token Scorecard --><details><summary>Token Scorecard</summary><div>
-  <p><strong>What it does:</strong> Shows a mock data card with token summary.</p>
-  <input id="scorecardToken" placeholder="Token ID">
-  <button onclick="generateScorecard()">Generate Scorecard</button>
-  <div id="scorecardResult"></div>
-</div></details><!-- TOOL 25: Airdrop Radar + Eligibility Checker --><details><summary>Airdrop Radar + Eligibility Checker</summary><div>
-  <p><strong>What it does:</strong> Simulates upcoming airdrops + wallet eligibility.</p>
-  <input id="airdropWallet" placeholder="Wallet Address">
-  <button onclick="checkAirdropEligibility()">Check Eligibility</button>
-  <div id="airdropResult"></div>
-  <br>
-  <button onclick="loadAirdropRadar()">View Upcoming Airdrops</button>
-  <ul id="airdropRadarList"></ul>
-</div></details><!-- TOOL 26: Smart Money Tracker / Wallet Tagger --><details><summary>Smart Money Tracker / Wallet Tagger</summary><div>
-  <p><strong>What it does:</strong> Tags wallet as smart money and loads trades.</p>
-  <input id="smartWallet" placeholder="Wallet Address">
-  <button onclick="tagSmartWallet()">Tag Wallet</button>
-  <div id="smartTagResult"></div>
-  <br>
-  <button onclick="loadSmartTrades()">Load Smart Trades</button>
-  <table>
-    <thead><tr><th>Wallet</th><th>Token</th><th>Amount</th><th>Action</th></tr></thead>
-    <tbody id="smartTradeTable"></tbody>
-  </table>
-</div></details><!-- TOOL 27: Token Narrative Tracker --><details><summary>Token Narrative Tracker</summary><div>
-  <p><strong>What it does:</strong> Assigns a trending narrative to the token.</p>
-  <input id="narrativeToken" placeholder="Token ID">
-  <button onclick="trackNarrative()">Track Narrative</button>
-  <div id="narrativeResult"></div>
-</div></details><!-- TOOL 28: Presale Sniper + ROI Estimator --><details><summary>Presale Sniper + ROI Estimator</summary><div>
-  <p><strong>What it does:</strong> Calculates potential ROI from presale.</p>
-  <input id="presaleToken" placeholder="Token Name">
-  <input id="presaleBuyPrice" type="number" placeholder="Presale Price">
-  <input id="presaleListPrice" type="number" placeholder="Expected Listing Price">
-  <button onclick="calculatePresaleROI()">Estimate ROI</button>
-  <div id="presaleResult"></div>
-</div></details><!-- TOOL 29: Whale Wallet Explorer --><details><summary>Whale Wallet Explorer</summary><div>
-  <p><strong>What it does:</strong> Loads mock token balances for a whale.</p>
-  <input id="whaleExploreWallet" placeholder="Wallet Address">
-  <button onclick="exploreWhaleWallet()">Explore Wallet</button>
-  <div id="whaleExplorerResult"></div>
-</div></details><!-- TOOL 30: Multi-Token Rebalancer with Risk Tiers --><details><summary>Multi-Token Rebalancer with Risk Tiers</summary><div>
-  <p><strong>What it does:</strong> Allocates capital by risk (High, Medium, Low).</p>
-  <input id="rebalanceTotal" type="number" placeholder="Total Value">
-  <input id="highRiskToken" placeholder="High Risk Token">
-  <input id="mediumRiskToken" placeholder="Medium Risk Token">
-  <input id="lowRiskToken" placeholder="Low Risk Token">
-  <button onclick="rebalanceWithTiers()">Rebalance</button>
-  <div id="rebalanceTiersResult"></div>
-</div></details><!-- TOOL 31: Token Unlock Heatmap --><details><summary>Token Unlock Heatmap</summary><div>
-  <p><strong>What it does:</strong> Visualizes unlocks by token and month (mock).</p>
-  <button onclick="loadUnlockHeatmap()">Show Heatmap</button>
-  <div id="unlockHeatmapResult"></div>
-</div></details>
-  </main>
-  <footer class="footer">
-    <p>© 2025 CryptoKid. Built for those who read between the blocks.</p>
-  </footer>
-  <script>
-function calcGrowth() {
-  const p = parseFloat(document.getElementById("startPrice").value);
-  const r = parseFloat(document.getElementById("growthRate").value) / 100;
-  const d = parseInt(document.getElementById("days").value);
-  const result = p * Math.pow(1 + r, d);
-  document.getElementById("growthResult").textContent = `Projected Price: $${result.toFixed(4)}`;
-}
-function calcCap() {
-  const s = parseFloat(document.getElementById("circulating").value);
-  const c = parseFloat(document.getElementById("targetCap").value);
-  const price = c / s;
-  document.getElementById("capResult").textContent = `Target Price: $${price.toFixed(6)}`;
-}
-function calcUnlock() {
-  const price = parseFloat(document.getElementById("currentPrice").value);
-  const sellRate = parseFloat(document.getElementById("sellPressure").value) / 100;
-  const impact = price * (1 - (sellRate * 0.5));
-  document.getElementById("unlockResult").textContent = `Simulated Price: $${impact.toFixed(4)}`;
-}
-function predictSentiment() {
-  const score = parseFloat(document.getElementById("sentimentScore").value);
-  const rsi = parseFloat(document.getElementById("rsi").value);
-  let prediction = "Neutral";
-  if (score > 70 && rsi < 70) prediction = "Bullish";
-  else if (score < 40 || rsi > 75) prediction = "Bearish";
-  document.getElementById("sentimentResult").textContent = `Trend: ${prediction}`;
-}
-function calculatePortfolio() {
-  const amount = parseFloat(document.getElementById("portfolioAmount").value);
-  const buy = parseFloat(document.getElementById("purchasePrice").value);
-  const value = amount * buy;
-  document.getElementById("portfolioResult").innerText = `Holding Value: $${value.toFixed(2)}`;
-}
-function checkPriceAlert() {
-  const target = parseFloat(document.getElementById("alertTarget").value);
-  const token = document.getElementById("alertToken").value;
-  document.getElementById("alertResult").innerText = `${token.toUpperCase()} alert set for $${target}`;
-}
-function loadWhaleData() {
-  const data = [
-    { hash: "0xabc", amount: "200K", from: "0xWallet1", to: "0xExchange" },
-    { hash: "0xdef", amount: "350K", from: "0xWallet2", to: "0xVault" }
-  ];
-  document.getElementById("whaleTableBody").innerHTML = data.map(d => `<tr><td>${d.hash}</td><td>${d.amount}</td><td>${d.from}</td><td>${d.to}</td></tr>`).join("");
-}
-function saveWhaleAlert() {
-  const token = document.getElementById("alertTokenInput").value;
-  const threshold = document.getElementById("alertThresholdInput").value;
-  const type = document.getElementById("alertTypeInput").value;
-  const alert = { token, threshold, type, timestamp: new Date().toISOString() };
-  const saved = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
-  saved.push(alert);
-  localStorage.setItem("whaleAlerts", JSON.stringify(saved));
-  document.getElementById("whaleAlertConfirm").innerText = "Alert saved.";
-}
-function loadWhaleHistory() {
-  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
-  document.getElementById("whaleHistoryBody").innerHTML = alerts.map(a => `<tr><td>${a.token}</td><td>${a.threshold}</td><td>${a.type}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join("");
-}
-function loadAdminAlerts() {
-  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
-  document.getElementById("adminAlertTable").innerHTML = alerts.map((a, i) => `<tr><td>${a.token}</td><td>${a.threshold}</td><td>${a.type}</td><td>${new Date(a.timestamp).toLocaleString()}</td><td><button onclick="deleteAlert(${i})">Delete</button></td></tr>`).join("");
-}
-function deleteAlert(i) {
-  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
-  alerts.splice(i, 1);
-  localStorage.setItem("whaleAlerts", JSON.stringify(alerts));
-  loadAdminAlerts();
-}
-function analyzeSentiment() {
-  const score = Math.floor(Math.random() * 101);
-  let status = "Neutral", color = "#FFD700";
-  if (score > 70) { status = "Bullish"; color = "lime"; }
-  else if (score < 40) { status = "Bearish"; color = "red"; }
-  document.getElementById("sentimentAnalysisResult").innerHTML = `<p>Score: ${score}%</p><p style="color:${color};">Status: ${status}</p>`;
-}
-function calculateSlippage() {
-  const amount = parseFloat(document.getElementById("slipTokenAmount").value);
-  const pool = parseFloat(document.getElementById("slipPoolLiquidity").value);
-  const slippage = (amount / (pool + amount)) * 100;
-  document.getElementById("slippageResult").innerText = `Estimated Slippage: ${slippage.toFixed(2)}%`;
-}
-function calculateUnlockCountdown() {
-  const token = document.getElementById("unlockToken").value;
-  const date = new Date(document.getElementById("unlockDate").value);
-  const now = new Date();
-  const diff = date - now;
-  if (diff <= 0) return document.getElementById("unlockCountdownResult").innerHTML = "Already unlocked.";
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById("unlockCountdownResult").innerHTML = `${token.toUpperCase()} unlocks in ${d} days.`;
-}
-function loadChart() {
-  const token = document.getElementById("chartToken").value.toUpperCase();
-  document.getElementById("chartResult").innerHTML = `Showing historical chart for <strong>${token}</strong> (mock data only).`;
-}
-function compareTokens() {
-  const t1 = document.getElementById("token1").value.toUpperCase();
-  const t2 = document.getElementById("token2").value.toUpperCase();
-  document.getElementById("comparisonResult").innerHTML = `
-    <p><strong>Comparison:</strong></p>
-    <ul>
-      <li>${t1} vs ${t2}</li>
-      <li>Market Cap: ${Math.floor(Math.random() * 100)}B vs ${Math.floor(Math.random() * 100)}B</li>
-      <li>Volume: ${Math.floor(Math.random() * 10)}M vs ${Math.floor(Math.random() * 10)}M</li>
-      <li>Price: $${(Math.random() * 10).toFixed(2)} vs $${(Math.random() * 10).toFixed(2)}</li>
-    </ul>`;
-}
-function rebalancePortfolio() {
-  const total = parseFloat(document.getElementById("totalValue").value);
-  const t1 = document.getElementById("rebalanceToken1").value;
-  const p1 = parseFloat(document.getElementById("rebalancePercent1").value);
-  const t2 = document.getElementById("rebalanceToken2").value;
-  const p2 = parseFloat(document.getElementById("rebalancePercent2").value);
-  const amt1 = (total * p1) / 100;
-  const amt2 = (total * p2) / 100;
-  document.getElementById("rebalanceResult").innerHTML = `
-    Buy/Hold ${t1.toUpperCase()}: $${amt1.toFixed(2)}<br>
-    Buy/Hold ${t2.toUpperCase()}: $${amt2.toFixed(2)}`;
-}
-function analyzeUnlock() {
-  const token = document.getElementById("unlockSimToken").value.toUpperCase();
-  const amount = parseFloat(document.getElementById("unlockSimAmount").value);
-  const price = parseFloat(document.getElementById("unlockSimPrice").value);
-  const shortImpact = price * 0.9;
-  const midImpact = price * 0.8;
-  const longImpact = price * 0.75;
-  document.getElementById("unlockSimResult").innerHTML = `
-    <p><strong>${token} Unlock Analysis:</strong></p>
-    <ul>
-      <li>Short Term Impact: ~$${shortImpact.toFixed(4)}</li>
-      <li>Mid Term Impact: ~$${midImpact.toFixed(4)}</li>
-      <li>Long Term Impact: ~$${longImpact.toFixed(4)}</li>
-    </ul>`;
-}
-function trackGas() {
-  const slow = (Math.random() * 10 + 5).toFixed(2);
-  const average = (Math.random() * 20 + 10).toFixed(2);
-  const fast = (Math.random() * 30 + 20).toFixed(2);
-  document.getElementById("gasResult").innerHTML = `
-    <ul>
-      <li>Slow: ${slow} Gwei</li>
-      <li>Average: ${average} Gwei</li>
-      <li>Fast: ${fast} Gwei</li>
-    </ul>`;
-}
-function estimateTax() {
-  const profit = parseFloat(document.getElementById("taxProfit").value);
-  const rate = parseFloat(document.getElementById("taxCountry").value);
-  const tax = profit * rate;
-  document.getElementById("taxResult").innerHTML = `Estimated Tax: $${tax.toFixed(2)}`;
-}
-function lookupWhale() {
-  const addr = document.getElementById("lookupWallet").value;
-  const mockHoldings = [
-    { token: "ETH", balance: (Math.random() * 2000).toFixed(2) },
-    { token: "USDT", balance: (Math.random() * 500000).toFixed(0) },
-    { token: "SHIBA", balance: (Math.random() * 1000000000).toFixed(0) }
-  ];
-  const html = mockHoldings.map(t => `<li>${t.token}: ${t.balance}</li>`).join("");
-  document.getElementById("lookupResult").innerHTML = `<p>Wallet: ${addr}</p><ul>${html}</ul>`;
-}
-function calculateHype() {
-  const token = document.getElementById("hypeToken").value.toUpperCase();
-  const score = Math.floor(Math.random() * 101);
-  let label = "Moderate";
-  if (score >= 80) label = "Extreme";
-  else if (score >= 60) label = "High";
-  else if (score < 40) label = "Low";
-  document.getElementById("hypeResult").innerHTML = `<p>${token} Hype Score: <strong>${score}</strong> (${label})</p>`;
-}
-function loadSentimentFeed() {
-  const feed = [
-    { token: "PI", status: "Bullish" },
-    { token: "ROAM", status: "Neutral" },
-    { token: "XRP", status: "Bearish" },
-    { token: "SOL", status: "Bullish" }
-  ];
-  document.getElementById("sentimentFeedList").innerHTML = feed.map(item => `<li><strong>${item.token}</strong>: ${item.status}</li>`).join("");
-}
-function calculateProfit() {
-  const buy = parseFloat(document.getElementById("profitBuyPrice").value);
-  const sell = parseFloat(document.getElementById("profitSellPrice").value);
-  const amount = parseFloat(document.getElementById("profitAmount").value);
-  const profit = (sell - buy) * amount;
-  const roi = ((sell - buy) / buy) * 100;
-  document.getElementById("profitCalcResult").innerHTML = `
-    <p>Profit: $${profit.toFixed(2)}</p>
-    <p>ROI: ${roi.toFixed(2)}%</p>
-    <p>Break-even Price: $${buy.toFixed(2)}</p>`;
-}
-function generateScorecard() {
-  const token = document.getElementById("scorecardToken").value.toUpperCase();
-  const cap = (Math.random() * 1000).toFixed(1);
-  const volume = (Math.random() * 100).toFixed(1);
-  document.getElementById("scorecardResult").innerHTML =
-    `<div><strong>${token} Scorecard</strong><br>Market Cap: $${cap}M<br>Volume: $${volume}M</div>`;
-}
-Checker
-function checkAirdropEligibility() {
-  const wallet = document.getElementById("airdropWallet").value;
-  const eligible = Math.random() > 0.5;
-  document.getElementById("airdropResult").innerText = eligible
-    ? `${wallet} is eligible!`
-    : `${wallet} is not eligible.`;
-}
-function loadAirdropRadar() {
-  const radar = [
-    { token: "PIX", date: "2025-06-01" },
-    { token: "BETA", date: "2025-06-12" },
-    { token: "FOXX", date: "2025-07-04" }
-  ];
-  document.getElementById("airdropRadarList").innerHTML = radar.map(r =>
-    `<li>${r.token} - ${r.date}</li>`).join("");
-}
-Tagger
-function tagSmartWallet() {
-  const wallet = document.getElementById("smartWallet").value;
-  document.getElementById("smartTagResult").innerText = `Wallet ${wallet} tagged as smart money.`;
-}
-function loadSmartTrades() {
-  const trades = [
-    { wallet: "0xSmartA", token: "ARB", amount: "120K", action: "Buy" },
-    { wallet: "0xSmartB", token: "ETH", amount: "500", action: "Sell" }
-  ];
-  document.getElementById("smartTradeTable").innerHTML = trades.map(t =>
-    `<tr><td>${t.wallet}</td><td>${t.token}</td><td>${t.amount}</td><td>${t.action}</td></tr>`).join("");
-}
-function trackNarrative() {
-  const token = document.getElementById("narrativeToken").value.toUpperCase();
-  const tags = ["AI", "DePIN", "Gaming", "RWA", "Memecoin", "Staking", "Infrastructure"];
-  const label = tags[Math.floor(Math.random() * tags.length)];
-  document.getElementById("narrativeResult").innerHTML =
-    `${token} is currently trending in the <strong>${label}</strong> narrative.`;
-}
-Estimator
-function calculatePresaleROI() {
-  const buy = parseFloat(document.getElementById("presaleBuyPrice").value);
-  const list = parseFloat(document.getElementById("presaleListPrice").value);
-  if (isNaN(buy) || isNaN(list) || buy <= 0) {
-    document.getElementById("presaleResult").innerText = "Invalid input.";
+function filterByDropdown(value) {
+  if (value === "all") {
+    document.querySelectorAll('.tool-card').forEach(card => card.style.display = 'block');
     return;
   }
-  const roi = ((list - buy) / buy) * 100;
-  document.getElementById("presaleResult").innerHTML =
-    `Expected ROI: <strong>${roi.toFixed(2)}%</strong>`;
-}
-function exploreWhaleWallet() {
-  const wallet = document.getElementById("whaleExploreWallet").value;
-  const balances = [
-    { token: "USDC", balance: (Math.random() * 1000000).toFixed(0) },
-    { token: "BTC", balance: (Math.random() * 500).toFixed(2) },
-    { token: "ETH", balance: (Math.random() * 1500).toFixed(2) }
-  ];
-  document.getElementById("whaleExplorerResult").innerHTML =
-    `<p>${wallet}</p><ul>${balances.map(b => `<li>${b.token}: ${b.balance}</li>`).join("")}</ul>`;
-}
-function rebalanceWithTiers() {
-  const total = parseFloat(document.getElementById("rebalanceTotal").value);
-  const high = document.getElementById("highRiskToken").value.toUpperCase();
-  const med = document.getElementById("mediumRiskToken").value.toUpperCase();
-  const low = document.getElementById("lowRiskToken").value.toUpperCase();
-  if (isNaN(total) || total <= 0 || !high || !med || !low) {
-    document.getElementById("rebalanceTiersResult").innerText = "Invalid input.";
-    return;
-  }
-  const result = `
-    ${high}: $${(total * 0.5).toFixed(2)}<br>
-    ${med}: $${(total * 0.3).toFixed(2)}<br>
-    ${low}: $${(total * 0.2).toFixed(2)}`;
-  document.getElementById("rebalanceTiersResult").innerHTML = result;
-}
-function loadUnlockHeatmap() {
-  const heatmap = {
-    June: ["PIX ($10M)", "ROAM ($8M)"],
-    July: ["HYPE ($12M)", "XRAY ($5M)"],
-    August: ["SOLVE ($9M)"]
-  };
-  let html = "<ul>";
-  for (const [month, tokens] of Object.entries(heatmap)) {
-    html += `<li>${month}: ${tokens.join(", ")}</li>`;
-  }
-  html += "</ul>";
-  docum<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#FFD700"/>
-  <title>CryptoKid Tools</title>
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
-  <style>
-    body { background: #000; color: #FFD700; font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    .market-ticker {
-      background: #111; color: #FFD700; overflow: hidden; white-space: nowrap;
-      padding: 10px; font-size: 0.9rem; border-bottom: 1px solid #FFD700; position: relative;
-    }
-    .market-ticker span {
-      display: inline-block; min-width: 100%; padding-right: 40px;
-      animation: scroll-ticker 20s linear infinite;
-    }
-    @keyframes scroll-ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-    .navbar, .hero, .footer { text-align: center; padding: 20px; }
-    .old-english { font-family: 'UnifrakturCook', cursive; font-size: 2rem; color: #FFD700; }
-    main { padding: 20px; }
-    details {
-      background: #111; color: #FFD700; border: 1px solid #FFD70055;
-      border-radius: 5px; margin-bottom: 15px; padding: 10px;
-    }
-    summary {
-      cursor: pointer; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;
-    }
-    details[open] summary::after { content: " ▲"; }
-    details summary::after { content: " ▼"; }
-    input, select, button {
-      background: #000; color: #FFD700; border: 1px solid #FFD700;
-      padding: 8px; width: 100%; box-sizing: border-box; margin-bottom: 10px;
-    }
-    button { cursor: pointer; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { padding: 5px; text-align: left; color: #FFF; }
-    th { color: #FFD700; }
-  </style>
-</head>
-<body>
-  <div class="market-ticker">
-    <span>BTC: $62,115 | ETH: $3,010 | PI: $0.72 | SOL: $155.12 | DOGE: $0.137</span>
-  </div>
- <nav class="navbar" style="background:#000; padding:10px 20px; position:relative;">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <div class="logo old-english" style="font-size:2rem; color:#FFD700;">CryptoKid</div>
-    <input type="checkbox" id="menu-toggle" style="display:none;">
-    <label for="menu-toggle" id="menu-icon" style="font-size:2rem; color:#FFD700; cursor:pointer;">☰</label>
-  </div>
-  <div id="nav-links" style="display:none; flex-direction:column; align-items:flex-start; padding-top:10px;">
-    <a href="index.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Home</a>
-    <a href="articles.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Articles</a>
-    <a href="guides.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Guides</a>
-    <a href="markets.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Markets</a>
-    <a href="tools.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Tools</a>
-    <a href="about.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">About</a>
-    <a href="contact.html" style="color:#FFD700; text-decoration:none; font-weight:bold; margin:5px 0;">Contact</a>
-  </div>
-</nav>
-
-<!-- Responsive Navbar Script -->
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const nav = document.getElementById("nav-links");
-  const icon = document.getElementById("menu-icon");
-
-  icon.addEventListener("click", () => {
-    toggle.checked = !toggle.checked;
-    nav.style.display = toggle.checked ? "flex" : "none";
+  document.querySelectorAll('.tool-card').forEach(card => {
+    const category = card.getAttribute('data-category');
+    card.style.display = category === value ? 'block' : 'none';
   });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) {
-      nav.style.display = "flex";
-      nav.style.flexDirection = "row";
-      nav.style.alignItems = "center";
-      nav.style.justifyContent = "center";
-      nav.style.gap = "20px";
-    } else {
-      nav.style.display = toggle.checked ? "flex" : "none";
-      nav.style.flexDirection = "column";
-      nav.style.alignItems = "flex-start";
-    }
-  });
-
-  window.dispatchEvent(new Event("resize"));
-</script>
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const nav = document.getElementById("nav-links");
-  const icon = document.getElementById("menu-icon");
-
-  icon.addEventListener("click", () => {
-    toggle.checked = !toggle.checked;
-    nav.style.display = toggle.checked ? "flex" : "none";
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) {
-      nav.style.display = "flex";
-      nav.style.flexDirection = "row";
-      nav.style.gap = "20px";
-    } else {
-      nav.style.display = toggle.checked ? "flex" : "none";
-      nav.style.flexDirection = "column";
-      nav.style.gap = "10px";
-    }
-  });
-
-  window.dispatchEvent(new Event("resize"));
-</script>
-  <header class="hero">
-    <h1 class="hero-title">Crypto Tools & Calculators</h1>
-    <p class="hero-subtext">Forecasts, simulators, alerts and more — all in one place.</p>
-  </header>
-  <main>
-    <!-- TOOL 1: Growth Forecast Calculator -->
-    <details><summary>Growth Forecast Calculator</summary><div>
-      <p><strong>What it does:</strong> Use this tool to estimate the future value of a token based on its current price and a projected daily growth rate.</p>
-      <input id="startPrice" type="number" placeholder="Current Price">
-      <input id="growthRate" type="number" placeholder="Daily Growth %">
-      <input id="days" type="number" placeholder="Days">
-      <button onclick="calcGrowth()">Calculate</button>
-      <div id="growthResult"></div>
-    </div></details><!-- TOOL 2: Market Cap Estimator -->
-<details><summary>Market Cap Estimator</summary><div>
-  <p><strong>What it does:</strong> Calculate what the price of a token would be at a given market cap.</p>
-  <input id="circulating" type="number" placeholder="Circulating Supply">
-  <input id="targetCap" type="number" placeholder="Target Market Cap">
-  <button onclick="calcCap()">Estimate</button>
-  <div id="capResult"></div>
-</div></details>
-
-<!-- TOOL 3: Unlock Impact Simulator -->
-<details><summary>Unlock Impact Simulator</summary><div>
-  <p><strong>What it does:</strong> Estimate the effect of token unlock events on price.</p>
-  <input id="currentPrice" type="number" placeholder="Current Price">
-  <input id="unlockAmount" type="number" placeholder="Unlock Amount">
-  <input id="sellPressure" type="number" placeholder="Sell Pressure %">
-  <button onclick="calcUnlock()">Simulate</button>
-  <div id="unlockResult"></div>
-</div></details>
-
-<!-- TOOL 4: Sentiment + Trend Predictor -->
-<details><summary>Sentiment + Trend Predictor</summary><div>
-  <p><strong>What it does:</strong> Predicts whether a token is likely to trend bullish, bearish, or remain neutral.</p>
-  <input id="sentimentScore" type="number" placeholder="Sentiment Score %">
-  <input id="rsi" type="number" placeholder="RSI (0-100)">
-  <button onclick="predictSentiment()">Predict</button>
-  <div id="sentimentResult"></div>
-</div></details>
-
-<!-- TOOL 5: Portfolio Tracker -->
-<details><summary>Portfolio Tracker</summary><div>
-  <p><strong>What it does:</strong> Track your holdings and total portfolio value.</p>
-  <input id="portfolioToken" placeholder="Token">
-  <input id="portfolioAmount" type="number" placeholder="Amount Held">
-  <input id="purchasePrice" type="number" placeholder="Buy Price">
-  <button onclick="calculatePortfolio()">Calculate</button>
-  <div id="portfolioResult"></div>
-</div></details>
-
-<!-- TOOL 6: Price Alert Manager -->
-<details><summary>Price Alert Manager</summary><div>
-  <p><strong>What it does:</strong> Set a target price and check alert trigger.</p>
-  <input id="alertToken" placeholder="Token ID">
-  <input id="alertTarget" type="number" placeholder="Target Price">
-  <button onclick="checkPriceAlert()">Check</button>
-  <div id="alertResult"></div>
-</div></details>
-
-<!-- TOOL 7: Whale Tracker -->
-<details><summary>Whale Tracker</summary><div>
-  <p><strong>What it does:</strong> Simulated whale transaction activity.</p>
-  <input id="whaleToken" placeholder="Token ID">
-  <button onclick="loadWhaleData()">Simulate Activity</button>
-  <table><thead><tr><th>Tx Hash</th><th>Amount</th><th>From</th><th>To</th></tr></thead><tbody id="whaleTableBody"></tbody></table>
-</div></details>
-
-<!-- TOOL 8: Whale Alert Setup -->
-<details><summary>Whale Alert Setup</summary><div>
-  <p><strong>What it does:</strong> Define custom alert rules based on token transfers.</p>
-  <input id="alertTokenInput" placeholder="Token ID">
-  <input id="alertThresholdInput" type="number" placeholder="Threshold">
-  <select id="alertTypeInput"><option value="popup">Popup</option><option value="log">Log</option></select>
-  <button onclick="saveWhaleAlert()">Save Rule</button>
-  <div id="whaleAlertConfirm"></div>
-</div></details>
-
-<!-- TOOL 9: Whale Alert History -->
-<details><summary>Whale Alert History</summary><div>
-  <p><strong>What it does:</strong> Review previously triggered whale alerts.</p>
-  <button onclick="loadWhaleHistory()">Load History</button>
-  <table><thead><tr><th>Token</th><th>Threshold</th><th>Type</th><th>Date</th></tr></thead><tbody id="whaleHistoryBody"></tbody></table>
-</div></details>
-
-<!-- TOOL 10: Admin Dashboard -->
-<details><summary>Admin Dashboard</summary><div>
-  <p><strong>What it does:</strong> Manage whale alert settings in your local browser memory.</p>
-  <button onclick="loadAdminAlerts()">Manage Alerts</button>
-  <table><thead><tr><th>Token</th><th>Threshold</th><th>Type</th><th>Time</th><th>Action</th></tr></thead><tbody id="adminAlertTable"></tbody></table>
-</div></details>
-
-<!-- TOOL 11: Token Sentiment Analyzer -->
-<details><summary>Token Sentiment Analyzer</summary><div>
-  <p><strong>What it does:</strong> Generates a sentiment score for a given token.</p>
-  <input id="sentimentToken" placeholder="Token ID">
-  <button onclick="analyzeSentiment()">Analyze</button>
-  <div id="sentimentAnalysisResult"></div>
-</div></details>
-
-<!-- TOOL 12: Slippage Calculator -->
-<details><summary>Slippage Calculator</summary><div>
-  <p><strong>What it does:</strong> Estimate how much slippage will occur in a trade.</p>
-  <input id="slipTokenAmount" type="number" placeholder="Token Amount">
-  <input id="slipPoolLiquidity" type="number" placeholder="Pool Liquidity">
-  <button onclick="calculateSlippage()">Calculate</button>
-  <div id="slippageResult"></div>
-</div></details>
-
-<!-- TOOL 13: Token Unlock Countdown -->
-<details><summary>Token Unlock Countdown</summary><div>
-  <p><strong>What it does:</strong> Countdown to future token unlocks.</p>
-  <input id="unlockToken" placeholder="Token ID">
-  <input id="unlockDate" type="date">
-  <button onclick="calculateUnlockCountdown()">Start</button>
-  <div id="unlockCountdownResult"></div>
-</div></details>
-
-<!-- TOOL 14: Historical Chart Viewer -->
-<details><summary>Historical Chart Viewer</summary><div>
-  <p><strong>What it does:</strong> Displays a token’s price chart over time using mock data.</p>
-  <input id="chartToken" placeholder="Token ID">
-  <button onclick="loadChart()">View Chart</button>
-  <div id="chartResult">[Chart would render here with live integration]</div>
-</div></details>
-
-<!-- TOOL 15: Token Comparison Tool -->
-<details><summary>Token Comparison Tool</summary><div>
-  <p><strong>What it does:</strong> Compare two tokens side-by-side based on market cap, price, volume, and other key stats.</p>
-  <input id="token1" placeholder="Token 1">
-  <input id="token2" placeholder="Token 2">
-  <button onclick="compareTokens()">Compare</button>
-  <div id="comparisonResult"></div>
-</div></details>
-
-<!-- TOOL 16: Portfolio Rebalancer -->
-<details><summary>Portfolio Rebalancer</summary><div>
-  <p><strong>What it does:</strong> Calculates how much of each token to buy/sell to hit your ideal allocation.</p>
-  <input id="totalValue" type="number" placeholder="Total Portfolio Value">
-  <input id="rebalanceToken1" placeholder="Token 1 Name">
-  <input id="rebalancePercent1" type="number" placeholder="Target % for Token 1">
-  <input id="rebalanceToken2" placeholder="Token 2 Name">
-  <input id="rebalancePercent2" type="number" placeholder="Target % for Token 2">
-  <button onclick="rebalancePortfolio()">Rebalance</button>
-  <div id="rebalanceResult"></div>
-</div></details>
-
-<!-- TOOL 17: Token Unlock Analyzer -->
-<details><summary>Token Unlock Analyzer</summary><div>
-  <p><strong>What it does:</strong> Simulates different unlock scenarios and outputs projected impact across multiple timeframes.</p>
-  <input id="unlockSimToken" placeholder="Token ID">
-  <input id="unlockSimAmount" type="number" placeholder="Total Unlock Amount">
-  <input id="unlockSimPrice" type="number" placeholder="Current Price">
-  <button onclick="analyzeUnlock()">Analyze Unlock Impact</button>
-  <div id="unlockSimResult"></div>
-</div></details>
-
-  <!-- TOOL 18: Gas Tracker --><details><summary>Gas Tracker</summary><div>
-  <p><strong>What it does:</strong> Estimate the average gas fees for Ethereum-based transactions using mock data.</p>
-  <button onclick="trackGas()">Check Gas</button>
-  <div id="gasResult"></div>
-</div></details><!-- TOOL 19: Tax Estimator --><details><summary>Tax Estimator</summary><div>
-  <p><strong>What it does:</strong> Estimate crypto taxes based on profit and selected country tax rate.</p>
-  <input id="taxProfit" type="number" placeholder="Total Profit ($)">
-  <select id="taxCountry">
-    <option value="0.15">USA (15%)</option>
-    <option value="0.20">Canada (20%)</option>
-    <option value="0.25">UK (25%)</option>
-    <option value="0.30">Germany (30%)</option>
-  </select>
-  <button onclick="estimateTax()">Estimate</button>
-  <div id="taxResult"></div>
-</div></details><!-- TOOL 20: Whale Lookup Tool --><details><summary>Whale Lookup Tool</summary><div>
-  <p><strong>What it does:</strong> Lookup a wallet address and return mock holdings for large whale wallets.</p>
-  <input id="lookupWallet" placeholder="Wallet Address">
-  <button onclick="lookupWhale()">Lookup</button>
-  <div id="lookupResult"></div>
-</div></details><!-- TOOL 21: Token Hype Score --><details><summary>Token Hype Score</summary><div>
-  <p><strong>What it does:</strong> Assigns a hype score to a token based on mock social metrics and trend signals.</p>
-  <input id="hypeToken" placeholder="Token ID">
-  <button onclick="calculateHype()">Get Hype Score</button>
-  <div id="hypeResult"></div>
-</div></details><!-- TOOL 22: Token Sentiment Feed --><details><summary>Token Sentiment Feed</summary><div>
-  <p><strong>What it does:</strong> Simulates a live sentiment feed for tokens based on mock API data.</p>
-  <button onclick="loadSentimentFeed()">Load Feed</button>
-  <ul id="sentimentFeedList"></ul>
-</div></details><!-- TOOL 23: Advanced Profit Calculator --><details><summary>Advanced Profit Calculator</summary><div>
-  <p><strong>What it does:</strong> Calculates exact profit, ROI %, and break-even price for a given buy/sell scenario.</p>
-  <input id="profitBuyPrice" type="number" placeholder="Buy Price">
-  <input id="profitSellPrice" type="number" placeholder="Sell Price">
-  <input id="profitAmount" type="number" placeholder="Amount Traded">
-  <button onclick="calculateProfit()">Calculate</button>
-  <div id="profitCalcResult"></div>
-</div></details>
-    <!-- TOOL 24: Token Scorecard --><details><summary>Token Scorecard</summary><div>
-  <p><strong>What it does:</strong> Shows a mock data card with token summary.</p>
-  <input id="scorecardToken" placeholder="Token ID">
-  <button onclick="generateScorecard()">Generate Scorecard</button>
-  <div id="scorecardResult"></div>
-</div></details><!-- TOOL 25: Airdrop Radar + Eligibility Checker --><details><summary>Airdrop Radar + Eligibility Checker</summary><div>
-  <p><strong>What it does:</strong> Simulates upcoming airdrops + wallet eligibility.</p>
-  <input id="airdropWallet" placeholder="Wallet Address">
-  <button onclick="checkAirdropEligibility()">Check Eligibility</button>
-  <div id="airdropResult"></div>
-  <br>
-  <button onclick="loadAirdropRadar()">View Upcoming Airdrops</button>
-  <ul id="airdropRadarList"></ul>
-</div></details><!-- TOOL 26: Smart Money Tracker / Wallet Tagger --><details><summary>Smart Money Tracker / Wallet Tagger</summary><div>
-  <p><strong>What it does:</strong> Tags wallet as smart money and loads trades.</p>
-  <input id="smartWallet" placeholder="Wallet Address">
-  <button onclick="tagSmartWallet()">Tag Wallet</button>
-  <div id="smartTagResult"></div>
-  <br>
-  <button onclick="loadSmartTrades()">Load Smart Trades</button>
-  <table>
-    <thead><tr><th>Wallet</th><th>Token</th><th>Amount</th><th>Action</th></tr></thead>
-    <tbody id="smartTradeTable"></tbody>
-  </table>
-</div></details><!-- TOOL 27: Token Narrative Tracker --><details><summary>Token Narrative Tracker</summary><div>
-  <p><strong>What it does:</strong> Assigns a trending narrative to the token.</p>
-  <input id="narrativeToken" placeholder="Token ID">
-  <button onclick="trackNarrative()">Track Narrative</button>
-  <div id="narrativeResult"></div>
-</div></details><!-- TOOL 28: Presale Sniper + ROI Estimator --><details><summary>Presale Sniper + ROI Estimator</summary><div>
-  <p><strong>What it does:</strong> Calculates potential ROI from presale.</p>
-  <input id="presaleToken" placeholder="Token Name">
-  <input id="presaleBuyPrice" type="number" placeholder="Presale Price">
-  <input id="presaleListPrice" type="number" placeholder="Expected Listing Price">
-  <button onclick="calculatePresaleROI()">Estimate ROI</button>
-  <div id="presaleResult"></div>
-</div></details><!-- TOOL 29: Whale Wallet Explorer --><details><summary>Whale Wallet Explorer</summary><div>
-  <p><strong>What it does:</strong> Loads mock token balances for a whale.</p>
-  <input id="whaleExploreWallet" placeholder="Wallet Address">
-  <button onclick="exploreWhaleWallet()">Explore Wallet</button>
-  <div id="whaleExplorerResult"></div>
-</div></details><!-- TOOL 30: Multi-Token Rebalancer with Risk Tiers --><details><summary>Multi-Token Rebalancer with Risk Tiers</summary><div>
-  <p><strong>What it does:</strong> Allocates capital by risk (High, Medium, Low).</p>
-  <input id="rebalanceTotal" type="number" placeholder="Total Value">
-  <input id="highRiskToken" placeholder="High Risk Token">
-  <input id="mediumRiskToken" placeholder="Medium Risk Token">
-  <input id="lowRiskToken" placeholder="Low Risk Token">
-  <button onclick="rebalanceWithTiers()">Rebalance</button>
-  <div id="rebalanceTiersResult"></div>
-</div></details><!-- TOOL 31: Token Unlock Heatmap --><details><summary>Token Unlock Heatmap</summary><div>
-  <p><strong>What it does:</strong> Visualizes unlocks by token and month (mock).</p>
-  <button onclick="loadUnlockHeatmap()">Show Heatmap</button>
-  <div id="unlockHeatmapResult"></div>
-</div></details>
-  </main>
-  <footer class="footer">
-    <p>© 2025 CryptoKid. Built for those who read between the blocks.</p>
-  </footer>
-  <script>
-function calcGrowth() {
-  const p = parseFloat(document.getElementById("startPrice").value);
-  const r = parseFloat(document.getElementById("growthRate").value) / 100;
-  const d = parseInt(document.getElementById("days").value);
-  const result = p * Math.pow(1 + r, d);
-  document.getElementById("growthResult").textContent = `Projected Price: $${result.toFixed(4)}`;
-}
-function calcCap() {
-  const s = parseFloat(document.getElementById("circulating").value);
-  const c = parseFloat(document.getElementById("targetCap").value);
-  const price = c / s;
-  document.getElementById("capResult").textContent = `Target Price: $${price.toFixed(6)}`;
-}
-function calcUnlock() {
-  const price = parseFloat(document.getElementById("currentPrice").value);
-  const sellRate = parseFloat(document.getElementById("sellPressure").value) / 100;
-  const impact = price * (1 - (sellRate * 0.5));
-  document.getElementById("unlockResult").textContent = `Simulated Price: $${impact.toFixed(4)}`;
-}
-function predictSentiment() {
-  const score = parseFloat(document.getElementById("sentimentScore").value);
-  const rsi = parseFloat(document.getElementById("rsi").value);
-  let prediction = "Neutral";
-  if (score > 70 && rsi < 70) prediction = "Bullish";
-  else if (score < 40 || rsi > 75) prediction = "Bearish";
-  document.getElementById("sentimentResult").textContent = `Trend: ${prediction}`;
-}
-function calculatePortfolio() {
-  const amount = parseFloat(document.getElementById("portfolioAmount").value);
-  const buy = parseFloat(document.getElementById("purchasePrice").value);
-  const value = amount * buy;
-  document.getElementById("portfolioResult").innerText = `Holding Value: $${value.toFixed(2)}`;
-}
-function checkPriceAlert() {
-  const target = parseFloat(document.getElementById("alertTarget").value);
-  const token = document.getElementById("alertToken").value;
-  document.getElementById("alertResult").innerText = `${token.toUpperCase()} alert set for $${target}`;
-}
-function loadWhaleData() {
-  const data = [
-    { hash: "0xabc", amount: "200K", from: "0xWallet1", to: "0xExchange" },
-    { hash: "0xdef", amount: "350K", from: "0xWallet2", to: "0xVault" }
-  ];
-  document.getElementById("whaleTableBody").innerHTML = data.map(d => `<tr><td>${d.hash}</td><td>${d.amount}</td><td>${d.from}</td><td>${d.to}</td></tr>`).join("");
-}
-function saveWhaleAlert() {
-  const token = document.getElementById("alertTokenInput").value;
-  const threshold = document.getElementById("alertThresholdInput").value;
-  const type = document.getElementById("alertTypeInput").value;
-  const alert = { token, threshold, type, timestamp: new Date().toISOString() };
-  const saved = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
-  saved.push(alert);
-  localStorage.setItem("whaleAlerts", JSON.stringify(saved));
-  document.getElementById("whaleAlertConfirm").innerText = "Alert saved.";
-}
-function loadWhaleHistory() {
-  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
-  document.getElementById("whaleHistoryBody").innerHTML = alerts.map(a => `<tr><td>${a.token}</td><td>${a.threshold}</td><td>${a.type}</td><td>${new Date(a.timestamp).toLocaleString()}</td></tr>`).join("");
-}
-function loadAdminAlerts() {
-  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
-  document.getElementById("adminAlertTable").innerHTML = alerts.map((a, i) => `<tr><td>${a.token}</td><td>${a.threshold}</td><td>${a.type}</td><td>${new Date(a.timestamp).toLocaleString()}</td><td><button onclick="deleteAlert(${i})">Delete</button></td></tr>`).join("");
-}
-function deleteAlert(i) {
-  const alerts = JSON.parse(localStorage.getItem("whaleAlerts") || "[]");
-  alerts.splice(i, 1);
-  localStorage.setItem("whaleAlerts", JSON.stringify(alerts));
-  loadAdminAlerts();
-}
-function analyzeSentiment() {
-  const score = Math.floor(Math.random() * 101);
-  let status = "Neutral", color = "#FFD700";
-  if (score > 70) { status = "Bullish"; color = "lime"; }
-  else if (score < 40) { status = "Bearish"; color = "red"; }
-  document.getElementById("sentimentAnalysisResult").innerHTML = `<p>Score: ${score}%</p><p style="color:${color};">Status: ${status}</p>`;
-}
-function calculateSlippage() {
-  const amount = parseFloat(document.getElementById("slipTokenAmount").value);
-  const pool = parseFloat(document.getElementById("slipPoolLiquidity").value);
-  const slippage = (amount / (pool + amount)) * 100;
-  document.getElementById("slippageResult").innerText = `Estimated Slippage: ${slippage.toFixed(2)}%`;
-}
-function calculateUnlockCountdown() {
-  const token = document.getElementById("unlockToken").value;
-  const date = new Date(document.getElementById("unlockDate").value);
-  const now = new Date();
-  const diff = date - now;
-  if (diff <= 0) return document.getElementById("unlockCountdownResult").innerHTML = "Already unlocked.";
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById("unlockCountdownResult").innerHTML = `${token.toUpperCase()} unlocks in ${d} days.`;
-}
-function loadChart() {
-  const token = document.getElementById("chartToken").value.toUpperCase();
-  document.getElementById("chartResult").innerHTML = `Showing historical chart for <strong>${token}</strong> (mock data only).`;
-}
-function compareTokens() {
-  const t1 = document.getElementById("token1").value.toUpperCase();
-  const t2 = document.getElementById("token2").value.toUpperCase();
-  document.getElementById("comparisonResult").innerHTML = `
-    <p><strong>Comparison:</strong></p>
-    <ul>
-      <li>${t1} vs ${t2}</li>
-      <li>Market Cap: ${Math.floor(Math.random() * 100)}B vs ${Math.floor(Math.random() * 100)}B</li>
-      <li>Volume: ${Math.floor(Math.random() * 10)}M vs ${Math.floor(Math.random() * 10)}M</li>
-      <li>Price: $${(Math.random() * 10).toFixed(2)} vs $${(Math.random() * 10).toFixed(2)}</li>
-    </ul>`;
-}
-function rebalancePortfolio() {
-  const total = parseFloat(document.getElementById("totalValue").value);
-  const t1 = document.getElementById("rebalanceToken1").value;
-  const p1 = parseFloat(document.getElementById("rebalancePercent1").value);
-  const t2 = document.getElementById("rebalanceToken2").value;
-  const p2 = parseFloat(document.getElementById("rebalancePercent2").value);
-  const amt1 = (total * p1) / 100;
-  const amt2 = (total * p2) / 100;
-  document.getElementById("rebalanceResult").innerHTML = `
-    Buy/Hold ${t1.toUpperCase()}: $${amt1.toFixed(2)}<br>
-    Buy/Hold ${t2.toUpperCase()}: $${amt2.toFixed(2)}`;
-}
-function analyzeUnlock() {
-  const token = document.getElementById("unlockSimToken").value.toUpperCase();
-  const amount = parseFloat(document.getElementById("unlockSimAmount").value);
-  const price = parseFloat(document.getElementById("unlockSimPrice").value);
-  const shortImpact = price * 0.9;
-  const midImpact = price * 0.8;
-  const longImpact = price * 0.75;
-  document.getElementById("unlockSimResult").innerHTML = `
-    <p><strong>${token} Unlock Analysis:</strong></p>
-    <ul>
-      <li>Short Term Impact: ~$${shortImpact.toFixed(4)}</li>
-      <li>Mid Term Impact: ~$${midImpact.toFixed(4)}</li>
-      <li>Long Term Impact: ~$${longImpact.toFixed(4)}</li>
-    </ul>`;
-}
-function trackGas() {
-  const slow = (Math.random() * 10 + 5).toFixed(2);
-  const average = (Math.random() * 20 + 10).toFixed(2);
-  const fast = (Math.random() * 30 + 20).toFixed(2);
-  document.getElementById("gasResult").innerHTML = `
-    <ul>
-      <li>Slow: ${slow} Gwei</li>
-      <li>Average: ${average} Gwei</li>
-      <li>Fast: ${fast} Gwei</li>
-    </ul>`;
-}
-function estimateTax() {
-  const profit = parseFloat(document.getElementById("taxProfit").value);
-  const rate = parseFloat(document.getElementById("taxCountry").value);
-  const tax = profit * rate;
-  document.getElementById("taxResult").innerHTML = `Estimated Tax: $${tax.toFixed(2)}`;
-}
-function lookupWhale() {
-  const addr = document.getElementById("lookupWallet").value;
-  const mockHoldings = [
-    { token: "ETH", balance: (Math.random() * 2000).toFixed(2) },
-    { token: "USDT", balance: (Math.random() * 500000).toFixed(0) },
-    { token: "SHIBA", balance: (Math.random() * 1000000000).toFixed(0) }
-  ];
-  const html = mockHoldings.map(t => `<li>${t.token}: ${t.balance}</li>`).join("");
-  document.getElementById("lookupResult").innerHTML = `<p>Wallet: ${addr}</p><ul>${html}</ul>`;
-}
-function calculateHype() {
-  const token = document.getElementById("hypeToken").value.toUpperCase();
-  const score = Math.floor(Math.random() * 101);
-  let label = "Moderate";
-  if (score >= 80) label = "Extreme";
-  else if (score >= 60) label = "High";
-  else if (score < 40) label = "Low";
-  document.getElementById("hypeResult").innerHTML = `<p>${token} Hype Score: <strong>${score}</strong> (${label})</p>`;
-}
-function loadSentimentFeed() {
-  const feed = [
-    { token: "PI", status: "Bullish" },
-    { token: "ROAM", status: "Neutral" },
-    { token: "XRP", status: "Bearish" },
-    { token: "SOL", status: "Bullish" }
-  ];
-  document.getElementById("sentimentFeedList").innerHTML = feed.map(item => `<li><strong>${item.token}</strong>: ${item.status}</li>`).join("");
-}
-function calculateProfit() {
-  const buy = parseFloat(document.getElementById("profitBuyPrice").value);
-  const sell = parseFloat(document.getElementById("profitSellPrice").value);
-  const amount = parseFloat(document.getElementById("profitAmount").value);
-  const profit = (sell - buy) * amount;
-  const roi = ((sell - buy) / buy) * 100;
-  document.getElementById("profitCalcResult").innerHTML = `
-    <p>Profit: $${profit.toFixed(2)}</p>
-    <p>ROI: ${roi.toFixed(2)}%</p>
-    <p>Break-even Price: $${buy.toFixed(2)}</p>`;
-}
-function generateScorecard() {
-  const token = document.getElementById("scorecardToken").value.toUpperCase();
-  const cap = (Math.random() * 1000).toFixed(1);
-  const volume = (Math.random() * 100).toFixed(1);
-  document.getElementById("scorecardResult").innerHTML =
-    `<div><strong>${token} Scorecard</strong><br>Market Cap: $${cap}M<br>Volume: $${volume}M</div>`;
-}
-Checker
-function checkAirdropEligibility() {
-  const wallet = document.getElementById("airdropWallet").value;
-  const eligible = Math.random() > 0.5;
-  document.getElementById("airdropResult").innerText = eligible
-    ? `${wallet} is eligible!`
-    : `${wallet} is not eligible.`;
-}
-function loadAirdropRadar() {
-  const radar = [
-    { token: "PIX", date: "2025-06-01" },
-    { token: "BETA", date: "2025-06-12" },
-    { token: "FOXX", date: "2025-07-04" }
-  ];
-  document.getElementById("airdropRadarList").innerHTML = radar.map(r =>
-    `<li>${r.token} - ${r.date}</li>`).join("");
-}
-Tagger
-function tagSmartWallet() {
-  const wallet = document.getElementById("smartWallet").value;
-  document.getElementById("smartTagResult").innerText = `Wallet ${wallet} tagged as smart money.`;
-}
-function loadSmartTrades() {
-  const trades = [
-    { wallet: "0xSmartA", token: "ARB", amount: "120K", action: "Buy" },
-    { wallet: "0xSmartB", token: "ETH", amount: "500", action: "Sell" }
-  ];
-  document.getElementById("smartTradeTable").innerHTML = trades.map(t =>
-    `<tr><td>${t.wallet}</td><td>${t.token}</td><td>${t.amount}</td><td>${t.action}</td></tr>`).join("");
-}
-function trackNarrative() {
-  const token = document.getElementById("narrativeToken").value.toUpperCase();
-  const tags = ["AI", "DePIN", "Gaming", "RWA", "Memecoin", "Staking", "Infrastructure"];
-  const label = tags[Math.floor(Math.random() * tags.length)];
-  document.getElementById("narrativeResult").innerHTML =
-    `${token} is currently trending in the <strong>${label}</strong> narrative.`;
-}
-Estimator
-function calculatePresaleROI() {
-  const buy = parseFloat(document.getElementById("presaleBuyPrice").value);
-  const list = parseFloat(document.getElementById("presaleListPrice").value);
-  if (isNaN(buy) || isNaN(list) || buy <= 0) {
-    document.getElementById("presaleResult").innerText = "Invalid input.";
-    return;
-  }
-  const roi = ((list - buy) / buy) * 100;
-  document.getElementById("presaleResult").innerHTML =
-    `Expected ROI: <strong>${roi.toFixed(2)}%</strong>`;
-}
-function exploreWhaleWallet() {
-  const wallet = document.getElementById("whaleExploreWallet").value;
-  const balances = [
-    { token: "USDC", balance: (Math.random() * 1000000).toFixed(0) },
-    { token: "BTC", balance: (Math.random() * 500).toFixed(2) },
-    { token: "ETH", balance: (Math.random() * 1500).toFixed(2) }
-  ];
-  document.getElementById("whaleExplorerResult").innerHTML =
-    `<p>${wallet}</p><ul>${balances.map(b => `<li>${b.token}: ${b.balance}</li>`).join("")}</ul>`;
-}
-function rebalanceWithTiers() {
-  const total = parseFloat(document.getElementById("rebalanceTotal").value);
-  const high = document.getElementById("highRiskToken").value.toUpperCase();
-  const med = document.getElementById("mediumRiskToken").value.toUpperCase();
-  const low = document.getElementById("lowRiskToken").value.toUpperCase();
-  if (isNaN(total) || total <= 0 || !high || !med || !low) {
-    document.getElementById("rebalanceTiersResult").innerText = "Invalid input.";
-    return;
-  }
-  const result = `
-    ${high}: $${(total * 0.5).toFixed(2)}<br>
-    ${med}: $${(total * 0.3).toFixed(2)}<br>
-    ${low}: $${(total * 0.2).toFixed(2)}`;
-  document.getElementById("rebalanceTiersResult").innerHTML = result;
-}
-function loadUnlockHeatmap() {
-  const heatmap = {
-    June: ["PIX ($10M)", "ROAM ($8M)"],
-    July: ["HYPE ($12M)", "XRAY ($5M)"],
-    August: ["SOLVE ($9M)"]
-  };
-  let html = "<ul>";
-  for (const [month, tokens] of Object.entries(heatmap)) {
-    html += `<li>${month}: ${tokens.join(", ")}</li>`;
-  }
-  html += "</ul>";
-  document.getElementById("unlockHeatmapResult").innerHTML = html;
 }
 </script>
 </body>
 </html>
-ent.getElementById("unlockHeatmapResult").innerHTML = html;
+<!-- Filters Section (Row 1) -->
+<!-- Filters Section (Row 2 - Functional Categories) -->
+<div class="grid-container">
+<div class="tool-card" data-category="market">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/line-chart.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Price Tracker</div>
+<div class="tool-category">Market Data</div>
+<div class="tool-desc">Monitor real-time prices of the top cryptocurrencies and react quickly to major moves.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="defi">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/swap.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Token Swap Analyzer</div>
+<div class="tool-category">DeFi</div>
+<div class="tool-desc">Evaluate the best swaps for your tokens based on current DEX rates and slippage estimates.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="portfolio">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/comments.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Portfolio Analyzer</div>
+<div class="tool-category">Portfolio</div>
+<div class="tool-desc">Track your crypto portfolio value and gain/losses over time.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="defi">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/blockchain.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Gas Fee Checker</div>
+<div class="tool-category">DeFi</div>
+<div class="tool-desc">Check live gas fees across popular blockchains to choose optimal times for transactions.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="market">
+<div class="tool-icon"><img alt="Gauge Icon" height="40" src="https://cdn-icons-png.flaticon.com/512/181/181546.png" width="40"/></div>
+<div class="tool-content">
+<div class="tool-title">Market Sentiment Gauge</div>
+<div class="tool-category">Market</div>
+<div class="tool-desc">Analyze crypto market mood using a fear and greed sentiment indicator.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="portfolio">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/investment-portfolio.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Profit/Loss Tracker</div>
+<div class="tool-category">Portfolio</div>
+<div class="tool-desc">Input past buys/sells to calculate your realized profit or loss.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="wallet">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/wallet--v1.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Wallet Tracker</div>
+<div class="tool-category">Wallet</div>
+<div class="tool-desc">Monitor wallet balances and track changes in real time.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="analysis">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/data-configuration.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Token Scorecard</div>
+<div class="tool-category">Analysis</div>
+<div class="tool-desc">Rate and review tokens by fundamentals, utility, and traction.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="unlock">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/unlock--v1.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Unlock Heatmap</div>
+<div class="tool-category">Unlock</div>
+<div class="tool-desc">View upcoming token unlocks and vesting schedules.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+<div class="tool-card" data-category="presale">
+<div class="tool-icon"><img alt="icon" src="https://img.icons8.com/ios/50/bullish.png"/></div>
+<div class="tool-content">
+<div class="tool-title">Presale Radar</div>
+<div class="tool-category">Presale</div>
+<div class="tool-desc">Discover trending presales and estimate potential ROI.</div>
+<button class="open-btn">Open</button>
+<button class="favorite-btn" onclick="toggleFavorite(this)">☆</button>
+</div>
+</div>
+</div>
+<div id="pagination-container" style="text-align:center; margin: 40px 0;">
+<button class="filter-btn" id="prevBtn" onclick="prevPage()">Prev</button>
+<span id="pageNumbers"></span>
+<button class="filter-btn" id="nextBtn" onclick="nextPage()">Next</button>
+</div>
+<script>
+    function filterCategory(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(category) || category === 'all') {
+          if (btn.textContent.toLowerCase().includes(category)) {
+            btn.classList.add('active');
+          }
+        }
+        if (category === 'all' && btn.textContent.toLowerCase().includes('all tools')) {
+          btn.classList.add('active');
+        }
+      });
+
+      const toolCards = document.querySelectorAll('.tool-card');
+      toolCards.forEach(card => {
+        card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
+      });
+    }
+
+    function toggleFavorite(button) {
+      button.classList.toggle('active');
+      button.innerHTML = button.classList.contains('active') ? '&#9733;' : '&#9734;';
+    }
+  </script>
+<script>
+const toolsPerPage = 10;
+let currentPage = 1;
+
+function paginateTools() {
+  const cards = document.querySelectorAll('.tool-card');
+  const totalPages = Math.ceil(cards.length / toolsPerPage);
+  const start = (currentPage - 1) * toolsPerPage;
+  const end = start + toolsPerPage;
+
+  cards.forEach((card, index) => {
+    card.style.display = (index >= start && index < end) ? 'block' : 'none';
+  });
+
+  document.getElementById('prevBtn').disabled = currentPage === 1;
+  document.getElementById('nextBtn').disabled = currentPage === totalPages;
+
+  const pageNumbers = document.getElementById('pageNumbers');
+  pageNumbers.innerHTML = '';
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.innerText = i;
+    btn.className = 'filter-btn';
+    if (i === currentPage) btn.style.backgroundColor = '#6A0DAD';
+    btn.onclick = () => {
+      currentPage = i;
+      paginateTools();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    pageNumbers.appendChild(btn);
+  }
 }
+
+function nextPage() {
+  const cards = document.querySelectorAll('.tool-card');
+  const totalPages = Math.ceil(cards.length / toolsPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    paginateTools();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    paginateTools();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+window.onload = paginateTools;
 </script>
 </body>
 </html>

@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body { background-color: #000; color: #FFD700; font-family: Arial, sans-serif; padding: 20px; }
+    .tool-card { background: #111; border: 2px solid #FFD700; border-radius: 10px; padding: 20px; max-width: 700px; margin: 30px auto; }
+    input, textarea, select {
+      padding: 10px; width: 100%; margin: 10px 0;
+      border-radius: 5px; border: 1px solid #FFD700;
+      background: #000; color: #FFD700;
+    }
+    button {
+      padding: 10px 20px; background-color: #FFD700; color: #000;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .results-box { margin-top: 15px; background: #222; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+<div class="tool-card" id="tool-45">
+  <h2>45. Token Launch Calendar</h2>
+  <p><strong>Description:</strong> Displays a calendar of upcoming token launches.</p>
+  <p><strong>Utility:</strong> Helps investors plan entries and track promising new projects.</p>
+  <p><strong>How to Use:</strong> Click "View Calendar" to display upcoming token launch events.</p>
+  <p><strong>Result Analysis:</strong> Use the launch dates to strategize early investments or airdrop farming.</p>
+  <button onclick="showLaunchCalendar()">View Calendar</button>
+  <div id="launchCalendarResults" class="results-box"></div>
+</div>
+
+<script>
+function showLaunchCalendar() {
+  const launches = [
+    { date: "2025-06-25", token: "TOKENX", desc: "Decentralized storage platform." },
+    { date: "2025-07-01", token: "DEFIQ", desc: "New yield farming aggregator." },
+    { date: "2025-07-08", token: "AIWEB", desc: "AI-powered web3 search engine." }
+  ];
+  let html = "<ul>";
+  launches.forEach(l => {
+    html += `<li><strong>${l.date}</strong> - ${l.token}: ${l.desc}</li>`;
+  });
+  html += "</ul>";
+  document.getElementById("launchCalendarResults").innerHTML = html;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tool 39: Token Correlation Analyzer</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tool-card" id="tool-39">
+    <h2>39. Token Correlation Analyzer</h2>
+    <p><strong>Description:</strong> Analyze how the price movements of two cryptocurrencies are correlated over a period.</p>
+    <p><strong>Utility:</strong> Helps in identifying pairs that may move together, useful for hedge strategies or pair trading.</p>
+    <p><strong>How to Use:</strong> Enter historical return data (comma-separated % returns) for two tokens, and click "Analyze Correlation."</p>
+    <p><strong>Result Analysis:</strong> A correlation close to 1 means high positive correlation, -1 means high inverse correlation, 0 means no correlation.</p>
+
+    <textarea id="tokenA" placeholder="Returns for Token A (e.g., 1.2, -0.5, 0.3)"></textarea>
+    <textarea id="tokenB" placeholder="Returns for Token B (e.g., 1.0, -0.4, 0.2)"></textarea>
+    <button onclick="analyzeCorrelation()">Analyze Correlation</button>
+    <div id="correlationResults" class="results-box"></div>
+  </div>
+
+  <script>
+    function analyzeCorrelation() {
+      const a = document.getElementById("tokenA").value.split(',').map(Number);
+      const b = document.getElementById("tokenB").value.split(',').map(Number);
+      if (a.length !== b.length || a.some(isNaN) || b.some(isNaN)) {
+        document.getElementById("correlationResults").innerHTML = "<p>Invalid input or unequal data lengths.</p>";
+        return;
+      }
+
+      const n = a.length;
+      const avgA = a.reduce((sum, v) => sum + v, 0) / n;
+      const avgB = b.reduce((sum, v) => sum + v, 0) / n;
+
+      let numerator = 0;
+      let denomA = 0;
+      let denomB = 0;
+
+      for (let i = 0; i < n; i++) {
+        const devA = a[i] - avgA;
+        const devB = b[i] - avgB;
+        numerator += devA * devB;
+        denomA += devA * devA;
+        denomB += devB * devB;
+      }
+
+      const correlation = numerator / Math.sqrt(denomA * denomB);
+      const strength = correlation > 0.7 ? "Strong Positive" : correlation < -0.7 ? "Strong Negative" : "Weak/No Correlation";
+
+      document.getElementById("correlationResults").innerHTML = 
+        `<p><strong>Correlation:</strong> ${correlation.toFixed(3)} (${strength})</p>`;
+    }
+  </script>
+</body>
+</html>

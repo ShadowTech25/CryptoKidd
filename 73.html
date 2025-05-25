@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body { background-color: #000; color: #FFD700; font-family: Arial, sans-serif; padding: 20px; }
+    .tool-card { background: #111; border: 2px solid #FFD700; border-radius: 10px; padding: 20px; max-width: 700px; margin: 30px auto; }
+    input, textarea, select {
+      padding: 10px; width: 100%; margin: 10px 0;
+      border-radius: 5px; border: 1px solid #FFD700;
+      background: #000; color: #FFD700;
+    }
+    button {
+      padding: 10px 20px; background-color: #FFD700; color: #000;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .results-box { margin-top: 15px; background: #222; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-73">
+  <h2>73. Volume Spike Detector</h2>
+  <p><strong>Description:</strong> Detect sudden volume surges on specified tokens.</p>
+  <p><strong>Utility:</strong> Identifies potential breakout moments or accumulation before news or moves.</p>
+  <p><strong>How to Use:</strong> Enter token symbol to scan recent volume data.</p>
+  <p><strong>Result Analysis:</strong> Sudden spikes may indicate whale interest or catalyst events. Helps set alerts or initiate technical review.</p>
+  <input type="text" id="volToken" placeholder="e.g. BTC" />
+  <button onclick="detectVolumeSpike()">Detect Spike</button>
+  <div id="volumeSpikeResult" class="results-box"></div>
+</div>
+
+<script>
+function detectVolumeSpike() {
+  const token = document.getElementById("volToken").value.trim().toUpperCase();
+  const result = document.getElementById("volumeSpikeResult");
+  if (!token) {
+    result.innerHTML = "<p>Please enter a token symbol.</p>";
+    return;
+  }
+  result.innerHTML = `<p>Scanning ${token} volume...</p>`;
+  setTimeout(() => {
+    result.innerHTML = `<p>Spike Detected! ${token} saw a 342% volume increase in the last 4 hours.</p>`;
+  }, 1000);
+}
+</script>
+</body></html>

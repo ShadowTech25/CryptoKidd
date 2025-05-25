@@ -1,0 +1,25 @@
+<!-- TOOL 69: DAO Voting Power Calculator -->
+<div class="tool-card" id="tool-69">
+  <h2>69. DAO Voting Power Calculator</h2>
+  <p><strong>Description:</strong> Calculates voting weight based on your token holdings in a DAO.</p>
+  <p><strong>Utility:</strong> Essential for governance participants to understand their influence on proposals.</p>
+  <p><strong>How to Use:</strong> Input your token amount and total supply.</p>
+  <p><strong>Result Analysis:</strong> The result reveals your proportional impact on DAO proposals.</p>
+  <input type="number" id="userTokens" placeholder="Your DAO Tokens" />
+  <input type="number" id="totalSupply" placeholder="Total Token Supply" />
+  <button onclick="calculateVotingPower()">Calculate</button>
+  <div id="daoVotingResults" class="results-box"></div>
+</div>
+<script>
+function calculateVotingPower() {
+  const yours = parseFloat(document.getElementById("userTokens").value);
+  const supply = parseFloat(document.getElementById("totalSupply").value);
+  const result = document.getElementById("daoVotingResults");
+  if (isNaN(yours) || isNaN(supply) || supply <= 0) {
+    result.innerHTML = "<p>Please enter valid numbers.</p>";
+    return;
+  }
+  const percent = ((yours / supply) * 100).toFixed(4);
+  result.innerHTML = `<p><strong>Your Voting Power:</strong> ${percent}%</p>`;
+}
+</script>

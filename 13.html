@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-13">
+  <h2>13. Token Liquidity Viewer</h2>
+  <p><strong>Description:</strong> Simulates token liquidity depth and available buy/sell volume across pairs.</p>
+  <p><strong>Utility:</strong> Helps traders avoid low liquidity traps and better plan trade sizes.</p>
+  <p><strong>How to Use:</strong> Select a token and click “View Liquidity”.</p>
+  <p><strong>Result Analysis:</strong> Displays available buy/sell depth that can affect slippage and execution speed.</p>
+  <select id="liqToken">
+    <option value="ETH">ETH</option>
+    <option value="SOL">SOL</option>
+    <option value="SHIB">SHIB</option>
+  </select>
+  <button onclick="showLiquidity()">View Liquidity</button>
+  <div id="liquidityResult" class="results-box"></div>
+</div>
+<script>
+function showLiquidity() {
+  const token = document.getElementById("liqToken").value;
+  const liquidity = {
+    ETH: { buy: 4200000, sell: 4300000 },
+    SOL: { buy: 2100000, sell: 1900000 },
+    SHIB: { buy: 980000, sell: 1030000 }
+  };
+  const result = liquidity[token];
+  document.getElementById("liquidityResult").innerHTML =
+    `<p>Buy Volume: $${result.buy.toLocaleString()}<br>Sell Volume: $${result.sell.toLocaleString()}</p>`;
+}
+</script>
+</body></html>

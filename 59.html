@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tool 59: Market Impact Estimator</title>
+  <style>
+    body { background: #000; color: #FFD700; font-family: Arial, sans-serif; padding: 20px; }
+    .tool-card { background: #111; border: 2px solid #FFD700; border-radius: 10px; padding: 20px; max-width: 700px; margin: 30px auto; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; background: #000; color: #FFD700; border: 1px solid #FFD700; }
+    .results-box { background: #222; padding: 10px; margin-top: 15px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="tool-card">
+    <h2>59. Market Impact Estimator</h2>
+    <p><strong>Description:</strong> Estimate the price impact of a large token buy/sell order based on assumed liquidity.</p>
+    <p><strong>Utility:</strong> Traders can plan high-volume moves without excessive slippage.</p>
+    <p><strong>How to Use:</strong> Enter order size (USD) and token liquidity (USD) to see expected slippage.</p>
+    <p><strong>Result Analysis:</strong> Use slippage estimates to optimize trade timing or use TWAP/DCA methods.</p>
+    <input type="number" id="orderSize" placeholder="Order Size in USD" />
+    <input type="number" id="tokenLiquidity" placeholder="Token Liquidity in USD" />
+    <button onclick="estimateImpact()">Estimate Impact</button>
+    <div id="impactResult" class="results-box"></div>
+  </div>
+  <script>
+    function estimateImpact() {
+      const order = parseFloat(document.getElementById("orderSize").value);
+      const liquidity = parseFloat(document.getElementById("tokenLiquidity").value);
+      const output = document.getElementById("impactResult");
+
+      if (isNaN(order) || isNaN(liquidity) || liquidity <= 0) {
+        output.innerHTML = "<p>Enter valid numbers for both fields.</p>";
+        return;
+      }
+
+      const impact = (order / liquidity) * 100;
+      output.innerHTML = `<p><strong>Estimated Price Impact:</strong> ${impact.toFixed(2)}%</p>`;
+    }
+  </script>
+</body>
+</html>

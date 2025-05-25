@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool 31 – Token Unlock Heatmap</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 800px;
+      margin: 30px auto;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #FFD700;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #FFD700;
+    }
+    th {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-31">
+  <h2>31. Token Unlock Heatmap</h2>
+  <p><strong>Description:</strong> Visualize upcoming token unlock events and analyze their potential impact on market liquidity and price volatility.</p>
+  <p><strong>Utility:</strong> Helps investors avoid sudden dumps and front-run unlock-related volatility by planning trades around scheduled token unlocks.</p>
+  <p><strong>How to Use:</strong> Click the button to load a simulated unlock schedule including date, token, amount, and risk level.</p>
+  <p><strong>Result Analysis:</strong> High-risk unlocks may signal incoming sell pressure. Plan entries/exits accordingly and monitor liquidity and volume.</p>
+  <button onclick="loadUnlockHeatmap()">Load Heatmap</button>
+  <div id="unlockHeatmapResults" class="results-box"></div>
+</div>
+
+<script>
+function loadUnlockHeatmap() {
+  const output = document.getElementById("unlockHeatmapResults");
+  output.innerHTML = "<p>Loading upcoming unlocks...</p>";
+
+  setTimeout(() => {
+    const unlocks = [
+      { date: "2025-06-01", token: "APT", amount: "10M", risk: "High" },
+      { date: "2025-06-10", token: "ARB", amount: "5M", risk: "Medium" },
+      { date: "2025-06-20", token: "SUI", amount: "8M", risk: "High" },
+      { date: "2025-06-30", token: "IMX", amount: "3M", risk: "Low" }
+    ];
+
+    let html = "<table>";
+    html += "<tr><th>Date</th><th>Token</th><th>Amount</th><th>Risk</th></tr>";
+    unlocks.forEach(u => {
+      html += `<tr>
+        <td>${u.date}</td>
+        <td>${u.token}</td>
+        <td>${u.amount}</td>
+        <td style="color:${u.risk === 'High' ? '#FF0000' : u.risk === 'Medium' ? '#FFD700' : '#00FF00'}">${u.risk}</td>
+      </tr>`;
+    });
+    html += "</table>";
+    output.innerHTML = html;
+  }, 1000);
+}
+</script>
+
+</body>
+</html>

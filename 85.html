@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body { background-color: #000; color: #FFD700; font-family: Arial, sans-serif; padding: 20px; }
+    .tool-card { background: #111; border: 2px solid #FFD700; border-radius: 10px; padding: 20px; max-width: 700px; margin: 30px auto; }
+    input, textarea, select {
+      padding: 10px; width: 100%; margin: 10px 0;
+      border-radius: 5px; border: 1px solid #FFD700;
+      background: #000; color: #FFD700;
+    }
+    button {
+      padding: 10px 20px; background-color: #FFD700; color: #000;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .results-box { margin-top: 15px; background: #222; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-85">
+  <h2>85. Volume Surge Detector</h2>
+  <p><strong>Description:</strong> Detects sudden spikes in trading volume of tracked tokens.</p>
+  <p><strong>Utility:</strong> Helps catch early signals of whale activity, breakouts, or dumps.</p>
+  <p><strong>How to Use:</strong> Click scan and view tokens with >30% volume change.</p>
+  <p><strong>Result Analysis:</strong> Can signal the beginning of strong price movement—positive or negative.</p>
+  
+  <button onclick="detectVolumeSurge()">Scan Volume</button>
+  <div class="results-box" id="volumeSurgeResults"></div>
+</div>
+
+<script>
+function detectVolumeSurge() {
+  const tokens = [
+    { symbol: "ARB", change: 45 },
+    { symbol: "INJ", change: 10 },
+    { symbol: "SUI", change: 38 },
+    { symbol: "PEPE", change: 55 }
+  ];
+  let html = "<ul>";
+  tokens.forEach(t => {
+    if (t.change >= 30) html += `<li>${t.symbol}: ${t.change}% volume increase</li>`;
+  });
+  html += "</ul>";
+  document.getElementById("volumeSurgeResults").innerHTML = html;
+}
+</script>
+</body></html>

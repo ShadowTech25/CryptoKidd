@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool 44</title>
+  <style>
+    body { background-color: #000; color: #FFD700; font-family: Arial, sans-serif; padding: 20px; }
+    .tool-card { background: #111; border: 2px solid #FFD700; border-radius: 10px; padding: 20px; max-width: 700px; margin: 30px auto; }
+    input, button, select {
+      padding: 10px; margin: 10px 0; width: 100%;
+      border-radius: 5px; border: 1px solid #FFD700;
+      background: #000; color: #FFD700;
+    }
+    button { background-color: #FFD700; color: #000; border: none; cursor: pointer; }
+    .results-box { margin-top: 15px; background: #222; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+<div class="tool-card">
+  <h2>44. Network Uptime Tracker</h2>
+  <p><strong>Description:</strong> View average uptime of selected blockchain networks.</p>
+  <p><strong>Utility:</strong> Helps gauge network reliability for deployment or transaction needs.</p>
+  <p><strong>How to Use:</strong> Click the button to simulate uptime stats of various networks.</p>
+  <p><strong>Result Analysis:</strong> A lower uptime indicates greater risk for delays, failures, or technical issues.</p>
+  <button onclick="loadUptime()">Load Network Uptime</button>
+  <div id="uptimeResults" class="results-box"></div>
+</div>
+
+<script>
+function calcDegenRisk() {
+  const token = document.getElementById("degenToken").value.trim();
+  const percent = parseFloat(document.getElementById("degenPercent").value);
+  let output = document.getElementById("degenRiskResult");
+
+  if (!token || isNaN(percent)) {
+    output.innerHTML = "<p>Please enter a valid token and percentage.</p>";
+    return;
+  }
+
+  const riskScore = percent > 50 ? "Very High" : percent > 30 ? "High" : percent > 15 ? "Moderate" : "Low";
+  output.innerHTML = `<p>Token: ${token}<br>Allocation: ${percent}%<br><strong>Risk Score:</strong> ${riskScore}</p>`;
+}
+
+function loadUptime() {
+  const data = [
+    { network: "Ethereum", uptime: "99.99%" },
+    { network: "Solana", uptime: "95.12%" },
+    { network: "Polygon", uptime: "98.88%" },
+    { network: "Arbitrum", uptime: "99.23%" }
+  ];
+  let html = "<ul>";
+  data.forEach(n => html += `<li>${n.network}: ${n.uptime}</li>`);
+  html += "</ul>";
+  document.getElementById("uptimeResults").innerHTML = html;
+}
+</script></body></html>

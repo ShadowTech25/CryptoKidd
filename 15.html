@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-15">
+  <h2>15. Gas Tracker (Chains Overview)</h2>
+  <p><strong>Description:</strong> View current gas prices across major blockchains.</p>
+  <p><strong>Utility:</strong> Useful for timing your transactions to minimize fees.</p>
+  <p><strong>How to Use:</strong> Click the “Track Gas” button to display the latest simulated gas prices.</p>
+  <p><strong>Result Analysis:</strong> Lower Gwei values indicate cheaper transaction costs—helpful for budgeting deployments or transfers.</p>
+  <button onclick="trackGas()">Track Gas</button>
+  <div id="gasTrackerResult" class="results-box"></div>
+</div>
+<script>
+function trackGas() {
+  const gas = [
+    { chain: "Ethereum", gwei: 38 },
+    { chain: "Polygon", gwei: 6 },
+    { chain: "BSC", gwei: 3 },
+    { chain: "Arbitrum", gwei: 0.7 }
+  ];
+  let html = "<ul>";
+  gas.forEach(g => html += `<li>${g.chain}: ${g.gwei} Gwei</li>`);
+  html += "</ul>";
+  document.getElementById("gasTrackerResult").innerHTML = html;
+}
+</script>
+</body></html>

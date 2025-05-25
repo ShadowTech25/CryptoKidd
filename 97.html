@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 800px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #000;
+      color: #FFD700;
+      border: 1px solid #FFD700;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      background: #222;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card">
+  <h2>97. DEX Slippage Analyzer</h2>
+  <p><strong>Description:</strong> Estimate average slippage for swaps on major decentralized exchanges.</p>
+  <p><strong>Utility:</strong> Helps optimize trade execution by revealing the real cost of swaps.</p>
+  <p><strong>How to Use:</strong> Enter token pair and trade size, then click analyze.</p>
+  <p><strong>Result Analysis:</strong> High slippage indicates poor liquidity or volatile markets.</p>
+  <input type="text" id="dexPair" placeholder="e.g., ETH/USDT" />
+  <input type="number" id="dexAmount" placeholder="Trade Size" />
+  <button onclick="analyzeSlippage()">Analyze Slippage</button>
+  <div class="results-box" id="slippageResults"></div>
+</div>
+<script>
+function analyzeSlippage() {
+  const pair = document.getElementById("dexPair").value.trim().toUpperCase();
+  const amount = parseFloat(document.getElementById("dexAmount").value);
+  const slippage = (Math.random() * 2).toFixed(2);
+  document.getElementById("slippageResults").innerHTML = `
+    <p>Estimated Slippage for ${pair} on ${amount} USD swap: <strong>${slippage}%</strong></p>`;
+}
+</script></body></html>

@@ -1,0 +1,24 @@
+<!-- TOOL 67: Multi-Wallet Balance Aggregator -->
+<div class="tool-card" id="tool-67">
+  <h2>67. Multi-Wallet Balance Aggregator</h2>
+  <p><strong>Description:</strong> Aggregates the total holdings across multiple wallet addresses.</p>
+  <p><strong>Utility:</strong> Convenient for portfolio tracking when assets are distributed across wallets.</p>
+  <p><strong>How to Use:</strong> Enter comma-separated wallet addresses. View total aggregated balance (simulated).</p>
+  <p><strong>Result Analysis:</strong> The total gives a high-level portfolio overview useful for allocation decisions.</p>
+  <textarea id="walletList" placeholder="0xABC..., 0xDEF..., 0x123..."></textarea>
+  <button onclick="aggregateBalances()">Aggregate</button>
+  <div id="balanceAggregatorResults" class="results-box"></div>
+</div>
+<script>
+function aggregateBalances() {
+  const wallets = document.getElementById("walletList").value.trim();
+  const result = document.getElementById("balanceAggregatorResults");
+  if (!wallets) {
+    result.innerHTML = "<p>Please enter wallet addresses.</p>";
+    return;
+  }
+  const count = wallets.split(",").length;
+  const total = (count * 1234.56).toFixed(2);
+  result.innerHTML = `<p>Detected ${count} wallets.</p><p><strong>Total Aggregated Balance:</strong> $${total}</p>`;
+}
+</script>

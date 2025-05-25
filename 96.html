@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 800px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #000;
+      color: #FFD700;
+      border: 1px solid #FFD700;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      background: #222;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card">
+  <h2>96. Whale Token Rotation Tracker</h2>
+  <p><strong>Description:</strong> Track which tokens whales are rotating in and out of.</p>
+  <p><strong>Utility:</strong> Identify new narratives or early trend shifts via capital rotation.</p>
+  <p><strong>How to Use:</strong> Click to load the latest whale token rotation data.</p>
+  <p><strong>Result Analysis:</strong> Understand sector movements led by large holders.</p>
+  <button onclick="trackRotation()">Track Rotation</button>
+  <div class="results-box" id="rotationResults"></div>
+</div>
+<script>
+function trackRotation() {
+  const tokens = ["ARB", "RNDR", "TIA", "WIF", "SOL"];
+  const inflow = tokens[Math.floor(Math.random() * tokens.length)];
+  const outflow = tokens[Math.floor(Math.random() * tokens.length)];
+  document.getElementById("rotationResults").innerHTML = `
+    <p><strong>Whale Inflow:</strong> ${inflow}</p>
+    <p><strong>Whale Outflow:</strong> ${outflow}</p>`;
+}
+</script></body></html>

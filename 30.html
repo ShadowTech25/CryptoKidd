@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="tool-card" id="tool-30">
+  <h2>30. Multi-Token Rebalancer with Risk Tiers</h2>
+  <p><strong>Description:</strong> This tool simulates rebalancing a crypto portfolio based on chosen risk level.</p>
+  <p><strong>Utility:</strong> Assists users in adjusting their portfolio allocation to match their risk appetite.</p>
+  <p><strong>How to Use:</strong> Input your token percentages and select a risk profile. Then click "Rebalance."</p>
+  <p><strong>Result Analysis:</strong> Provides a mock adjustment to guide diversification strategy and protect capital depending on risk tier.</p>
+  <textarea id="portfolioInput" placeholder="Enter tokens and % allocation, e.g. BTC:40, ETH:30, DOGE:30"></textarea>
+  <select id="riskLevel">
+    <option value="low">Low Risk</option>
+    <option value="medium" selected>Medium Risk</option>
+    <option value="high">High Risk</option>
+  </select>
+  <button onclick="rebalancePortfolio()">Rebalance</button>
+  <div id="rebalancerResults" class="results-box"></div>
+</div>
+
+<script>
+function exploreWhaleWallet() {
+  const wallet = document.getElementById("whaleWalletInput").value.trim();
+  const output = document.getElementById("whaleWalletResults");
+  if (!wallet) {
+    output.innerHTML = "<p>Please enter a wallet address.</p>";
+    return;
+  }
+
+  output.innerHTML = "<p>Loading transactions for " + wallet + "...</p>";
+
+  setTimeout(() => {
+    const txs = [
+      "Received 1,000,000 USDT from Binance",
+      "Swapped 500 ETH for WBTC",
+      "Deposited $2M into Aave",
+      "Withdrew 1.5M USDC to Coinbase"
+    ];
+
+    let html = "<p><strong>Recent Transactions:</strong></p><ul>";
+    txs.forEach(tx => {
+      html += `<li>${tx}</li>`;
+    });
+    html += "</ul>";
+    output.innerHTML = html;
+  }, 1500);
+}
+
+function rebalancePortfolio() {
+  const input = document.getElementById("portfolioInput").value.trim();
+  const risk = document.getElementById("riskLevel").value;
+  const output = document.getElementById("rebalancerResults");
+
+  if (!input) {
+    output.innerHTML = "<p>Please enter your current portfolio.</p>";
+    return;
+  }
+
+  const rawTokens = input.split(",");
+  let portfolio = [];
+  rawTokens.forEach(item => {
+    const [token, percent] = item.split(":");
+    if (token && percent) {
+      portfolio.push({ token: token.trim().toUpperCase(), percent: parseFloat(percent.trim()) });
+    }
+  });
+
+  if (portfolio.length === 0) {
+    output.innerHTML = "<p>Invalid portfolio format.</p>";
+    return;
+  }
+
+  const suggested = portfolio.map(entry => {
+    let adjust = risk === "high" ? 15 : risk === "low" ? -10 : 0;
+    let newPercent = entry.percent + adjust;
+    return `${entry.token}: ${Math.max(0, Math.min(100, newPercent))}%`;
+  });
+
+  output.innerHTML = "<p><strong>Suggested Allocation:</strong></p><ul><li>" + suggested.join("</li><li>") + "</li></ul>";
+}
+</script></body></html>

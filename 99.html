@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-99">
+  <h2>99. Token Reputation Engine</h2>
+  <p><strong>Description:</strong> Evaluates the social credibility and community trust score of a token.</p>
+  <p><strong>Utility:</strong> Helps users assess whether a token is well-regarded or likely to be a scam.</p>
+  <p><strong>How to Use:</strong> Enter a token name or symbol to simulate reputation score results.</p>
+  <p><strong>Result Analysis:</strong> A higher score indicates strong trust, while lower scores warn of possible red flags.</p>
+  <input type="text" id="reputationToken" placeholder="Enter token symbol or name" />
+  <button onclick="checkReputation()">Check Reputation</button>
+  <div id="reputationResults" class="results-box"></div>
+</div>
+
+<script>
+function checkReputation() {
+  const token = document.getElementById("reputationToken").value.trim();
+  const output = document.getElementById("reputationResults");
+  if (!token) {
+    output.innerHTML = "<p>Please enter a token name or symbol.</p>";
+    return;
+  }
+  const score = Math.floor(Math.random() * 101);
+  const tier = score > 80 ? "Excellent" : score > 60 ? "Good" : score > 40 ? "Neutral" : score > 20 ? "Risky" : "Critical";
+  output.innerHTML = `<p><strong>${token.toUpperCase()}</strong> Reputation Score: ${score}/100<br>Status: ${tier}</p>`;
+}
+</script>
+</body></html>

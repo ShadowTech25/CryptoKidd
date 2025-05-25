@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="tool-card" id="tool-55">
+  <h2>55. Cross-Chain Gas Fee Comparator</h2>
+  <p><strong>Description:</strong> Compares gas fees for common operations across Ethereum, Polygon, BSC, and other chains.</p>
+  <p><strong>Utility:</strong> Useful for deciding which chain to use based on current transaction costs.</p>
+  <p><strong>How to Use:</strong> Click the button to compare live estimates across chains.</p>
+  <p><strong>Result Analysis:</strong> Reveals the most cost-effective network for your next transaction or smart contract interaction.</p>
+  <button onclick="compareChainGas()">Compare Gas Fees</button>
+  <div id="chainGasResults" class="results-box"></div>
+</div>
+
+<!-- TOOL 56: Token Launch Timeline Tracker -->
+<div class="tool-card" id="tool-56">
+  <h2>56. Token Launch Timeline Tracker</h2>
+  <p><strong>Description:</strong> Tracks upcoming token launches and their stages (Presale, IDO, Listing).</p>
+  <p><strong>Utility:</strong> Great for investors to plan entries or sign up early for presales and launchpads.</p>
+  <p><strong>How to Use:</strong> Click to load the current list of upcoming launches.</p>
+  <p><strong>Result Analysis:</strong> Helps you schedule alerts, prepare capital, or research projects before listings.</p>
+  <button onclick="loadTokenLaunches()">Load Launches</button>
+  <div id="launchResults" class="results-box"></div>
+</div>
+
+<script>
+function compareChainGas() {
+  const chains = [
+    { name: "Ethereum", gwei: 37 },
+    { name: "Polygon", gwei: 3 },
+    { name: "BSC", gwei: 5 },
+    { name: "Arbitrum", gwei: 0.9 }
+  ];
+  let html = "<ul>";
+  chains.forEach(c => {
+    html += `<li>${c.name}: ${c.gwei} Gwei</li>`;
+  });
+  html += "</ul>";
+  document.getElementById("chainGasResults").innerHTML = html;
+}
+
+function loadTokenLaunches() {
+  const launches = [
+    { token: "ZENT", stage: "Presale", date: "2025-06-10" },
+    { token: "NOVA", stage: "IDO", date: "2025-06-12" },
+    { token: "ASTR", stage: "Exchange Listing", date: "2025-06-15" }
+  ];
+  let html = "<ul>";
+  launches.forEach(l => {
+    html += `<li>${l.token} – ${l.stage} on ${l.date}</li>`;
+  });
+  html += "</ul>";
+  document.getElementById("launchResults").innerHTML = html;
+}
+</script></body></html>

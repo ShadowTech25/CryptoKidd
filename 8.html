@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="tool-card" id="tool-08">
+  <h2>08. Stablecoin Allocation Analyzer</h2>
+  <p><strong>Description:</strong> Calculates what percentage of your total crypto portfolio is held in stablecoins.</p>
+  <p><strong>Utility:</strong> Useful for risk assessment and capital preservation strategies.</p>
+  <p><strong>How to Use:</strong> Enter your total stablecoin value and your overall portfolio value. Click "Analyze".</p>
+  <p><strong>Result Analysis:</strong> Helps determine if your allocation is too conservative, too aggressive, or well-balanced based on market volatility.</p>
+  <input type="number" id="stableUSD" placeholder="Stablecoin Total (USD)" />
+  <input type="number" id="portfolioUSD" placeholder="Total Portfolio Value (USD)" />
+  <button onclick="analyzeStablecoin()">Analyze</button>
+  <div id="stableResult" class="results-box"></div>
+</div>
+<script>
+function analyzeStablecoin() {
+  const stable = parseFloat(document.getElementById("stableUSD").value);
+  const total = parseFloat(document.getElementById("portfolioUSD").value);
+  if (isNaN(stable) || isNaN(total) || total <= 0) {
+    document.getElementById("stableResult").innerHTML = "<p>Please enter valid numbers.</p>";
+    return;
+  }
+  const percent = (stable / total) * 100;
+  document.getElementById("stableResult").innerHTML = `<p>Stablecoin Allocation: ${percent.toFixed(2)}%</p>`;
+}
+</script>
+</body></html>

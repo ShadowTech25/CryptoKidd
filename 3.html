@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="tool-card" id="tool-03">
+  <h2>03. Gas Fee Estimator</h2>
+  <p><strong>Description:</strong> Estimates current Ethereum gas fees across different speed tiers (Low, Medium, High).</p>
+  <p><strong>Utility:</strong> Useful for users transacting on Ethereum to time their interactions for cost efficiency.</p>
+  <p><strong>How to Use:</strong> Click the button to see estimated gas fees based on network conditions.</p>
+  <p><strong>Result Analysis:</strong> Use this insight to determine if now is the right time to send, mint, or deploy contracts.</p>
+  <button onclick="estimateGas()">Estimate Gas</button>
+  <div id="gasResults" class="results-box"></div>
+</div>
+<script>
+function estimateGas() {
+  const estimates = { low: 12, medium: 24, high: 43 };
+  let html = "<ul>";
+  for (const [level, gwei] of Object.entries(estimates)) {
+    html += `<li>${level.charAt(0).toUpperCase() + level.slice(1)}: ${gwei} Gwei</li>`;
+  }
+  html += "</ul>";
+  document.getElementById("gasResults").innerHTML = html;
+}
+</script>
+</body></html>

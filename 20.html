@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="tool-card" id="tool-20">
+  <h2>20. Crypto Savings Growth Estimator</h2>
+  <p><strong>Description:</strong> Estimates your savings growth with annual compounding returns.</p>
+  <p><strong>Utility:</strong> Great for holders estimating long-term yield on staked or saved crypto.</p>
+  <p><strong>How to Use:</strong> Enter your starting balance, years, and annual return % to simulate growth.</p>
+  <p><strong>Result Analysis:</strong> Shows projected balance based on compound interest over time.</p>
+  <input type="number" id="savingsStart" placeholder="Initial Amount (USD)" />
+  <input type="number" id="savingsYears" placeholder="Years" />
+  <input type="number" id="savingsRate" placeholder="Annual Growth Rate (%)" />
+  <button onclick="estimateSavings()">Estimate</button>
+  <div id="savingsResult" class="results-box"></div>
+</div>
+
+<script>
+function generateReentryPlan() {
+  const buy = parseFloat(document.getElementById("originalBuyPrice").value);
+  if (isNaN(buy)) {
+    document.getElementById("reentryPlanResult").innerHTML = "<p>Enter valid price.</p>";
+    return;
+  }
+  const levels = [10, 20, 30, 40, 50];
+  let html = "<ul>";
+  levels.forEach(pct => {
+    const entry = buy * (1 - pct / 100);
+    html += `<li>${pct}% dip: Re-entry at <strong>$${entry.toFixed(2)}</strong></li>`;
+  });
+  html += "</ul>";
+  document.getElementById("reentryPlanResult").innerHTML = html;
+}
+
+function estimateSavings() {
+  const start = parseFloat(document.getElementById("savingsStart").value);
+  const years = parseFloat(document.getElementById("savingsYears").value);
+  const rate = parseFloat(document.getElementById("savingsRate").value);
+  if (isNaN(start) || isNaN(years) || isNaN(rate)) {
+    document.getElementById("savingsResult").innerHTML = "<p>Enter valid numbers.</p>";
+    return;
+  }
+  const futureValue = start * Math.pow(1 + rate / 100, years);
+  document.getElementById("savingsResult").innerHTML = `<p>Projected Value: <strong>$${futureValue.toFixed(2)}</strong></p>`;
+}
+</script></body></html>

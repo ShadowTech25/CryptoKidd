@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card">
+  <h2>Tool 82: On-Chain Wallet Count Tracker</h2>
+  <p><strong>Description:</strong> Tracks number of wallets holding a token over time.</p>
+  <p><strong>Utility:</strong> Helps detect adoption trends or signs of whale accumulation/distribution.</p>
+  <p><strong>How to Use:</strong> Click to view sample wallet count trends.</p>
+  <p><strong>Result Analysis:</strong> Rising wallet count = growing adoption. Falling = exiting holders.</p>
+  <button onclick="document.getElementById('tool82result').innerText='Wallets holding ADA rose from 3.5M to 4.1M in last 90 days.'">Check Growth</button>
+  <div class="results-box" id="tool82result"></div>
+</div>
+</body></html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-11">
+  <h2>11. ROI Calculator</h2>
+  <p><strong>Description:</strong> Calculates return on investment (ROI) based on your entry and exit prices.</p>
+  <p><strong>Utility:</strong> Great for backtesting past trades or forecasting future positions.</p>
+  <p><strong>How to Use:</strong> Enter your buy price, sell price, and quantity of a token. Then click Calculate ROI.</p>
+  <p><strong>Result Analysis:</strong> Provides your profit or loss percentage and dollar amount, helping refine your trading decisions.</p>
+  <input type="number" id="buyPrice" placeholder="Buy Price" />
+  <input type="number" id="sellPrice" placeholder="Sell Price" />
+  <input type="number" id="quantity" placeholder="Quantity" />
+  <button onclick="calcROI()">Calculate ROI</button>
+  <div id="roiResult" class="results-box"></div>
+</div>
+<script>
+function calcROI() {
+  const buy = parseFloat(document.getElementById("buyPrice").value);
+  const sell = parseFloat(document.getElementById("sellPrice").value);
+  const qty = parseFloat(document.getElementById("quantity").value);
+  if (isNaN(buy) || isNaN(sell) || isNaN(qty)) {
+    document.getElementById("roiResult").innerHTML = "<p>Fill out all fields correctly.</p>";
+    return;
+  }
+  const profit = (sell - buy) * qty;
+  const percent = ((sell - buy) / buy) * 100;
+  document.getElementById("roiResult").innerHTML = `<p>Profit: $${profit.toFixed(2)} (${percent.toFixed(2)}%)</p>`;
+}
+</script>
+</body></html>

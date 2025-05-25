@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tool 62: Exchange Listing Scanner</title>
+  <style>
+    body { background-color: #000; color: #FFD700; font-family: Arial, sans-serif; padding: 20px; }
+    .tool-card { background: #111; border: 2px solid #FFD700; border-radius: 10px; padding: 20px; max-width: 700px; margin: 30px auto; }
+    .results-box { margin-top: 15px; background: #222; padding: 10px; border-radius: 5px; }
+    button { padding: 10px 20px; background-color: #FFD700; color: #000; border: none; border-radius: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="tool-card" id="tool-62">
+    <h2>62. Exchange Listing Scanner</h2>
+    <p><strong>Description:</strong> Monitors new token listings across major exchanges.</p>
+    <p><strong>Utility:</strong> Allows users to get early notification of newly listed tokens to act quickly.</p>
+    <p><strong>How to Use:</strong> Click the button to view simulated new listings.</p>
+    <p><strong>Result Analysis:</strong> Early listings on major exchanges often result in short-term price spikes.</p>
+    <button onclick="showResult()">Simulate Tool</button>
+    <div class="results-box" id="resultBox">Results will appear here...</div>
+  </div>
+  <script>
+    function showResult() {
+      document.getElementById("resultBox").innerHTML = "Simulated data for Exchange Listing Scanner is displayed here.";
+    }
+  </script>
+</body>
+</html>

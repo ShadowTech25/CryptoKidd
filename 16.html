@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-16">
+  <h2>16. Altcoin Season Index</h2>
+  <p><strong>Description:</strong> Calculates whether it’s currently Bitcoin season or Altcoin season based on market index simulation.</p>
+  <p><strong>Utility:</strong> Helps with macro positioning—whether to lean heavier on BTC or diversify into altcoins.</p>
+  <p><strong>How to Use:</strong> Click “Check” to simulate and determine the current index category.</p>
+  <p><strong>Result Analysis:</strong> If the index shows Altcoin Season, smaller-cap coins might outperform. BTC Season may signal dominance safety plays.</p>
+  <button onclick="checkAltcoinSeason()">Check</button>
+  <div id="altcoinSeasonResult" class="results-box"></div>
+</div>
+<script>
+function checkAltcoinSeason() {
+  const index = Math.floor(Math.random() * 100);
+  const season = index > 75 ? "Altcoin Season" : index < 25 ? "Bitcoin Season" : "Neutral Market";
+  document.getElementById("altcoinSeasonResult").innerHTML = `<p>Index: ${index} – ${season}</p>`;
+}
+</script>
+</body></html>

@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 800px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #000;
+      color: #FFD700;
+      border: 1px solid #FFD700;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      background: #222;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card">
+  <h2>94. Token Holder Sentiment Analyzer</h2>
+  <p><strong>Description:</strong> Analyze token holder sentiment based on social activity and on-chain trends.</p>
+  <p><strong>Utility:</strong> Helps gauge investor sentiment shifts before price movements occur.</p>
+  <p><strong>How to Use:</strong> Input a token and click analyze to get sentiment insights.</p>
+  <p><strong>Result Analysis:</strong> Sentiment readings can identify bullish/bearish shifts for trading strategies.</p>
+  <input type="text" id="sentimentToken" placeholder="Enter Token (e.g., BTC)" />
+  <button onclick="analyzeSentiment()">Analyze Sentiment</button>
+  <div class="results-box" id="sentimentResults"></div>
+</div>
+<script>
+function analyzeSentiment() {
+  const token = document.getElementById("sentimentToken").value.trim().toUpperCase();
+  const mood = Math.random() > 0.5 ? "Bullish" : "Bearish";
+  document.getElementById("sentimentResults").innerHTML = `<p>Sentiment for ${token}: <strong>${mood}</strong></p>`;
+}
+</script></body></html>

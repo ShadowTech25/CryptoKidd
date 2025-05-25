@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tool 36 – Blockchain Fork Monitor</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      background-color: #FFD700;
+      color: #000;
+      cursor: pointer;
+      border: none;
+    }
+    .results-box {
+      background: #222;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tool-card">
+    <h2>36. Blockchain Fork Monitor</h2>
+    <p><strong>Description:</strong> Monitors a blockchain for recent or active forks that may affect chain stability.</p>
+    <p><strong>Utility:</strong> Crucial for developers, node operators, and analysts to detect divergence in blockchains and adjust infrastructure accordingly.</p>
+    <p><strong>How to Use:</strong> Click the button below to simulate checking for forks on selected chains.</p>
+    <p><strong>Result Analysis:</strong> Identifies recent forks or high-risk zones for splits—allowing users to avoid interacting with unstable chains or pause operations if necessary.</p>
+    <select id="forkChain">
+      <option value="Bitcoin">Bitcoin</option>
+      <option value="Ethereum">Ethereum</option>
+      <option value="Polygon">Polygon</option>
+    </select>
+    <button onclick="monitorForks()">Check for Forks</button>
+    <div id="forkResult" class="results-box"></div>
+  </div>
+
+  <script>
+    function monitorForks() {
+      const chain = document.getElementById("forkChain").value;
+      const result = document.getElementById("forkResult");
+      const forks = {
+        Bitcoin: "No recent forks detected. Network is stable.",
+        Ethereum: "Soft fork detected on block #18,945,203. Status: Merged successfully.",
+        Polygon: "Warning: Chain reorganization detected 3 hours ago."
+      };
+      result.innerHTML = `<p><strong>${chain}:</strong> ${forks[chain]}</p>`;
+    }
+  </script>
+</body>
+</html>

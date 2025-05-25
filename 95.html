@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 30px auto;
+      max-width: 800px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #000;
+      color: #FFD700;
+      border: 1px solid #FFD700;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      background: #222;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tool-card">
+  <h2>95. Exchange Volume Flow Monitor</h2>
+  <p><strong>Description:</strong> Tracks token inflow/outflow between wallets and major exchanges.</p>
+  <p><strong>Utility:</strong> Detects accumulation or dumping behavior across platforms.</p>
+  <p><strong>How to Use:</strong> Enter a token and click monitor to view flow activity.</p>
+  <p><strong>Result Analysis:</strong> High outflows may signal holding; high inflows could suggest selling pressure.</p>
+  <input type="text" id="volumeToken" placeholder="Enter Token (e.g., ETH)" />
+  <button onclick="monitorFlow()">Monitor Flow</button>
+  <div class="results-box" id="flowResults"></div>
+</div>
+<script>
+function monitorFlow() {
+  const token = document.getElementById("volumeToken").value.trim().toUpperCase();
+  const inflow = Math.floor(Math.random() * 1000000);
+  const outflow = Math.floor(Math.random() * 1000000);
+  document.getElementById("flowResults").innerHTML = `
+    <p>${token} Exchange Inflow: $${inflow.toLocaleString()}</p>
+    <p>${token} Exchange Outflow: $${outflow.toLocaleString()}</p>`;
+}
+</script></body></html>

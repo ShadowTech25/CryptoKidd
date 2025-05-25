@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, textarea, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="tool-card" id="tool-04">
+  <h2>04. Whale Watcher</h2>
+  <p><strong>Description:</strong> Displays recent large transactions from high-value crypto wallets ("whales").</p>
+  <p><strong>Utility:</strong> Allows traders to gauge market sentiment and whale movement before major price actions.</p>
+  <p><strong>How to Use:</strong> Click the button to load a list of simulated whale transactions.</p>
+  <p><strong>Result Analysis:</strong> Spotting repeated buy or sell patterns can reveal accumulation or distribution zones.</p>
+  <button onclick="loadWhaleTx()">Load Whale TXs</button>
+  <div id="whaleTxResults" class="results-box"></div>
+</div>
+<script>
+function loadWhaleTx() {
+  const txs = [
+    "Whale A bought 2,000 ETH",
+    "Whale B sold 50 BTC",
+    "Whale C added $3M USDC to Aave",
+    "Whale D withdrew $1.2M USDT"
+  ];
+  let html = "<ul>";
+  txs.forEach(tx => html += `<li>${tx}</li>`);
+  html += "</ul>";
+  document.getElementById("whaleTxResults").innerHTML = html;
+}
+</script>
+</body></html>

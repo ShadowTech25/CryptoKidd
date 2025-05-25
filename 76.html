@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoKidd Tool</title>
+  <style>
+    body { background-color: #000; color: #FFD700; font-family: Arial, sans-serif; padding: 20px; }
+    .tool-card { background: #111; border: 2px solid #FFD700; border-radius: 10px; padding: 20px; max-width: 700px; margin: 30px auto; }
+    input, textarea, select {
+      padding: 10px; width: 100%; margin: 10px 0;
+      border-radius: 5px; border: 1px solid #FFD700;
+      background: #000; color: #FFD700;
+    }
+    button {
+      padding: 10px 20px; background-color: #FFD700; color: #000;
+      border: none; border-radius: 5px; cursor: pointer;
+    }
+    .results-box { margin-top: 15px; background: #222; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<div class="tool-card" id="tool-76">
+  <h2>76. Fork Detector</h2>
+  <p><strong>Description:</strong> Simulate detection of recent chain forks in blockchain networks using timestamp and block height variance.</p>
+  <p><strong>Utility:</strong> Useful for blockchain developers and explorers to monitor the health and consistency of networks.</p>
+  <p><strong>How to Use:</strong> Click the button to simulate recent blocks and check for discrepancies indicating forks.</p>
+  <p><strong>Result Analysis:</strong> Alerts developers or users if a fork might have occurred, allowing for investigation or mitigation.</p>
+  <button onclick="detectFork()">Run Fork Detector</button>
+  <div id="forkResult" class="results-box"></div>
+</div>
+
+<script>
+function detectFork() {
+  const blockDiff = Math.random() > 0.7 ? "⚠️ Fork Detected: Blocks out of sync by 2+" : "✅ No Forks Detected";
+  document.getElementById("forkResult").innerHTML = "<p>" + blockDiff + "</p>";
+}
+</script>
+</body></html>

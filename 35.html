@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tool 35 – Network Latency Checker</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .tool-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    input, select {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #FFD700;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .results-box {
+      margin-top: 15px;
+      background: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tool-card">
+    <h2>35. Network Latency Checker</h2>
+    <p><strong>Description:</strong> This tool simulates a latency check to measure the response time between different blockchain networks.</p>
+    <p><strong>Utility:</strong> Helps developers and traders identify fast or slow-performing networks for app deployment or transaction execution.</p>
+    <p><strong>How to Use:</strong> Choose a network from the list and click "Check Latency" to view simulated results.</p>
+    <p><strong>Result Analysis:</strong> Networks with lower latency are ideal for fast trading, DeFi interactions, or real-time apps. High latency may indicate congestion or inefficient routing.</p>
+
+    <select id="networkSelect">
+      <option value="Ethereum">Ethereum</option>
+      <option value="Polygon">Polygon</option>
+      <option value="Arbitrum">Arbitrum</option>
+      <option value="Solana">Solana</option>
+    </select>
+    <button onclick="checkLatency()">Check Latency</button>
+    <div id="latencyResult" class="results-box"></div>
+  </div>
+
+  <script>
+    function checkLatency() {
+      const network = document.getElementById("networkSelect").value;
+      const resultBox = document.getElementById("latencyResult");
+      const latency = {
+        Ethereum: Math.floor(Math.random() * 150 + 250),
+        Polygon: Math.floor(Math.random() * 50 + 50),
+        Arbitrum: Math.floor(Math.random() * 60 + 70),
+        Solana: Math.floor(Math.random() * 40 + 20)
+      };
+      resultBox.innerHTML = `<p>Latency on ${network}: <strong>${latency[network]} ms</strong></p>`;
+    }
+  </script>
+</body>
+</html>

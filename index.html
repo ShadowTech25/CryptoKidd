@@ -1,13 +1,15 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#FFD700"/>
-  <link rel="manifest" href="manifest.json"/>
-  <title>CryptoKid – Decoding Crypto, One Block at a Time</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet" />
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#FFD700" name="theme-color"/>
+<link href="manifest.json" rel="manifest"/>
+<title>CryptoKid – Decoding Crypto, One Block at a Time</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet"/>
+<style>
     .market-ticker {
       background: #111;
       color: #FFD700;
@@ -75,86 +77,242 @@
       margin: 0 15px;
       opacity: 0.7;
     }
-  </style>
+  
+
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #FFD700;
+      font-family: Arial, sans-serif;
+    }
+    .navbar {
+      background-color: #000;
+      border-bottom: 3px solid #FFD700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      font-family: 'UnifrakturCook', cursive;
+    }
+    .logo {
+      font-size: 2rem;
+      color: #FFD700;
+    }
+    .hamburger {
+      width: 30px;
+      height: 21px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .hamburger div {
+      height: 3px;
+      background-color: #FFD700;
+      border-radius: 2px;
+    }
+    .nav-wrapper {
+      display: none;
+      flex-direction: column;
+      background-color: #111;
+      padding: 20px;
+    }
+    .nav-wrapper.show {
+      display: flex;
+    }
+    .nav-section {
+      border-top: 1px solid #FFD700;
+      padding: 15px 10px;
+    }
+    .nav-section h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: #FFD700;
+      text-align: center;
+    }
+    .nav-section a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 6px 0;
+      display: block;
+      text-align: center;
+    }
+    .nav-section a:hover {
+      color: white;
+    }
+
+    .market-ticker {
+      background: #111;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 1px solid #FFD700;
+      padding: 10px 0;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 30s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-block;
+      margin-right: 40px;
+      font-size: 1rem;
+    }
+
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  
+.hero {
+  padding: 40px 20px;
+  text-align: center;
+}
+.hero-title {
+  font-size: 2.5rem;
+  color: #FFD700;
+  margin-bottom: 10px;
+}
+.hero-subtext {
+  font-size: 1.1rem;
+  color: #ccc;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.feature-section {
+  padding: 30px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+.card {
+  background: #111;
+  padding: 20px;
+  border: 1px solid #FFD70044;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+</style>
 </head>
-<body>
-<div class="market-ticker">
-  <div class="ticker-track" id="tickerTrack"></div>
+<body><div class="market-ticker">
+<div class="ticker-track" id="tickerTrack">
+<!-- Prices will be injected here -->
 </div>
-<nav class="navbar">
-  <div class="logo old-english">CryptoKid</div>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-<div class="nav-wrapper" id="navMenu">
-  <div class="nav-section">
-    <h3>Main</h3>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </div>
-  <div class="nav-section">
-    <h3>Learn</h3>
-    <a href="articles.html">Articles</a>
-    <a href="guides.html">Guides</a>
-  </div>
-  <div class="nav-section">
-    <h3>Tools</h3>
-    <a href="markets.html">Markets</a>
-    <a href="tools.html">Tools</a>
-    <a href="dashboard.html">Dashboard</a>
-  </div>
-  </div>
-  </nav>  <header class="hero">
-    <h1 class="hero-title">Decoding Crypto, One Block at a Time</h1>
-    <p class="hero-subtext">Explore underground trends, early alpha, and sharp insights before they hit the mainstream.</p>
-  </header>  <section class="feature-section">
-    <h2>What’s Moving Right Now</h2>
-    <div class="card">
-      <h3>$PI is up 22% – Why?</h3>
-      <p>Exchange flows are spiking, and community wallets just got unlocked. Big move coming or bull trap? Here's what we're seeing today.</p>
-    </div>
-    <div class="card">
-      <h3>ETH Gas Drops Below 8 Gwei</h3>
-      <p>That’s unusually cheap. Perfect window for L2 deployments or smart contract interaction. Builders, this is your green light.</p>
-    </div>
-  </section>  <section class="feature-section">
-    <h2>CryptoKid’s Radar</h2>
-    <div class="card">
-      <h3>Watchlist Highlights</h3>
-      <ul>
-        <li><strong>Narrative:</strong> Real World Assets (RWA)</li>
-        <li><strong>Coin:</strong> ROAM – Mobile-native payments</li>
-        <li><strong>Protocol:</strong> ELX – AI-optimized DeFi routing</li>
-      </ul>
-    </div>
-  </section>  <section class="feature-section">
-    <h2>Alpha Corner</h2>
-    <div class="card">
-      <p><strong>Tip:</strong> Don't chase pumps. Chase volume with no price movement — that’s where whales accumulate.</p>
-    </div>
-  </section>  <section class="video-embed">
-    <h2 style="text-align:center;">Watch: The Crypto Breakdown</h2>
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="CryptoKid Video"></iframe>
-  </section>  <section class="start-here">
-    <h2>New Here?</h2>
-    <p>Start with these essentials:</p>
-    <a href="guides.html">Crypto Starter Guide</a>
-    <a href="article-pi-network.html">Is Pi Network Real?</a>
-    <a href="contact.html">Contact the Kid</a>
-  </section>  <div class="rotating-quote" id="quoteBox">
+</div><nav class="navbar">
+<div class="logo">CryptoKid</div>
+<div class="hamburger" onclick="toggleMenu()">
+<div></div><div></div><div></div>
+</div>
+</nav><div class="nav-wrapper" id="navMenu">
+<div class="nav-section">
+<h3>Main</h3>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</div>
+<div class="nav-section">
+<h3>Learn</h3>
+<a href="articles.html">Articles</a>
+<a href="guides.html">Guides</a>
+</div>
+<div class="nav-section">
+<h3>Tools</h3>
+<a href="markets.html">Markets</a>
+<a href="tools.html">Tools</a>
+<a href="dashboard.html">Dashboard</a>
+</div>
+</div><script>
+  function toggleMenu() {
+    document.getElementById("navMenu").classList.toggle("show");
+  }
+
+  async function fetchPrices() {
+    const ids = 'bitcoin,ethereum,solana,bitget-token,ripple,shiba-inu,dogecoin';
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      const prices = {
+        'PI': '$0.71', // Placeholder
+        'BTC': `$${data.bitcoin.usd.toLocaleString()}`,
+        'ETH': `$${data.ethereum.usd.toLocaleString()}`,
+        'SOL': `$${data.solana.usd.toLocaleString()}`,
+        'BGB': `$${data['bitget-token'].usd}`,
+        'XRP': `$${data.ripple.usd}`,
+        'SHIB': `$${data['shiba-inu'].usd}`,
+        'DOGE': `$${data.dogecoin.usd}`
+      };
+
+      const ticker = document.getElementById('tickerTrack');
+      ticker.innerHTML = '';
+      for (const [symbol, price] of Object.entries(prices)) {
+        const span = document.createElement('span');
+        span.className = 'ticker-item';
+        span.textContent = `${symbol}: ${price}`;
+        ticker.appendChild(span);
+      }
+    } catch (err) {
+      console.error('Failed to fetch prices:', err);
+    }
+  }
+
+  fetchPrices();
+  setInterval(fetchPrices, 60000);
+</script>
+<header class="hero">
+<h1 class="hero-title">Decoding Crypto, One Block at a Time</h1>
+<p class="hero-subtext">Explore underground trends, early alpha, and sharp insights before they hit the mainstream.</p>
+</header> <section class="feature-section">
+<h2>What’s Moving Right Now</h2>
+<div class="card">
+<h3>$PI is up 22% – Why?</h3>
+<p>Exchange flows are spiking, and community wallets just got unlocked. Big move coming or bull trap? Here's what we're seeing today.</p>
+</div>
+<div class="card">
+<h3>ETH Gas Drops Below 8 Gwei</h3>
+<p>That’s unusually cheap. Perfect window for L2 deployments or smart contract interaction. Builders, this is your green light.</p>
+</div>
+</section> <section class="feature-section">
+<h2>CryptoKid’s Radar</h2>
+<div class="card">
+<h3>Watchlist Highlights</h3>
+<ul>
+<li><strong>Narrative:</strong> Real World Assets (RWA)</li>
+<li><strong>Coin:</strong> ROAM – Mobile-native payments</li>
+<li><strong>Protocol:</strong> ELX – AI-optimized DeFi routing</li>
+</ul>
+</div>
+</section> <section class="feature-section">
+<h2>Alpha Corner</h2>
+<div class="card">
+<p><strong>Tip:</strong> Don't chase pumps. Chase volume with no price movement — that’s where whales accumulate.</p>
+</div>
+</section> <section class="video-embed">
+<h2 style="text-align:center;">Watch: The Crypto Breakdown</h2>
+<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="CryptoKid Video"></iframe>
+</section> <section class="start-here">
+<h2>New Here?</h2>
+<p>Start with these essentials:</p>
+<a href="guides.html">Crypto Starter Guide</a>
+<a href="article-pi-network.html">Is Pi Network Real?</a>
+<a href="contact.html">Contact the Kid</a>
+</section> <div class="rotating-quote" id="quoteBox">
     “The only crypto site that doesn’t waste your time. Straight to the point, no fluff.” — Anonymous Trader
-  </div>  <section class="slang-preview">
-    <p>Don’t know what “rekt” means? You will. <a href="guides.html">Learn the Lingo</a></p>
-  </section>  <section class="as-seen-on">
-    <h2>As Seen On</h2>
-    <img src="https://dummyimage.com/100x40/444/fff&text=Coindesk" alt="Coindesk" />
-    <img src="https://dummyimage.com/100x40/444/fff&text=Decrypt" alt="Decrypt" />
-    <img src="https://dummyimage.com/100x40/444/fff&text=Cointelegraph" alt="Cointelegraph" />
-  </section>  <footer class="footer">
-    <p>© 2025 CryptoKid. Built for those who read between the blocks.</p>
-  </footer>  <script>
+  </div> <section class="slang-preview">
+<p>Don’t know what “rekt” means? You will. <a href="guides.html">Learn the Lingo</a></p>
+</section> <section class="as-seen-on">
+<h2>As Seen On</h2>
+<img alt="Coindesk" src="https://dummyimage.com/100x40/444/fff&text=Coindesk"/>
+<img alt="Decrypt" src="https://dummyimage.com/100x40/444/fff&text=Decrypt"/>
+<img alt="Cointelegraph" src="https://dummyimage.com/100x40/444/fff&text=Cointelegraph"/>
+</section> <footer class="footer">
+<p>© 2025 CryptoKid. Built for those who read between the blocks.</p>
+</footer> <script>
     function toggleMenu() {
       document.getElementById('navMenu').classList.toggle('show');
     }

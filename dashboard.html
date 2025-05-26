@@ -1,146 +1,280 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CryptoKid Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CryptoKid Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet"/>
+<style>
     body { background:#000; color:#FFD700; font-family:Arial, sans-serif; margin:0; padding:0; }
-    .navbar { background:#000; padding:10px 20px; position:relative; }
-    .navbar .nav-content { display:flex; justify-content:space-between; align-items:center; }
-    .navbar .logo { font-family:'UnifrakturCook', cursive; font-size:2rem; color:#FFD700; }
-    #menu-toggle { display:none; }
-    #menu-icon { font-size:2rem; color:#FFD700; cursor:pointer; display:none; }
-    #nav-links { display:none; flex-direction:column; gap:10px; margin-top:15px; }
-    @media(min-width:768px) {
-      #menu-icon { display:none !important; }
-      #nav-links { display:flex !important; flex-direction:row !important; gap:20px !important; margin-top:0 !important; }
+
+    .market-ticker {
+      background: #111;
+      color: #FFD700;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 10px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #FFD700;
     }
-    a { color:#FFD700; text-decoration:none; font-weight:bold; }
+
+    .market-ticker span {
+      display: inline-block;
+      white-space: nowrap;
+      padding-right: 40px;
+      animation: scroll-ticker 8s linear infinite;
+    }
+
+    @keyframes scroll-ticker {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .navbar {
+      background-color: #000;
+      border-bottom: 3px solid #FFD700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      font-family: 'UnifrakturCook', cursive;
+    }
+
+    .logo {
+      font-size: 2rem;
+      color: #FFD700;
+    }
+
+    .hamburger {
+      width: 30px;
+      height: 21px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      height: 3px;
+      background-color: #FFD700;
+      border-radius: 2px;
+    }
+
+    .nav-wrapper {
+      display: none;
+      flex-direction: column;
+      background-color: #111;
+      padding: 20px;
+    }
+
+    .nav-wrapper.show {
+      display: flex;
+    }
+
+    .nav-section {
+      border-top: 1px solid #FFD700;
+      padding: 15px 10px;
+    }
+
+    .nav-section h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: #FFD700;
+      text-align: center;
+    }
+
+    .nav-section a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 6px 0;
+      display: block;
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .nav-section a:hover {
+      color: white;
+    }
+
     .container { max-width:900px; margin:0 auto; padding:20px; }
     .header { font-family:'UnifrakturCook', cursive; font-size:2.5rem; text-align:center; margin:20px 0; }
     .card { background:#111; border:1px solid #FFD700; border-radius:8px; padding:20px; margin-bottom:20px; }
     .button { background:#FFD700; color:#000; padding:10px 15px; font-weight:bold; border:none; border-radius:5px; cursor:pointer; width:100%; margin:5px 0; }
     .section-title { font-size:1.2rem; margin-bottom:10px; }
     .premium-badge { background:linear-gradient(to right, gold, #FFD700, goldenrod); color:#000; padding:3px 8px; border-radius:5px; font-size:0.8rem; }
-  </style>
+  
+#auth-links a {
+  color: #FFD700;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 10px;
+}
+#auth-links a:hover {
+  color: white;
+}
+</style>
 </head>
 <body>
-
-<!-- NAVBAR -->
+<div class="market-ticker">
+<span id="ticker-text">Loading live prices...</span>
+</div>
 <nav class="navbar">
-  <div class="nav-content">
-    <div class="logo">CryptoKid</div>
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" id="menu-icon">☰</label>
-  </div>
-  <div id="nav-links">
-    <a href="index.html">Home</a>
-    <a href="articles.html">Articles</a>
-    <a href="guides.html">Guides</a>
-    <a href="markets.html">Markets</a>
-    <a href="tools.html">Tools</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </div>
+<div class="logo">CryptoKid</div>
+<div class="hamburger" onclick="document.getElementById('navMenu').classList.toggle('show')">
+<div></div><div></div><div></div>
+</div>
 </nav>
-
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const nav = document.getElementById("nav-links");
-  const icon = document.getElementById("menu-icon");
-  icon.addEventListener("click", () => {
-    toggle.checked = !toggle.checked;
-    nav.style.display = toggle.checked ? "flex" : "none";
-  });
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) {
-      nav.style.display = "flex";
-      nav.style.flexDirection = "row";
-    } else {
-      nav.style.display = toggle.checked ? "flex" : "none";
-      nav.style.flexDirection = "column";
-    }
-  });
-  window.dispatchEvent(new Event("resize"));
-</script>
-
-<!-- DASHBOARD -->
+<div class="nav-wrapper" id="navMenu">
+<div class="nav-section">
+<h3>Main</h3>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</div>
+<div class="nav-section">
+<h3>Learn</h3>
+<a href="articles.html">Articles</a>
+<a href="guides.html">Guides</a>
+</div>
+<div class="nav-section">
+<h3>Tools</h3>
+<a href="markets.html">Markets</a>
+<a href="tools.html">Tools</a>
+<a href="dashboard.html">Dashboard</a>
+</div>
+</div>
 <div class="container">
-  <div class="header">CryptoKid Dashboard</div>
-
-  <div class="card">
-    <div class="section-title">Welcome, [Username]</div>
-    <p>Email: user@example.com</p>
-    <p>Account Tier: <span id="userTier" style="font-weight:bold;">Free</span></p>
-  </div>
-
-  <div class="card">
-    <div class="section-title">Upgrade to Premium</div>
-    <button class="button" onclick="payWithStripe()">Pay with Stripe</button>
-    <button class="button" onclick="payWithPayPal()">Pay with PayPal</button>
-    <button class="button" onclick="payWithBTC()">Pay with Bitcoin</button>
-    <button class="button" onclick="payWithPi()">Pay with Pi Coin</button>
-  </div>
-
-  <div class="card">
-    <div class="section-title">Account Summary</div>
-    <p>Tools used: 7</p>
-    <p>Alerts set: 3</p>
-    <p>Last login: 2025-05-14</p>
-  </div>
-
-  <div class="card">
-    <div class="section-title">Recently Used Tools</div>
-    <ul>
-      <li>Growth Forecast Calculator</li>
-      <li>Portfolio Tracker</li>
-      <li>Unlock Impact Simulator</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <div class="section-title">Articles You Viewed</div>
-    <ul>
-      <li><a href="article1.html">The Future of Tokenomics</a></li>
-      <li><a href="article2.html">Crypto Security Basics</a></li>
-    </ul>
-  </div>
-
-  <div id="paymentConfirmation" class="card" style="display:none; color:#00ff99; border-color:lime;">
-    <strong>Payment confirmed!</strong> Your Premium access will be activated shortly.
+<div class="header">CryptoKid Dashboard</div><div class="card"><h2 style="text-align:center;">Account Access</h2>
+<p id="auth-links" style="text-align:center;">Loading...</p></div>
+<div class="card">
+<div class="section-title">Welcome, <span id="userEmail">[User]</span></div>
+<p>Account Tier: <span id="userTier" style="font-weight:bold;">Free</span></p>
+</div>
+<div class="card">
+<div class="section-title">Upgrade to Premium</div>
+<button class="button" onclick="payWithStripe()">Pay with Stripe</button>
+<button class="button" onclick="payWithPayPal()">Pay with PayPal</button>
+<button class="button" onclick="payWithBTC()">Pay with Bitcoin</button>
+<button class="button" onclick="payWithPi()">Pay with Pi Coin</button>
+</div>
+<div class="card">
+<div class="section-title">Account Summary</div>
+<p>Tools used: <span id="toolsUsed">0</span></p>
+<p>Alerts set: <span id="alertsSet">0</span></p>
+<p>Last login: <span id="lastLogin">N/A</span></p>
+</div>
+<div class="card" id="paymentConfirmation" style="display:none; color:#00ff99; border-color:lime;">
+<strong>Payment confirmed!</strong> Your Premium access will be activated shortly.
   </div>
 </div>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+  import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    addDoc,
+    collection,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
-<!-- PAYMENT LOGIC -->
-<script>
-  function showConfirmation() {
+  const firebaseConfig = {
+    apiKey: "AIzaSyD4W0T6-0G9jYm0obX7gUzDWT1aahXzMmU",
+    authDomain: "cryptokidd-ca13d.firebaseapp.com",
+    databaseURL: "https://cryptokidd-ca13d-default-rtdb.firebaseio.com",
+    projectId: "cryptokidd-ca13d",
+    storageBucket: "cryptokidd-ca13d.firebasestorage.app",
+    messagingSenderId: "658724474932",
+    appId: "1:658724474932:web:d764b523f37f727b2e3a61",
+    measurementId: "G-DKC298LTMH"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth();
+  const db = getFirestore();
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      document.getElementById("userEmail").innerText = user.email;
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        document.getElementById("userTier").innerText = data.tier || "Free";
+        document.getElementById("toolsUsed").innerText = data.toolsUsed || 0;
+        document.getElementById("alertsSet").innerText = data.alertsSet || 0;
+        document.getElementById("lastLogin").innerText = data.lastLogin || "N/A";
+      } else {
+        await setDoc(userRef, {
+          email: user.email,
+          tier: "Free",
+          toolsUsed: 0,
+          alertsSet: 0,
+          lastLogin: new Date().toISOString()
+        });
+      }
+    } else {
+      window.location.href = "login.html";
+    }
+  });
+
+  async function logPayment(method) {
+    const user = auth.currentUser;
+    if (!user) return;
+    await addDoc(collection(db, "payments"), {
+      uid: user.uid,
+      email: user.email,
+      paymentMethod: method,
+      timestamp: serverTimestamp()
+    });
     document.getElementById("paymentConfirmation").style.display = "block";
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function payWithStripe() {
+  window.payWithStripe = () => {
     alert("Redirecting to Stripe...");
-    showConfirmation();
-  }
-
-  function payWithPayPal() {
+    logPayment("Stripe");
+  };
+  window.payWithPayPal = () => {
     alert("Redirecting to PayPal...");
-    showConfirmation();
-  }
-
-  function payWithBTC() {
+    logPayment("PayPal");
+  };
+  window.payWithBTC = () => {
     alert("Send BTC to: 1A2b3C4d5E6f7G8h9I0j");
-    showConfirmation();
-  }
-
-  function payWithPi() {
+    logPayment("Bitcoin");
+  };
+  window.payWithPi = () => {
     alert("Send Pi to: PiWallet1234567890");
-    showConfirmation();
-  }
-</script>
+    logPayment("Pi Coin");
+  };
 
+  fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1')
+    .then(res => res.json())
+    .then(data => {
+      const ticker = data.map(c => `${c.symbol.toUpperCase()}: $${c.current_price}`).join(' | ');
+      document.getElementById("ticker-text").innerText = ticker;
+    })
+    .catch(() => {
+      document.getElementById("ticker-text").innerText = "Ticker failed to load.";
+    });
+</script>
+<script>
+  // Simulated login state (replace with real Firebase/Auth check)
+  const isLoggedIn = !!localStorage.getItem("userLoggedIn");
+
+  const linksHTML = isLoggedIn
+    ? '<a href="dashboard.html">Dashboard</a> | <a href="logout.html">Sign Out</a>'
+    : '<a href="signup.html">Sign Up</a> | <a href="login.html">Log In</a>';
+
+  document.getElementById("auth-links").innerHTML = linksHTML;
+</script>
 </body>
 </html>

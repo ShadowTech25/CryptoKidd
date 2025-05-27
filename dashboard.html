@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CryptoKid Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet"/>
   <style>
@@ -28,22 +29,19 @@
     .card { background:#111; border:1px solid #FFD700; border-radius:8px; padding:20px; margin-bottom:20px; }
     .button { background:#FFD700; color:#000; padding:10px 15px; font-weight:bold; border:none; border-radius:5px; cursor:pointer; width:100%; margin:5px 0; }
     .section-title { font-size:1.2rem; margin-bottom:10px; }
-    .premium-badge { background:linear-gradient(to right, gold, #FFD700, goldenrod); color:#000; padding:3px 8px; border-radius:5px; font-size:0.8rem; }
-
     #auth-links a { color:#FFD700; font-weight:bold; text-decoration:none; margin:0 10px; }
     #auth-links a:hover { color:white; }
   </style>
 </head>
 <body>
   <div class="market-ticker"><span id="ticker-text">Loading live prices...</span></div>
-
   <nav class="navbar">
     <div class="logo">CryptoKid</div>
+
     <div class="hamburger" onclick="document.getElementById('navMenu').classList.toggle('show')">
       <div></div><div></div><div></div>
     </div>
   </nav>
-
   <div class="nav-wrapper" id="navMenu">
     <div class="nav-section"><h3>Main</h3><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
     <div class="nav-section"><h3>Learn</h3><a href="articles.html">Articles</a><a href="guides.html">Guides</a></div>
@@ -52,7 +50,6 @@
 
   <div class="container">
     <div class="header">CryptoKid Dashboard</div>
-
     <div class="card"><h2 style="text-align:center;">Account Access</h2><p id="auth-links" style="text-align:center;">Loading...</p></div>
 
     <div class="card"><div class="section-title">Welcome, <span id="userEmail">[User]</span></div>
@@ -72,7 +69,20 @@
     <div class="card" id="paymentConfirmation" style="display:none; color:#00ff99; border-color:lime;">
       <strong>Payment confirmed!</strong> Your Premium access will be activated shortly.
     </div>
+  
+<div class="card">
+  <div class="section-title">Settings</div>
+  <div class="dropdown-settings">
+    <select onchange="handleSettings(this.value)" style="width:100%; padding:10px; font-weight:bold; background:#000; color:#FFD700; border:1px solid #FFD700; border-radius:5px;">
+      <option selected disabled>Choose an option</option>
+      <option value="profile">View Profile</option>
+      <option value="reset">Reset Password</option>
+      <option value="logout">Log Out</option>
+    </select>
   </div>
+</div>
+
+</div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
@@ -87,7 +97,7 @@
       authDomain: "cryptokidd-ca13d.firebaseapp.com",
       databaseURL: "https://cryptokidd-ca13d-default-rtdb.firebaseio.com",
       projectId: "cryptokidd-ca13d",
-      storageBucket: "cryptokidd-ca13d.appspot.com",
+      storageBucket: "cryptokidd-ca13d.firebasestorage.app",
       messagingSenderId: "658724474932",
       appId: "1:658724474932:web:d764b523f37f727b2e3a61",
       measurementId: "G-DKC298LTMH"
@@ -101,16 +111,17 @@
     onAuthStateChanged(auth, async (user) => {
       const authLinks = document.getElementById("auth-links");
       if (!user) {
-        if (authLinks) authLinks.innerHTML = '<a href="signup.html">Sign Up</a> | <a href="login.html">Log In</a>';
+        authLinks.innerHTML = '<a href="signup.html">Sign Up</a> | <a href="login.html">Log In</a>';
         return;
       }
+
       try {
-        const email = user.email || "[No Email]";
-        if (authLinks) authLinks.innerHTML = `<a href="dashboard.html">Dashboard</a> | <a href="logout.html">Sign Out</a>`;
-        document.getElementById("userEmail").innerText = email;
+        authLinks.innerHTML = '<a href="dashboard.html">Dashboard</a> | <a href="logout.html">Sign Out</a>';
+        document.getElementById("userEmail").innerText = user.email;
 
         const userRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(userRef);
+
         if (docSnap.exists()) {
           const data = docSnap.data();
           document.getElementById("userTier").innerText = data.tier || "Free";
@@ -119,7 +130,7 @@
           document.getElementById("lastLogin").innerText = data.lastLogin || "N/A";
         } else {
           await setDoc(userRef, {
-            email,
+            email: user.email,
             tier: "Free",
             toolsUsed: 0,
             alertsSet: 0,
@@ -127,7 +138,7 @@
           });
         }
       } catch (err) {
-        console.error("Auth error:", err);
+        console.error("Error fetching user data:", err);
       }
     });
 
@@ -144,7 +155,7 @@
         document.getElementById("paymentConfirmation").style.display = "block";
         window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (err) {
-        console.error("Payment log failed:", err);
+        console.error("Payment logging error:", err);
       }
     }
 
@@ -163,5 +174,23 @@
         document.getElementById("ticker-text").innerText = "Ticker failed to load.";
       });
   </script>
+
+<script>
+function handleSettings(value) {
+  if (value === "profile") window.location.href = "profile.html";
+  else if (value === "reset") window.location.href = "forgot-password.html";
+  else if (value === "logout") window.location.href = "logout.html";
+}
+
+  function toggleProfileMenu() {
+    const menu = document.getElementById("profileMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    document.addEventListener("click", function(e) {
+      if (!e.target.closest('.profile-dropdown')) {
+        menu.style.display = "none";
+      }
+    }, { once: true });
+  }
+</script>
 </body>
 </html>
